@@ -11,15 +11,25 @@ class Nav extends Component {
         const { token } = this.props
         return (
             <Fragment>
-                <div>
-                    { token ? null : <Link to="/login" style={ styles }>Login</Link> }
-                    { token ? null : <Link to="/signup" style={ styles }>Sign Up</Link> }
-                </div>
-                <div>
-                    { token ? <Link to="/profile" style={ styles }>Profile</Link> : <Redirect to='/'/> }
-                    { token ? <Link to="/create-log" style={ styles }>New Log</Link> : <Redirect to='/'/> }
-                    { token ? <Link to="/logout" style={ styles }>Logout</Link> : null }
-                </div>
+
+                { token ?
+                    <Link to="/logout" style={ styles }>Logout</Link>
+                    :
+                    <div>
+                        <Link to="/login" style={ styles }>Login</Link>
+                        <Link to="/signup" style={ styles }>Sign Up</Link>
+                    </div>
+                }
+
+                { token ?
+                    <div>
+                        <Link to="/profile" style={ styles }>Profile</Link>
+                        <Link to="/create-log" style={ styles }>New Log</Link>
+
+                    </div>
+                    : <Redirect to='/'/>
+                }
+
             </Fragment>
         )
     }

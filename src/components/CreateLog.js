@@ -21,44 +21,46 @@ class Profile extends Component {
 
     state = {
         mentalRating: null,
+        mentalNote: null,
         emotionalRating: null,
+        emotionalNote: null,
         physicalRating: null,
-        spiritual: null
+        physicalNote: null,
+        spiritualRating: null,
+        spiritualNote: null,
     }
 
-    inputMentalNote = null
-    inputEmotionalNote = null
-    inputPhysicalNote = null
-    inputSpiritualNote = null
 
-    handleChange = (event) => {
-        console.log(event.target.value)
+    handleRadioChange = (event) => {
         this.setState({mentalRating: event.target.value})
+    }
+
+    handleNoteChange = (event) => {
+        this.setState({mentalNote: event.target.value})
     }
 
     handleSubmit = async (event) => {
         event.preventDefault()
+        
+        const { mentalNote, mentalRating, emotionalNote, emotionalRating, physicalNote, physicalRating, spiritualNote, spiritualRating } = this.state
 
-        let r = await fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}`, {
+        let r = await fetch(`http://localhost:3000/api/v1/logs`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${this.props.user.token}`
+            },
             body: JSON.stringify({
-                user: {
-                    ...this.state.user.user,
-                    logs: [...this.state.user.user.logs,
-                        {
-                            mental_rating: this.state.mentalRating,
-                            mental_note: this.inputMentalNote.value,
-                            emotional_rating: null,
-                            emotional_note: null,
-                            physical_rating: null,
-                            physical_note: null,
-                            spiritual_rating: null,
-                            spiritual_note: null,
-                        }
-                    ]
+                log: {
+                    mental_rating: mentalRating,
+                    mental_note: mentalNote,
+                    emotional_rating: emotionalRating,
+                    emotional_note: emotionalNote,
+                    physical_rating: physicalRating,
+                    physical_note: physicalNote,
+                    spiritual_rating: spiritualRating,
+                    spiritual_note: spiritualNote
                 }
-
             })
         })
 
@@ -68,7 +70,7 @@ class Profile extends Component {
 
 
     render() {
-        console.log(this.state.user)
+        console.log(this.props.user.user)
         return (
             <div className='log-card-container'>
 
@@ -79,7 +81,7 @@ class Profile extends Component {
 
                             <FormLabel component="legend">Mental</FormLabel>
 
-                            <RadioGroup aria-label="Mental" name="mental" value={this.state.mentalRating} onChange={this.handleChange} style={{ flexDirection: 'row' }}>
+                            <RadioGroup aria-label="Mental" name="mental" value={this.state.mentalRating} onChange={this.handleRadioChange} style={{ flexDirection: 'row' }}>
                               <FormControlLabel value="1" control={<Radio />} label="Busy" />
                               <FormControlLabel value="2" control={<Radio />} label="Foggy" />
                               <FormControlLabel value="3" control={<Radio />} label="Neutral" />
@@ -88,7 +90,7 @@ class Profile extends Component {
                             </RadioGroup>
 
                         </FormControl>
-                        <TextField id="outlined-multiline-static"  multiline rows="3" label="Add Note" margin="normal" variant="outlined" ref={el => this.inputMentalNote = el}/>
+                        <TextField id="outlined-multiline-static"  multiline rows="3" label="Add Note" margin="normal" variant="outlined" onChange={this.handleNoteChange }/>
                         <Button type='submit' variant="fab" aria-label="Save" color='primary'><SaveIcon/></Button>
                     </form>
 
@@ -100,7 +102,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { user: state.user.user }
+    return { user: state.user }
 }
 
 const mapDispatchToProps = { setLog }
