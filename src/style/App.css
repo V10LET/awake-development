@@ -1,32 +1,21 @@
-.App {
-  text-align: center;
+.log-card-container {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.log-card {
+    margin: 40px;
+    text-align: center;
+    width: 350px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.log-card-form {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 30px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.MuiTypography-body1-197 {
+    font-size: 12px !important;
 }
