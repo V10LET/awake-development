@@ -39,16 +39,16 @@ class Profile extends Component {
     handleSubmit = async (event) => {
         event.preventDefault()
 
-        let r = await fetch('http://localhost:3000/api/v1/logs', {
+        let r = await fetch(`http://localhost:3000/api/v1/users/${this.state.user.id}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
                 user: {
-                    ...this.state.user,
-                    logs: [...this.state.user.logs,
+                    ...this.state.user.user,
+                    logs: [...this.state.user.user.logs,
                         {
                             mental_rating: this.state.mentalRating,
-                            mental_note: this.inputMentalNote,
+                            mental_note: this.inputMentalNote.value,
                             emotional_rating: null,
                             emotional_note: null,
                             physical_rating: null,
@@ -68,7 +68,7 @@ class Profile extends Component {
 
 
     render() {
-        console.log(this.state.token)
+        console.log(this.state.user)
         return (
             <div className='log-card-container'>
 
@@ -100,7 +100,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { token: state.user.token }
+    return { user: state.user.user }
 }
 
 const mapDispatchToProps = { setLog }

@@ -37,6 +37,7 @@ export default function user(state = initialState, action) {
             return {
                 ...state,
                 user: {
+                    id: user.id,
                     name: user.name,
                     email: user.email,
                     birthday: user.birthday,
