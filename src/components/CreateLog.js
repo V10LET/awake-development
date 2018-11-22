@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import history from '../history'
 
 // radio button
 import Radio from '@material-ui/core/Radio'
@@ -28,20 +29,20 @@ class Profile extends Component {
         physicalNote: null,
         spiritualRating: null,
         spiritualNote: null,
+        submitError: null
     }
 
 
-    handleRadioChange = (event) => {
-        this.setState({mentalRating: event.target.value})
+    handleChange = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+        this.setState({ [name]: value })
     }
 
-    handleNoteChange = (event) => {
-        this.setState({mentalNote: event.target.value})
-    }
 
     handleSubmit = async (event) => {
         event.preventDefault()
-        
+
         const { mentalNote, mentalRating, emotionalNote, emotionalRating, physicalNote, physicalRating, spiritualNote, spiritualRating } = this.state
 
         let r = await fetch(`http://localhost:3000/api/v1/logs`, {
@@ -64,38 +65,102 @@ class Profile extends Component {
             })
         })
 
+        if (!r.ok) {
+            let data = await r.json()
+            this.setState({loginError: data.message})
+            return
+        }
+
         let data = await r.json()
-        console.log(data)
+        this.props.setLog(data.log)
+        history.push('/profile')
     }
 
 
     render() {
-        console.log(this.props.user.user)
         return (
             <div className='log-card-container'>
 
-                <Card className='log-card'>
-                    <CardMedia style={{ height: '250px' }} image={require('../style/images/mental.jpg')}/>
                     <form className='log-card-form' onSubmit={this.handleSubmit}>
-                        <FormControl component="fieldset" >
 
-                            <FormLabel component="legend">Mental</FormLabel>
+                        <Card className='log-card'>
+                            <CardMedia style={{ height: '150px' }} image={require('../style/images/emotional1.jpg')}/>
+                            <div className='card-content'>
+                                <FormControl component="fieldset" >
+                                    <FormLabel component="legend">How has your state of mind been?</FormLabel>
+                                    <RadioGroup aria-label="Mental" name="mentalRating" value={this.state.mentalRating} onChange={this.handleChange} style={{ flexDirection: 'row' }}>
+                                      <FormControlLabel value="1" control={<Radio />} label="Busy" />
+                                      <FormControlLabel value="2" control={<Radio />} label="Foggy" />
+                                      <FormControlLabel value="3" control={<Radio />} label="Distracted" />
+                                      <FormControlLabel value="4" control={<Radio />} label="Neutral" />
+                                      <FormControlLabel value="5" control={<Radio />} label="Focused" />
+                                      <FormControlLabel value="6" control={<Radio />} label="Calm" />
+                                    </RadioGroup>
+                                </FormControl>
+                                <TextField id="outlined-multiline-static" style={{width: 300}} multiline rows="3" label="Add Note" margin="normal" variant="outlined" name="mentalNote" onChange={this.handleChange }/>
+                            </div>
+                        </Card>
 
-                            <RadioGroup aria-label="Mental" name="mental" value={this.state.mentalRating} onChange={this.handleRadioChange} style={{ flexDirection: 'row' }}>
-                              <FormControlLabel value="1" control={<Radio />} label="Busy" />
-                              <FormControlLabel value="2" control={<Radio />} label="Foggy" />
-                              <FormControlLabel value="3" control={<Radio />} label="Neutral" />
-                              <FormControlLabel value="4" control={<Radio />} label="Clear" />
-                              <FormControlLabel value="5" control={<Radio />} label="Calm" />
-                            </RadioGroup>
+                        <Card className='log-card'>
+                            <CardMedia style={{ height: '150px' }} image={require('../style/images/mental.jpg')}/>
+                            <div className='card-content'>
+                                <FormControl component="fieldset" >
+                                    <FormLabel component="legend">What's your strongest feeling today?</FormLabel>
+                                    <RadioGroup aria-label="Emotional" name="emotionalRating" value={this.state.emotionalRating} onChange={this.handleChange} style={{ flexDirection: 'row' }}>
+                                      <FormControlLabel value="1" control={<Radio />} label="Anger" />
+                                      <FormControlLabel value="2" control={<Radio />} label="Shame" />
+                                      <FormControlLabel value="3" control={<Radio />} label="Stress" />
+                                      <FormControlLabel value="4" control={<Radio />} label="Joy" />
+                                      <FormControlLabel value="5" control={<Radio />} label="Content" />
+                                      <FormControlLabel value="6" control={<Radio />} label="Gratitude" />
+                                    </RadioGroup>
+                                </FormControl>
+                                <TextField id="outlined-multiline-static" style={{width: 300}} multiline rows="3" label="Add Note" margin="normal" variant="outlined" name="emotionalNote" onChange={this.handleChange }/>
+                            </div>
+                        </Card>
 
-                        </FormControl>
-                        <TextField id="outlined-multiline-static"  multiline rows="3" label="Add Note" margin="normal" variant="outlined" onChange={this.handleNoteChange }/>
-                        <Button type='submit' variant="fab" aria-label="Save" color='primary'><SaveIcon/></Button>
+                        <Card className='log-card'>
+                            <CardMedia style={{ height: '150px' }} image={require('../style/images/physical1.jpg')}/>
+                            <div className='card-content'>
+                                <FormControl component="fieldset" >
+                                    <FormLabel component="legend">How is your body doing today?</FormLabel>
+                                    <RadioGroup aria-label="Physical" name="physicalRating" value={this.state.physicalRating} onChange={this.handleChange} style={{ flexDirection: 'row' }}>
+                                      <FormControlLabel value="1" control={<Radio />} label="Painful" />
+                                      <FormControlLabel value="2" control={<Radio />} label="Tired" />
+                                      <FormControlLabel value="3" control={<Radio />} label="Disconnected" />
+                                      <FormControlLabel value="4" control={<Radio />} label="Grounded" />
+                                      <FormControlLabel value="5" control={<Radio />} label="Energetic" />
+                                      <FormControlLabel value="6" control={<Radio />} label="Relaxed" />
+                                    </RadioGroup>
+                                </FormControl>
+                                <TextField id="outlined-multiline-static" style={{width: 300}} multiline rows="3" label="Add Note" margin="normal" variant="outlined" name="physicalNote" onChange={this.handleChange }/>
+                            </div>
+                        </Card>
+
+                        <Card className='log-card'>
+                            <CardMedia style={{ height: '150px' }} image={require('../style/images/emotional.jpg')}/>
+                            <div className='card-content'>
+                                <FormControl component="fieldset" >
+                                    <FormLabel component="legend">How're you feeling about life in general?</FormLabel>
+                                    <RadioGroup aria-label="Spiritual" name="spiritualRating" value={this.state.spiritualRating} onChange={this.handleChange} style={{ flexDirection: 'row' }}>
+                                      <FormControlLabel value="1" control={<Radio />} label="Hopeless" />
+                                      <FormControlLabel value="2" control={<Radio />} label="Uncertain" />
+                                      <FormControlLabel value="3" control={<Radio />} label="Apathetic" />
+                                      <FormControlLabel value="4" control={<Radio />} label="Intrigued" />
+                                      <FormControlLabel value="5" control={<Radio />} label="Hopeful" />
+                                      <FormControlLabel value="6" control={<Radio />} label="Inspired" />
+                                    </RadioGroup>
+                                </FormControl>
+                                <TextField id="outlined-multiline-static" style={{width: 300}} multiline rows="3" label="Add Note" margin="normal" variant="outlined" name="spiritualNote" onChange={this.handleChange }/>
+                            </div>
+                        </Card>
+
+                    <Button type='submit' variant="contained" aria-label="Save" color='primary'><SaveIcon/>Save</Button>
                     </form>
 
-                </Card>
-
+                    {this.state.submitError &&
+                        <div style={{color: 'red'}}>{this.state.submitError.toString()}</div>
+                    }
             </div>
         )
     }

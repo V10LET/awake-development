@@ -7,15 +7,15 @@ import { setToken, setUser } from '../actions/userAction'
 class Login extends Component {
 
     state = {
-        email: '',
-        password: '',
+        email: null,
+        password: null,
         loginError: null,
     }
 
     handleChange = (event) => {
         const name = event.target.name
         const value = event.target.value
-        this.setState({ [name]: value})
+        this.setState({ [name]: value })
     }
 
     handleSubmit = async (event) => {
@@ -52,7 +52,6 @@ class Login extends Component {
     }
 
     render() {
-        console.log(this.props.setToken)
         return (
             <form onSubmit={this.handleSubmit}>
                 <input type='text' name='email' onChange={this.handleChange} />

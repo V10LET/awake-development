@@ -16,6 +16,9 @@ const store = createStore(
 )
 
 const theme = createMuiTheme({
+  typography: {
+    useNextVariants: true,
+  },
   palette: {
     primary: {
       light: '#4f5b62',

@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 
-import user from './userReducer'
-import log from './logReducer'
+import userReducer from './userReducer'
+import logReducer from './logReducer'
 
 const rootReducer = combineReducers({
-    user,
-    log
+    user: userReducer,
+    log: logReducer,
 })
 
 export default rootReducer

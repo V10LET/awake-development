@@ -7,15 +7,15 @@
 .log-card {
     margin: 40px;
     text-align: center;
-    width: 350px;
+    width: 375px;
 }
 
 .log-card-form {
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
     padding: 30px;
 }
 
-.MuiTypography-body1-197 {
-    font-size: 12px !important;
+.card-content {
+    padding: 40px;
 }
