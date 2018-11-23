@@ -33,7 +33,7 @@ const styles = theme => createStyles({
    },
    drawer: {
        backgroundColor: '#efebe9',
-       zIndex: 1,
+       zIndex: theme.zIndex.appBar - 1,
    }
 })
 
