@@ -4,10 +4,17 @@ import history from '../history'
 import Log from '../components/Log'
 import { setLog } from '../actions/logAction'
 
-// card for each log entry
 import Button from '@material-ui/core/Button'
-import SaveIcon from '@material-ui/icons/Save'
 
+const styles = {
+        button: {
+            width: '40%',
+            height: 50,
+            color: 'white',
+            fontWeight: 700,
+            margin: 10
+        }
+}
 
 class Logs extends Component {
 
@@ -71,22 +78,25 @@ class Logs extends Component {
     render() {
         return (
             <div>
-            <form className='log-card-form' onSubmit={this.handleSubmit}>
-                <div className='log-card-container'>
-                    <Log rating="mentalRating" note="mentalNote" question="How has your state of mind been?"
-                        handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm" />
-                    <Log rating="emotionalRating" note="emotionalNote" question="What's your strongest feeling today?"
-                        handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude" />
-                    <Log rating="physicalRating" note="physicalNote" question="How is your body doing today?"
-                        handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed" />
-                    <Log rating="spiritualRating" note="spiritualNote" question="How're you feeling about life in general?"
-                        handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" />
-                </div>
-                <Button type='submit' variant="contained" aria-label="Save" color='secondary'><SaveIcon/>Save</Button>
-            </form>
-            {this.state.submitError &&
-                <div style={{color: 'red'}}>{this.state.submitError.toString()}</div>
-            }
+                <form className='log-card-form' onSubmit={this.handleSubmit}>
+
+                    <div className='log-card-container'>
+                        <Log rating="mentalRating" note="mentalNote" question="How has your state of mind been?"
+                            handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm" />
+                        <Log rating="emotionalRating" note="emotionalNote" question="What's your strongest feeling today?"
+                            handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude" />
+                        <Log rating="physicalRating" note="physicalNote" question="How is your body doing today?"
+                            handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed" />
+                        <Log rating="spiritualRating" note="spiritualNote" question="How're you feeling about life in general?"
+                            handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" />
+                    </div>
+
+                    <Button type='submit' variant="contained" aria-label="Save" color='secondary' size='large' style={ styles.button }>
+                        Submit</Button>
+                </form>
+                {this.state.submitError &&
+                    <div style={{color: 'red'}}>{this.state.submitError.toString()}</div>
+                }
             </div>
         )
     }
