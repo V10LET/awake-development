@@ -7,7 +7,7 @@
 .log-card {
     margin: 40px;
     text-align: center;
-    width: 375px;
+    width: 450px;
 }
 
 .log-card-form {
@@ -17,5 +17,7 @@
 }
 
 .card-content {
+    display: flex;
+    flex-flow: column wrap;
     padding: 40px;
 }

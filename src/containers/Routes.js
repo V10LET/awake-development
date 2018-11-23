@@ -6,8 +6,7 @@ import Login from './Login'
 import Logout from './Logout'
 import SignUp from './SignUp'
 import Profile from './Profile'
-
-import CreateLog from '../components/CreateLog'
+import Logs from './Logs'
 
 
 const Routes = () =>
@@ -17,7 +16,7 @@ const Routes = () =>
         <Route path='/signup' component={ SignUp } />
         <Route path='/logout' component={ Logout } />
         <Route path='/profile' component={ Profile } />
-        <Route path='/create-log' component={ CreateLog } />
+        <Route path='/new-log' component={ Logs } />
     </Fragment>
 
 

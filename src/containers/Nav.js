@@ -47,7 +47,7 @@ class Nav extends Component {
                 { token ?
                     <div>
                         <Link to="/profile" style={ styles }>Profile</Link>
-                        <Link to="/create-log" style={ styles }>New Log</Link>
+                        <Link to="/new-log" style={ styles }>New Log</Link>
 
                     </div>
                     : <Redirect to='/'/>
