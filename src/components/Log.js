@@ -20,14 +20,14 @@ const styles = {
 class Log extends Component {
 
     render() {
-        const { rating, note, question, v1, v2, v3, v4, v5, v6, handleChange } = this.props
+        const { rating, note, question, v1, v2, v3, v4, v5, v6, handleChange, ratingValue } = this.props
         return (
             <Card className='log-card'>
                 <CardMedia style={{ height: '150px' }} image={require(`../style/images/${note}.jpg`)}/>
                 <div className='card-content'>
                     <FormControl component="fieldset" >
                         <FormLabel component="legend" style={{ paddingBottom: 10 }}>{question}</FormLabel>
-                        <RadioGroup aria-label={rating} name={rating} value={rating} onChange={handleChange} style={ styles }>
+                        <RadioGroup aria-label={rating} name={rating} value={ratingValue} onChange={handleChange} style={ styles }>
                           <FormControlLabel value="1" control={<Radio />} label={v1} />
                           <FormControlLabel value="2" control={<Radio />} label={v2} />
                           <FormControlLabel value="3" control={<Radio />} label={v3} />

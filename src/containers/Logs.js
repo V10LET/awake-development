@@ -34,6 +34,7 @@ class Logs extends Component {
     handleChange = (event) => {
         const name = event.target.name
         const value = event.target.value
+        console.log(name, value)
         this.setState({ [name]: value })
     }
 
@@ -81,13 +82,13 @@ class Logs extends Component {
                 <form className='log-card-form' onSubmit={this.handleSubmit}>
 
                     <div className='log-card-container'>
-                        <Log rating="mentalRating" note="mentalNote" question="How has your state of mind been?"
+                        <Log rating="mentalRating" note="mentalNote" question="How has your state of mind been?" ratingValue={this.state.mentalRating}
                             handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm" />
-                        <Log rating="emotionalRating" note="emotionalNote" question="What's your strongest feeling today?"
+                        <Log rating="emotionalRating" note="emotionalNote" question="What's your strongest feeling today?" ratingValue={this.state.emotionalRating}
                             handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude" />
-                        <Log rating="physicalRating" note="physicalNote" question="How is your body doing today?"
+                        <Log rating="physicalRating" note="physicalNote" question="How is your body doing today?" ratingValue={this.state.physicalRating}
                             handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed" />
-                        <Log rating="spiritualRating" note="spiritualNote" question="How're you feeling about life in general?"
+                        <Log rating="spiritualRating" note="spiritualNote" question="How're you feeling about life in general?" ratingValue={this.state.spiritualRating}
                             handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" />
                     </div>
 

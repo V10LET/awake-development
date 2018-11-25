@@ -1,3 +1,19 @@
+body {
+    padding-top: 100px;
+}
+
+/***********/
+/* APP BAR */
+/***********/
+
+.nav-logo {
+    height: 50px;
+}
+
+/*************/
+/* LOG CARDS */
+/*************/
+
 .log-card-container {
     display: flex;
     flex-flow: row wrap;
@@ -21,4 +37,15 @@
     display: flex;
     flex-flow: column wrap;
     padding: 40px;
+}
+
+/****************/
+/* PROFILE PAGE */
+/****************/
+
+.profile-container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
 }

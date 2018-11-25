@@ -47,13 +47,14 @@ class Login extends Component {
 
         data = await r.json()
         this.props.setUser(data)
+        console.log(data)
         history.push('/profile')
 
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} style={{ marginTop: 50 }}>
                 <input type='text' name='email' onChange={this.handleChange} />
                 <input type='password' name='password' onChange={this.handleChange} />
                 <input type='submit' value='Login'/>

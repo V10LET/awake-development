@@ -60,7 +60,7 @@ class SignUp extends Component {
     render () {
         return (
 
-            <form onSubmit={this.handleSubmit} >
+            <form onSubmit={this.handleSubmit} style={{ marginTop: 50 }}>
                 <Fragment>
                     <input type='text' placeholder='name' ref={ el => this.inputName = el } /><br/>
                     <input type='text' placeholder='image link' ref={ el => this.inputAvatar = el }/><br/>

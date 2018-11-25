@@ -11,12 +11,9 @@ import List from '@material-ui/core/List'
 import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
 import ListItem from '@material-ui/core/ListItem'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
+// import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import Divider from '@material-ui/core/Divider'
-
 import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 
 
 const styles = theme => createStyles({
@@ -43,6 +40,10 @@ class Nav extends Component {
         open: true
     }
 
+    handleClick = (event) => {
+        this.setState({open: !this.state.open})
+    }
+
     render () {
         const { token, classes } = this.props
         return (
@@ -50,8 +51,9 @@ class Nav extends Component {
                 <AppBar position="fixed">
                     <Toolbar variant="dense">
                         <IconButton color="inherit" aria-label="Menu">
-                            { token ? <MenuIcon /> : null }
+                            { token ? <MenuIcon onClick={ this.handleClick }/> : null }
                         </IconButton>
+                        <img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/>
                         <div style={{width: '100%', textAlign: 'right'}}>
                         { token ?
                             <Button variant="contained" color="secondary"><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
@@ -69,16 +71,11 @@ class Nav extends Component {
                 { token ?
                     <Fragment>
                         <Drawer variant="persistent" open={this.state.open} anchor="left" classes={{ paper: classes.drawer }}>
-                            <div style={{textAlign: 'right'}}>
-                                <IconButton onClick={this.handleClick}>
-                                    <ChevronLeftIcon/>
-                                </IconButton>
-                                <Divider/>
-                            </div>
+                            <div style={{ paddingTop: 60 }}></div>
                              <List>
                                  {['Profile', 'New Log'].map((text, index) => (
                                      <ListItem button key={text}>
-                                     <ListItemIcon>{}</ListItemIcon>
+                                     {/*<ListItemIcon>{null}</ListItemIcon>*/}
                                      <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }><ListItemText primary={text} /></Link>
                                     </ListItem>
                                 ))}

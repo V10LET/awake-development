@@ -1,4 +1,5 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
+import { SET_LOG } from '../actions/logAction'
 
 export const initialState = {
     token: null,
@@ -7,18 +8,7 @@ export const initialState = {
         email: null,
         birthday: null,
         avatar: null,
-        logs: [
-            {
-                mentalRating: null,
-                mentalNote: null,
-                emotionalRating: null,
-                emotionalNote: null,
-                physicalRating: null,
-                physicalNote: null,
-                spiritualRating: null,
-                spiritualNote: null
-            }
-        ]
+        logs: []
     }
 }
 
@@ -42,7 +32,29 @@ export default function userReducer(state = initialState, action) {
                     email: user.email,
                     birthday: user.birthday,
                     avatar: user.avatar,
-                    logs: []
+                    logs: user.logs
+                }
+            }
+        case SET_LOG:
+            const { log } = action.payload
+            console.log('log', log)
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    logs: [
+                        ...state.user.logs,
+                        {
+                            mentalRating: log.mental_rating,
+                            mentalNote: log.mental_note,
+                            emotionalRating: log.emotional_rating,
+                            emotionalNote: log.emotional_note,
+                            physicalRating: log.physical_rating,
+                            physicalNote: log.physical_note,
+                            spiritualRating: log.spiritual_rating,
+                            spiritualNote: log.spiritual_note
+                        }
+                    ]
                 }
             }
         default:
