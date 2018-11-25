@@ -23,9 +23,11 @@ body {
 }
 
 .log-card {
+    display: flex;
+    flex-flow: row nowrap;
     margin: 40px;
     text-align: center;
-    width: 450px;
+    width: 500px;
 }
 
 .log-card-form {

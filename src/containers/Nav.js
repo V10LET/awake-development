@@ -31,6 +31,10 @@ const styles = theme => createStyles({
    drawer: {
        backgroundColor: '#efebe9',
        zIndex: theme.zIndex.appBar - 1,
+   },
+   name: {
+       fontSize: 25,
+       fontWeight: 700
    }
 })
 
@@ -45,7 +49,7 @@ class Nav extends Component {
     }
 
     render () {
-        const { token, classes } = this.props
+        const { token, user, classes } = this.props
         return (
             <Fragment>
                 <AppBar position="fixed">
@@ -53,7 +57,7 @@ class Nav extends Component {
                         <IconButton color="inherit" aria-label="Menu">
                             { token ? <MenuIcon onClick={ this.handleClick }/> : null }
                         </IconButton>
-                        <img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/>
+                        {token ? null : <img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/>}
                         <div style={{width: '100%', textAlign: 'right'}}>
                         { token ?
                             <Button variant="contained" color="secondary"><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
@@ -73,6 +77,8 @@ class Nav extends Component {
                         <Drawer variant="persistent" open={this.state.open} anchor="left" classes={{ paper: classes.drawer }}>
                             <div style={{ paddingTop: 60 }}></div>
                              <List>
+                                 <ListItem><img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/></ListItem>
+                                 <ListItem className={classes.name}>{user.name}</ListItem>
                                  {['Profile', 'New Log'].map((text, index) => (
                                      <ListItem button key={text}>
                                      {/*<ListItemIcon>{null}</ListItemIcon>*/}
@@ -91,7 +97,10 @@ class Nav extends Component {
 }
 
 const mapStateToProps = state => {
-    return { token: state.user.token }
+    return {
+        token: state.user.token,
+        user: state.user.user
+    }
 }
 
 export default connect(mapStateToProps, null)(withStyles(styles, { withTheme: true })(Nav))

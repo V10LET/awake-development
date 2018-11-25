@@ -23,7 +23,7 @@ class Log extends Component {
         const { rating, note, question, v1, v2, v3, v4, v5, v6, handleChange, ratingValue } = this.props
         return (
             <Card className='log-card'>
-                <CardMedia style={{ height: '150px' }} image={require(`../style/images/${note}.jpg`)}/>
+                {/*<CardMedia style={{ width: '200px' }} image={require(`../style/images/${note}.jpg`)}/>*/}
                 <div className='card-content'>
                     <FormControl component="fieldset" >
                         <FormLabel component="legend" style={{ paddingBottom: 10 }}>{question}</FormLabel>
