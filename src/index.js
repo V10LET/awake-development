@@ -37,6 +37,7 @@ async function getUserFetch() {
 const theme = createMuiTheme({
   typography: {
     useNextVariants: true,
+    fontFamily: "'Alegreya', serif"
   },
   palette: {
     primary: {
