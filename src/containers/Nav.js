@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { setDrawer } from '../actions/designAction'
 
 // material ui
 import { withStyles, createStyles } from '@material-ui/core/styles'
@@ -11,10 +12,10 @@ import List from '@material-ui/core/List'
 import IconButton from '@material-ui/core/IconButton'
 import Button from '@material-ui/core/Button'
 import ListItem from '@material-ui/core/ListItem'
-// import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
-
+import Divider from '@material-ui/core/Divider'
+// import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 const styles = theme => createStyles({
     headerLink: {
@@ -29,29 +30,28 @@ const styles = theme => createStyles({
        fontWeight: 'bold',
    },
    drawer: {
+       width: 200,
        backgroundColor: '#efebe9',
        zIndex: theme.zIndex.appBar - 1,
    },
    name: {
        fontSize: 25,
-       fontWeight: 700
-   }
+       fontWeight: 700,
+   },
 })
 
 
 class Nav extends Component {
-    state = {
-        open: true
-    }
 
-    handleClick = (event) => {
-        this.setState({open: !this.state.open})
+    handleClick = () => {
+        this.props.setDrawer(!this.props.drawerOpen)
     }
 
     render () {
-        const { token, user, classes } = this.props
+        const { drawerOpen, token, user, classes } = this.props
         return (
-            <Fragment>
+
+            <div >
                 <AppBar position="fixed">
                     <Toolbar variant="dense">
                         <IconButton color="inherit" aria-label="Menu">
@@ -74,15 +74,18 @@ class Nav extends Component {
 
                 { token ?
                     <Fragment>
-                        <Drawer variant="persistent" open={this.state.open} anchor="left" classes={{ paper: classes.drawer }}>
+                        <Drawer variant="persistent" open={drawerOpen} anchor="left" classes={{ paper: classes.drawer }}>
                             <div style={{ paddingTop: 60 }}></div>
                              <List>
-                                 <ListItem><img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/></ListItem>
+                                 <ListItem style={{justifyContent: 'center'}}><img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/></ListItem>
                                  <ListItem className={classes.name}>{user.name}</ListItem>
                                  {['Profile', 'New Log'].map((text, index) => (
                                      <ListItem button key={text}>
-                                     {/*<ListItemIcon>{null}</ListItemIcon>*/}
-                                     <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }><ListItemText primary={text} /></Link>
+                                         {/*<ListItemIcon>{null}</ListItemIcon>*/}
+                                         <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                             <ListItemText primary={text} />
+                                             <Divider/>
+                                         </Link>
                                     </ListItem>
                                 ))}
                              </List>
@@ -91,16 +94,19 @@ class Nav extends Component {
                     : <Redirect to='/'/>
                 }
 
-            </Fragment>
+            </div>
         )
     }
 }
 
 const mapStateToProps = state => {
     return {
+        drawerOpen: state.design.drawerOpen,
         token: state.user.token,
         user: state.user.user
     }
 }
 
-export default connect(mapStateToProps, null)(withStyles(styles, { withTheme: true })(Nav))
+const mapDispatchToProps = { setDrawer }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles, { withTheme: true })(Nav))

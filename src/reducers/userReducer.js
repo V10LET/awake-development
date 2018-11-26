@@ -2,6 +2,7 @@ import { SET_TOKEN, SET_USER } from '../actions/userAction'
 import { SET_LOG } from '../actions/logAction'
 
 export const initialState = {
+    drawerOpen: true,
     token: null,
     user: {
         name: null,
@@ -12,9 +13,7 @@ export const initialState = {
     }
 }
 
-
-
-export default function userReducer(state = initialState, action) {
+export function userReducer(state = initialState, action) {
 
     switch (action.type) {
         case SET_TOKEN:
@@ -37,7 +36,6 @@ export default function userReducer(state = initialState, action) {
             }
         case SET_LOG:
             const { log } = action.payload
-            console.log('log', log)
             return {
                 ...state,
                 user: {
