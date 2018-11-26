@@ -52,7 +52,6 @@ class ViewLog extends Component {
                  </ExpansionPanelSummary>
                  <ExpansionPanelDetails style={{ display: 'flex', flexDirection: 'column'}}>
                         <h3>{this.getTime(log.created_at)}</h3>
-                        {/*<Divider className={ classes.divider }/>*/}
                         <div key={log.id}>
                             <div>Mental Rating: {log.mental_rating === null
                                     ? <span className={ classes.noEntryText }> No entry...</span>

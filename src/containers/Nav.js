@@ -15,7 +15,6 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
 import Divider from '@material-ui/core/Divider'
-// import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 const styles = theme => createStyles({
     headerLink: {
@@ -81,7 +80,6 @@ class Nav extends Component {
                                  <ListItem className={classes.name}>{user.name}</ListItem>
                                  {['Profile', 'New Log'].map((text, index) => (
                                      <ListItem button key={text}>
-                                         {/*<ListItemIcon>{null}</ListItemIcon>*/}
                                          <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
                                              <ListItemText primary={text} />
                                              <Divider/>

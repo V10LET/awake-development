@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Alegreya:500|Amiri');
 
-body {
-    padding-top: 50px;
-}
-
 .body-container {
     background-color: red;
     margin-right: 500px;
@@ -54,7 +50,7 @@ body {
 
 .profile-container {
     display: flex;
-    flex-flow: column wrap;
+    flex-flow: row wrap;
     align-items: center;
     justify-content: center;
 }
