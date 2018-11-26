@@ -10,12 +10,6 @@ const styles = theme => createStyles({
     },
     divider: {
         margin: '20px 0',
-    },
-    cardHeader: {
-        display: 'flex',
-        flexFlow: 'row nowrap',
-        alignItems: 'center',
-        justifyContent: 'space-between'
     }
 })
 

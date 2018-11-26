@@ -11,14 +11,6 @@ import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => createStyles({
-    noEntryText: {
-        fontStyle: 'oblique',
-        fontSize: 13,
-        color: 'rgba(0,0,0,.3)',
-    },
-    divider: {
-        margin: '20px 0',
-    },
     cardHeader: {
         display: 'flex',
         flexFlow: 'row nowrap',
