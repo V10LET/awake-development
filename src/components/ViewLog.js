@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import LogDetails from './LogDetails'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
@@ -6,20 +7,31 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Typography from '@material-ui/core/Typography'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Divider from '@material-ui/core/Divider'
+import EditIcon from '@material-ui/icons/Edit'
+import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => createStyles({
     noEntryText: {
         fontStyle: 'oblique',
         fontSize: 13,
-        color: 'rgba(0,0,0,.3)'
+        color: 'rgba(0,0,0,.3)',
     },
     divider: {
-        margin: '20px 0'
+        margin: '20px 0',
+    },
+    cardHeader: {
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        alignItems: 'center',
+        justifyContent: 'space-between'
     }
 })
 
 class ViewLog extends Component {
+
+    state = {
+        edit: false
+    }
 
     getDate = (time) => {
         let oldT = Date.parse(time)
@@ -43,6 +55,10 @@ class ViewLog extends Component {
         return strTime
     }
 
+    handleClick = (event) => {
+        this.setState({ edit: !this.state.edit })
+    }
+
     render () {
         const { log, classes } = this.props
         return (
@@ -51,42 +67,19 @@ class ViewLog extends Component {
                         <div>{this.getDate(log.created_at)}</div>
                  </ExpansionPanelSummary>
                  <ExpansionPanelDetails style={{ display: 'flex', flexDirection: 'column'}}>
-                        <h3>{this.getTime(log.created_at)}</h3>
-                        <div key={log.id}>
-                            <div>Mental Rating: {log.mental_rating === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.mental_rating}</div>
-                                <div>Mental Note: {log.mental_note === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.mental_note}</div>
+                        {!this.state.edit
+                          ? <Fragment>
+                                <div className={classes.cardHeader}>
+                                    <h3>{this.getTime(log.created_at)}</h3>
+                                    <Tooltip title='Edit Card' placement="top-end"><EditIcon onClick={this.handleClick}/></Tooltip>
+                                </div>
+                                <LogDetails log={log} />
+                            </Fragment>
+                          : <Fragment>
+                                <div onClick={this.handleClick}>OH SNAP!</div>
+                            </Fragment>
+                        }
 
-                                <Divider className={ classes.divider }/>
-
-                                <div>Emotional Rating: {log.emotional_rating === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.emotional_rating}</div>
-                                <div>Emotional Note: {log.emotional_note === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.emotional_note}</div>
-
-                                <Divider className={ classes.divider }/>
-
-                                <div>Physical Rating: {log.physical_rating === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.physical_rating}</div>
-                                <div>Physical Note: {log.physical_note === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.physical_note}</div>
-
-                                <Divider className={ classes.divider }/>
-
-                                <div>Spiritual Rating: {log.spiritual_rating === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.spiritual_rating}</div>
-                                <div>Spiritual Note: {log.spiritual_note === null
-                                    ? <span className={ classes.noEntryText }> No entry...</span>
-                                    : log.spiritual_note}</div>
-                         </div>
                  </ExpansionPanelDetails>
             </ExpansionPanel>
         )

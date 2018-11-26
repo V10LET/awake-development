@@ -68,12 +68,12 @@ class Profile extends Component {
                 </div>
 
                 <div className='logs-container'>
-                    <ExpansionPanel style={{width: '80%'}}>
+                    {/*<ExpansionPanel style={{width: '80%'}}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                             {console.log(user.name)}
                             <h3>Logs</h3>
                         </ExpansionPanelSummary>
-                        <ExpansionPanelDetails  style={{ display: 'flex', flexFlow: 'row wrap' }}>
+                        <ExpansionPanelDetails  style={{ display: 'flex', flexFlow: 'row wrap' }}>*/}
                             {user.logs.reverse().map(log=> {
                                 return (
                                     <div className={classes.log}>
@@ -81,8 +81,8 @@ class Profile extends Component {
                                     </div>
                                 )
                             })}
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                        {/*</ExpansionPanelDetails>
+                    </ExpansionPanel>*/}
                 </div>
             </Fragment>
         )
