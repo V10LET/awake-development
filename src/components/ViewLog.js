@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import LogDetails from './LogDetails'
+import LogEditForm from './LogEditForm'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
@@ -68,7 +69,9 @@ class ViewLog extends Component {
                                 <LogDetails log={log} />
                             </Fragment>
                           : <Fragment>
-                                <div onClick={this.handleClick}>OH SNAP!</div>
+                                <div>
+                                    <LogEditForm onEdit={this.handleClick}/>
+                                </div>
                             </Fragment>
                         }
 
