@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setDrawer } from '../actions/designAction'
+import sidebarExtraFaded from '../style/images/sidebarExtraFaded.png'
 
 // material ui
 import { withStyles, createStyles } from '@material-ui/core/styles'
@@ -19,24 +20,45 @@ import Divider from '@material-ui/core/Divider'
 const styles = theme => createStyles({
     headerLink: {
        textAlign: 'center',
-       color: 'white',
+       color: 'black',
        textDecoration: 'none',
-       fontWeight: 'bold',
+       // fontWeight: 'bold',
        },
    drawerLink: {
-       color: theme.palette.secondary.main,
+       color: 'black',
        textDecoration: 'none',
-       fontWeight: 'bold',
+       // fontWeight: 'bold',
+       marginBottom: 5,
    },
    drawer: {
        width: 200,
-       backgroundColor: '#efebe9',
+       backgroundColor: 'white',
+       // backgroundColor: '#212121',
+       // backgroundImage: `url(${sidebarExtraFaded})`,
+       color: 'white',
        zIndex: theme.zIndex.appBar - 1,
    },
    name: {
        fontSize: 25,
        fontWeight: 700,
    },
+   logout: {
+       backgroundColor: 'white',
+   },
+   media: {
+       borderRadius: '100%',
+       width: 80,
+       height: 80,
+       margin: '0 0 30px',
+       backgroundSize: 'cover',
+       boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)'
+   },
+   appbar: {
+       backgroundColor: 'white',
+   },
+   MenuIcon: {
+       color: 'black',
+   }
 })
 
 
@@ -51,19 +73,19 @@ class Nav extends Component {
         return (
 
             <div >
-                <AppBar position="fixed">
+                <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar variant="dense">
-                        <IconButton color="inherit" aria-label="Menu">
+                        <IconButton variant="contained" className={classes.MenuIcon} aria-label="Menu">
                             { token ? <MenuIcon onClick={ this.handleClick }/> : null }
                         </IconButton>
-                        {token ? null : <img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/>}
+                        {/*<img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/>*/}
                         <div style={{width: '100%', textAlign: 'right'}}>
                         { token ?
-                            <Button variant="contained" color="secondary"><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
+                            <Button variant="contained" className={classes.logout}><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
                             :
                             <div>
                                 <Link to="/login" className={ classes.headerLink }>Login</Link>
-                                <Button size='small' style={{ backgroundColor: '#8b6b61' }}><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
+                                <Button size='small' style={{ backgroundColor: 'white' }}><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
                             </div>
                         }
                         </div>
@@ -74,17 +96,19 @@ class Nav extends Component {
                 { token ?
                     <Fragment>
                         <Drawer variant="persistent" open={drawerOpen} anchor="left" classes={{ paper: classes.drawer }}>
-                            <div style={{ paddingTop: 60 }}></div>
+                            <div style={{ paddingTop: 80 }}></div>
                              <List>
-                                 <ListItem style={{justifyContent: 'center'}}><img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/></ListItem>
-                                 <ListItem className={classes.name}>{user.name}</ListItem>
+                                 <ListItem style={{justifyContent: 'center'}}><div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div></ListItem>
+                                 {/*<ListItem className={classes.name}>{user.name}</ListItem>*/}
                                  {['Profile', 'New Log'].map((text, index) => (
-                                     <ListItem button key={text}>
-                                         <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                             <ListItemText primary={text} />
-                                             <Divider/>
-                                         </Link>
-                                    </ListItem>
+                                     <Fragment>
+                                         <ListItem button key={text} className={classes.routes}>
+                                             <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                                 <ListItemText disableTypography primary={text} />
+                                                 <Divider style={{ margin: '10px 0px 0px', backgroundColor: 'black' }}/>
+                                             </Link>
+                                        </ListItem>
+                                    </Fragment>
                                 ))}
                              </List>
                         </Drawer>

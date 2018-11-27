@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import ViewLog from '../components/ViewLog'
+import sidebarFaded from '../style/images/sidebarFaded.jpg'
 
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -9,7 +10,8 @@ const styles = theme => createStyles({
     card: {
         margin: '0 20px 80px',
         width: '35%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: theme.palette.secondary.dark
 
     },
     cardDetails: {
@@ -18,16 +20,9 @@ const styles = theme => createStyles({
         display: 'flex',
         marginTop: 40,
     },
-    media: {
-        borderRadius: '100%',
-        width: 250,
-        height: 250,
-        backgroundSize: 'cover',
-    },
     highlight: {
         width: '100%',
-        backgroundColor: theme.palette.secondary.dark,
-        color: 'white',
+        // backgroundImage: `url(${sidebarFaded})`,
         textAlign: 'center',
         padding: '20px 0',
         margin: '40px 0 0',
@@ -44,7 +39,7 @@ class Profile extends Component {
         return (
             <Fragment>
                 <div className='profile-container'>
-                    <Card className={classes.card} style={{ backgroundImage: "url('https://ih1.redbubble.net/image.121705826.6787/pp,550x550.jpg')" }}>
+                    <Card className={classes.card}>
                         <Fragment>
                             <div className={classes.cardDetails}>
                                 <div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div>
