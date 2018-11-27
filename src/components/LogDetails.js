@@ -19,39 +19,39 @@ class LogDetails extends React.Component {
         const { log, classes } = this.props
         return (
            <div key={log.id}>
-               <div>Mental Rating: {log.mental_rating === null
+               <div>Mental Rating: {log.mentalRating === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.mental_rating}</div>
-                   <div>Mental Note: {log.mental_note === null
+                       : log.mentalRating}</div>
+                   <div>Mental Note: {log.mentalNote === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.mental_note}</div>
+                       : log.mentalNote}</div>
 
                    <Divider className={ classes.divider }/>
 
-                   <div>Emotional Rating: {log.emotional_rating === null
+                   <div>Emotional Rating: {log.emotionalRating === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.emotional_rating}</div>
-                   <div>Emotional Note: {log.emotional_note === null
+                       : log.emotionalRating}</div>
+                   <div>Emotional Note: {log.emotionalNote === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.emotional_note}</div>
+                       : log.emotionalNote}</div>
 
                    <Divider className={ classes.divider }/>
 
-                   <div>Physical Rating: {log.physical_rating === null
+                   <div>Physical Rating: {log.physicalRating === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.physical_rating}</div>
-                   <div>Physical Note: {log.physical_note === null
+                       : log.physicalRating}</div>
+                   <div>Physical Note: {log.physicalNote === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.physical_note}</div>
+                       : log.physicalNote}</div>
 
                    <Divider className={ classes.divider }/>
 
-                   <div>Spiritual Rating: {log.spiritual_rating === null
+                   <div>Spiritual Rating: {log.spiritualRating === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.spiritual_rating}</div>
-                   <div>Spiritual Note: {log.spiritual_note === null
+                       : log.spiritualRating}</div>
+                   <div>Spiritual Note: {log.spiritualNote === null
                        ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.spiritual_note}</div>
+                       : log.spiritualNote}</div>
             </div>
         )
     }

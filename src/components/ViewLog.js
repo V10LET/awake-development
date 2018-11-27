@@ -70,7 +70,7 @@ class ViewLog extends Component {
                             </Fragment>
                           : <Fragment>
                                 <div>
-                                    <LogEditForm onEdit={this.handleClick}/>
+                                    <LogEditForm onEdit={this.handleClick} log={log} />
                                 </div>
                             </Fragment>
                         }

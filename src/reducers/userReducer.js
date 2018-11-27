@@ -1,5 +1,5 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
-import { SET_LOG } from '../actions/logAction'
+import { SET_LOG, UPDATE_LOG } from '../actions/logAction'
 
 export const initialState = {
     drawerOpen: true,
@@ -10,6 +10,21 @@ export const initialState = {
         birthday: null,
         avatar: null,
         logs: []
+    }
+}
+
+function changeLogKeys(log) {
+    return {
+        id: log.id,
+        mentalRating: log.mental_rating,
+        mentalNote: log.mental_note,
+        emotionalRating: log.emotional_rating,
+        emotionalNote: log.emotional_note,
+        physicalRating: log.physical_rating,
+        physicalNote: log.physical_note,
+        spiritualRating: log.spiritual_rating,
+        spiritualNote: log.spiritual_note,
+        created_at: log.created_at
     }
 }
 
@@ -31,7 +46,7 @@ export function userReducer(state = initialState, action) {
                     email: user.email,
                     birthday: user.birthday,
                     avatar: user.avatar,
-                    logs: user.logs
+                    logs: user.logs.map(changeLogKeys)
                 }
             }
         case SET_LOG:
@@ -42,19 +57,30 @@ export function userReducer(state = initialState, action) {
                     ...state.user,
                     logs: [
                         ...state.user.logs,
-                        {
-                            mentalRating: log.mental_rating,
-                            mentalNote: log.mental_note,
-                            emotionalRating: log.emotional_rating,
-                            emotionalNote: log.emotional_note,
-                            physicalRating: log.physical_rating,
-                            physicalNote: log.physical_note,
-                            spiritualRating: log.spiritual_rating,
-                            spiritualNote: log.spiritual_note
-                        }
+                        changeLogKeys(log)
                     ]
                 }
             }
+        case UPDATE_LOG: {
+            const { log } = action.payload
+            console.log('log', log)
+            let newLogs = state.user.logs.map(l=> {
+                if (l.id !== log.id) {
+                    return l
+                } else {
+                    return changeLogKeys(log)
+                }
+            })
+
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    logs: newLogs
+                }
+            }
+        }
+
         default:
             return state
     }
