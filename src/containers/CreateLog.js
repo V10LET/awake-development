@@ -7,13 +7,13 @@ import { setLog } from '../actions/logAction'
 import Button from '@material-ui/core/Button'
 
 const styles = {
-        button: {
-            width: '40%',
-            height: 50,
-            color: 'white',
-            fontWeight: 700,
-            margin: 10
-        }
+    button: {
+        width: '40%',
+        height: 50,
+        color: 'white',
+        fontWeight: 700,
+        margin: 10
+    }
 }
 
 class Logs extends Component {

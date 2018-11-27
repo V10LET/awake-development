@@ -1,18 +1,48 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { withStyles, createStyles } from '@material-ui/core/styles'
 import { updateLog } from '../actions/logAction'
 
 import TextField from '@material-ui/core/TextField'
+import MenuItem from '@material-ui/core/MenuItem'
 import Button from '@material-ui/core/Button'
 
-const styles = theme => createStyles({
+const mental = [
+  { value: '1', label: 'Busy', },
+  { value: '2', label: 'Foggy', },
+  { value: '3', label: 'Distracted', },
+  { value: '4', label: 'Neutral', },
+  { value: '5', label: 'Focused', },
+  { value: '6', label: 'Calm', },
+]
 
-})
+const emotional = [
+  { value: '1',label: 'Anger', },
+  { value: '2',label: 'Shame', },
+  { value: '3',label: 'Stress', },
+  { value: '4',label: 'Excitement', },
+  { value: '5',label: 'Content', },
+  { value: '6',label: 'Gratitude', },
+]
+
+const physical = [
+  { value: '1',label: 'Painful', },
+  { value: '2',label: 'Tired', },
+  { value: '3',label: 'Disconnected', },
+  { value: '4',label: 'Grounded', },
+  { value: '5',label: 'Energetic', },
+  { value: '6',label: 'Relaxed', },
+]
+
+const spiritual = [
+  { value: '1',label: 'Hopeless', },
+  { value: '2',label: 'Uncertain', },
+  { value: '3',label: 'Apathetic', },
+  { value: '4',label: 'Intrigued', },
+  { value: '5',label: 'Hopeful', },
+  { value: '6',label: 'Inspired', },
+]
 
 class LogEditForm extends React.Component {
-
-
 
     state = {
         mentalRating: this.props.log.mentalRating,
@@ -28,6 +58,7 @@ class LogEditForm extends React.Component {
 
     handleChange = (name) => (event) => {
         const value = event.target.value
+        console.log(name, value)
         this.setState({ [name]: value })
     }
 
@@ -71,41 +102,48 @@ class LogEditForm extends React.Component {
     }
 
     render() {
+        const { mentalRating, mentalNote, emotionalRating, emotionalNote, physicalRating, physicalNote, spiritualRating, spiritualNote } = this.state
         const { log } = this.props
         return (
             <form onSubmit={ this.handleSubmit }>
-                <TextField label='Mental Rating' onChange={this.handleChange('mentalRating')}
-                    defaultValue={log.mentalRating === null ? 'No entry...' : log.mentalRating}/>
-                <div style={{ marginTop: 10 }} />
 
-                <TextField label='Mental Note' onChange={this.handleChange('mentalNote')}
+                <TextField select value={mentalRating ? mentalRating : 6} label="Mental" onChange={this.handleChange('mentalRating')}>
+                    {mental.map(option=> (
+                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                </TextField>
+
+                <TextField onChange={this.handleChange('mentalNote')}
                     defaultValue={log.mentalNote === null ? 'No entry...' : log.mentalNote}/>
                 <div style={{ marginTop: 40 }} />
 
+                <TextField select value={emotionalRating ? emotionalRating : 6} label="Emotional" onChange={this.handleChange('emotionalRating')}>
+                    {emotional.map(option=> (
+                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                </TextField>
 
-                <TextField label='Emotional Rating' onChange={this.handleChange('emotionalRating')}
-                    defaultValue={log.emotionalRating === null ? 'No entry...' : log.emotionalRating}/>
-                <div style={{ marginTop: 10 }} />
-
-                <TextField label='Emotional Note' onChange={this.handleChange('emotionalNote')}
+                <TextField onChange={this.handleChange('emotionalNote')}
                     defaultValue={log.emotionalNote === null ? 'No entry...' : log.emotionalNote}/>
                 <div style={{ marginTop: 40 }} />
 
+                <TextField select value={physicalRating ? physicalRating : 6} label="Physical" onChange={this.handleChange('physicalRating')}>
+                    {physical.map(option=> (
+                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                </TextField>
 
-                <TextField label='Physical Rating' onChange={this.handleChange('physicalRating')}
-                    defaultValue={log.physicalRating === null ? 'No entry...' : log.physicalRating}/>
-                <div style={{ marginTop: 10 }} />
-
-                <TextField label='Physical Note' onChange={this.handleChange('physicalNote')}
+                <TextField onChange={this.handleChange('physicalNote')}
                     defaultValue={log.physicalNote === null ? 'No entry...' : log.physicalNote}/>
                 <div style={{ marginTop: 40 }} />
 
+                <TextField select value={spiritualRating ? spiritualRating : 6} label="Spiritual" onChange={this.handleChange('spiritualRating')}>
+                    {spiritual.map(option=> (
+                        <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
+                    ))}
+                </TextField>
 
-                <TextField label='Spiritual Rating' onChange={this.handleChange('spiritualRating')}
-                    defaultValue={log.spiritualRating === null ? 'No entry...' : log.spiritualRating}/>
-                <div style={{ marginTop: 10 }} />
-
-                <TextField label='Spiritual Note' onChange={this.handleChange('spiritualNote')}
+                <TextField onChange={this.handleChange('spiritualNote')}
                     defaultValue={log.spiritualNote === null ? 'No entry...' : log.spiritualNote}/>
                 <div style={{ marginTop: 20 }} />
 
@@ -123,4 +161,4 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = { updateLog }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(LogEditForm))
+export default connect(mapStateToProps, mapDispatchToProps)(LogEditForm)

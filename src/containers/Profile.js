@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import ViewLog from '../components/ViewLog'
 import sidebarFaded from '../style/images/sidebarFaded.jpg'
 
 import { withStyles, createStyles } from '@material-ui/core/styles'
@@ -11,7 +10,7 @@ const styles = theme => createStyles({
         margin: '0 20px 80px',
         width: '35%',
         justifyContent: 'center',
-        backgroundColor: theme.palette.secondary.dark
+        backgroundColor: 'white'
 
     },
     cardDetails: {
@@ -22,23 +21,60 @@ const styles = theme => createStyles({
     },
     highlight: {
         width: '100%',
-        // backgroundImage: `url(${sidebarFaded})`,
         textAlign: 'center',
         padding: '20px 0',
         margin: '40px 0 0',
-    },
-    log: {
-        margin: '20px !important',
     }
 })
 
 class Profile extends Component {
 
+    horoscope = (birthday) => {
+        if (birthday) {
+            let date = birthday.split('-')
+            let day = date[2]
+            let month = date[1]
+
+            switch (month) {
+                case '01':
+                return birthday
+                case '02':
+                return birthday
+                case '03':
+                return birthday
+                case '04':
+                return birthday
+                case '05':
+                return birthday
+                case '06':
+                return birthday
+                case '07':
+                return birthday
+                case '08':
+                return birthday
+                case '09':
+                return birthday
+                case '10':
+                return birthday
+                case '11':
+                return birthday
+                case '12':
+                return birthday
+                break
+                default:
+                    return 'No horoscopes today...'
+            }
+        }
+    }
+
+
     render() {
         const { user, classes } = this.props
+        this.horoscope(user.birthday)
         return (
             <Fragment>
                 <div className='profile-container'>
+                    <div></div>
                     <Card className={classes.card}>
                         <Fragment>
                             <div className={classes.cardDetails}>
@@ -53,16 +89,6 @@ class Profile extends Component {
                             LOG STATS (OR TIMER INFO) GO HERE
                         </div>
                     </Card>
-                </div>
-
-                <div className='logs-container'>
-                    {user.logs.slice().reverse().map(log=> {
-                        return (
-                            <div key={log.id} className={classes.log}>
-                                <ViewLog log={log} />
-                            </div>
-                        )
-                    })}
                 </div>
             </Fragment>
         )

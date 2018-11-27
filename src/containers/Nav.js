@@ -100,10 +100,10 @@ class Nav extends Component {
                              <List>
                                  <ListItem style={{justifyContent: 'center'}}><div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div></ListItem>
                                  {/*<ListItem className={classes.name}>{user.name}</ListItem>*/}
-                                 {['Profile', 'New Log'].map((text, index) => (
+                                 {['Profile', 'View Logs', 'Create Log'].map((text, index) => (
                                      <Fragment>
                                          <ListItem button key={text} className={classes.routes}>
-                                             <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                             <Link to={text === 'View Logs' ? 'logs' : `/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
                                                  <ListItemText disableTypography primary={text} />
                                                  <Divider style={{ margin: '10px 0px 0px', backgroundColor: 'black' }}/>
                                              </Link>
