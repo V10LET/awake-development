@@ -14,17 +14,21 @@ export const initialState = {
 }
 
 function changeLogKeys(log) {
-    return {
-        id: log.id,
-        mentalRating: log.mental_rating,
-        mentalNote: log.mental_note,
-        emotionalRating: log.emotional_rating,
-        emotionalNote: log.emotional_note,
-        physicalRating: log.physical_rating,
-        physicalNote: log.physical_note,
-        spiritualRating: log.spiritual_rating,
-        spiritualNote: log.spiritual_note,
-        created_at: log.created_at
+    if (log === undefined || log === null) {
+        return {}
+    } else {
+        return {
+            id: log.id,
+            mentalRating: log.mental_rating,
+            mentalNote: log.mental_note,
+            emotionalRating: log.emotional_rating,
+            emotionalNote: log.emotional_note,
+            physicalRating: log.physical_rating,
+            physicalNote: log.physical_note,
+            spiritualRating: log.spiritual_rating,
+            spiritualNote: log.spiritual_note,
+            created_at: log.created_at
+        }
     }
 }
 
@@ -38,15 +42,29 @@ export function userReducer(state = initialState, action) {
             }
         case SET_USER:
             const { user } = action.payload
-            return {
-                ...state,
-                user: {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    birthday: user.birthday,
-                    avatar: user.avatar,
-                    logs: user.logs.map(changeLogKeys)
+            if (user.logs === undefined) {
+                return {
+                    ...state,
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        birthday: user.birthday,
+                        avatar: user.avatar,
+                        logs: []
+                    }
+                }
+            } else {
+                return {
+                    ...state,
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        birthday: user.birthday,
+                        avatar: user.avatar,
+                        logs: user.logs.map(changeLogKeys)
+                    }
                 }
             }
         case SET_LOG:
