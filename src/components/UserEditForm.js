@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react'
+import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import { setUser } from '../actions/userAction'
 
 import IconButton from '@material-ui/core/IconButton'
 import TextField from '@material-ui/core/TextField'
@@ -27,12 +29,33 @@ class UserEditForm extends React.Component {
 
     handleChange = (name) => (event) => {
         const value = event.target.value
+        console.log(name, value)
         this.setState({ [name]: value })
     }
 
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault()
-        console.log('submittteddd!')
+        let r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`, {
+            method: 'PATCH',
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}` },
+            body: JSON.stringify({
+                user: {
+                    name: this.state.name,
+                    email: this.state.email,
+                    birthday: this.state.birthday,
+                    avatar: this.state.avatar,
+                }
+            })
+        })
+
+        r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`, {
+            method: 'GET',
+            headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}`}
+        })
+
+        let data = await r.json()
+        console.log(data)
+        this.props.setUser(data)
         this.props.handleClick()
     }
 
@@ -59,4 +82,4 @@ class UserEditForm extends React.Component {
     }
 }
 
-export default (withStyles(styles)(UserEditForm))
+export default connect(null, { setUser })(withStyles(styles)(UserEditForm))
