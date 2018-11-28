@@ -65,7 +65,7 @@ class Settings extends Component {
                                  <div>{user.birthday}</div>
                                  <div>{user.email}</div>
                               </Fragment>
-                            : <UserEditForm user={user} handleClick={this.handleClick} />
+                            : <UserEditForm handleClick={this.handleClick} />
                         }
                     </div>
                 </Card>

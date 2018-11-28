@@ -15,6 +15,16 @@ const styles = theme => createStyles({
         padding: '10px 10px 0',
         marginRight: '-40px',
     },
+    birthday: {
+        border: 'none',
+        fontFamily: 'arial',
+        fontSize: '1em',
+        marginTop: 5,
+    },
+    birthdayLabel: {
+        fontSize: '0.8em',
+        color: 'rgba(0, 0, 0, 0.54)'
+    }
 })
 
 
@@ -73,7 +83,10 @@ class UserEditForm extends React.Component {
                         </IconButton>
                     </div>
                     <TextField label='Name' value={name} onChange={this.handleChange('name')} margin='normal'/><br/>
-                    <input type='date' value={birthday} onChange={this.handleChange('birthday')} margin='normal'/><br/>
+                    <div style={{ marginTop: 10 }}>
+                        <label className={classes.birthdayLabel}>Birthday</label><br/>
+                        <input type='date' value={birthday} onChange={this.handleChange('birthday')} className={classes.birthday}/><br/>
+                    </div>
                     <TextField label='Email' value={email} onChange={this.handleChange('email')} margin='normal'/><br/>
                     <TextField label='Avatar Link' value={avatar} onChange={this.handleChange('avatar')} margin='normal'/><br/>
                 </Fragment>
@@ -82,4 +95,6 @@ class UserEditForm extends React.Component {
     }
 }
 
-export default connect(null, { setUser })(withStyles(styles)(UserEditForm))
+const mapStateToProps = state => ({ user: state.user.user })
+
+export default connect(mapStateToProps, { setUser })(withStyles(styles)(UserEditForm))
