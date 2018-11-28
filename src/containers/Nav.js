@@ -46,9 +46,9 @@ const styles = theme => createStyles({
        backgroundColor: 'white',
    },
    media: {
-       borderRadius: '100%',
-       width: 80,
-       height: 80,
+       borderRadius: '10%',
+       width: 100,
+       height: 100,
        margin: '0 0 30px',
        backgroundSize: 'cover',
        boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)'
@@ -81,11 +81,11 @@ class Nav extends Component {
                         {/*<img src={require('../style/images/awake.png')} alt='nav-logo' className='nav-logo'/>*/}
                         <div style={{width: '100%', textAlign: 'right'}}>
                         { token ?
-                            <Button variant="contained" className={classes.logout}><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
+                            <Link to="/logout" className={ classes.headerLink }>Logout</Link>
                             :
                             <div>
                                 <Link to="/login" className={ classes.headerLink }>Login</Link>
-                                <Button size='small' style={{ backgroundColor: 'white' }}><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
+                                <Link to="/signup" className={ classes.headerLink }>Sign Up</Link>
                             </div>
                         }
                         </div>
@@ -98,7 +98,7 @@ class Nav extends Component {
                         <Drawer variant="persistent" open={drawerOpen} anchor="left" classes={{ paper: classes.drawer }}>
                             <div style={{ paddingTop: 80 }}></div>
                              <List>
-                                 <ListItem style={{justifyContent: 'center'}}><div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div></ListItem>
+                                 <ListItem><div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div></ListItem>
                                  {/*<ListItem className={classes.name}>{user.name}</ListItem>*/}
                                  {['Profile', 'View Logs', 'Create Log'].map((text, index) => (
                                      <Fragment>

@@ -11,8 +11,8 @@ import { setToken, setUser } from './actions/userAction'
 
 const store = createStore(
     rootReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__()
+    // window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    // window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 const token = localStorage.getItem('app-token')

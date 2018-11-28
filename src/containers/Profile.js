@@ -7,82 +7,130 @@ import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
     card: {
-        margin: '0 20px 80px',
-        width: '35%',
+        width: '100%',
         justifyContent: 'center',
-        backgroundColor: 'white'
+        backgroundColor: 'white',
+        margin: '20px 0'
 
     },
     cardDetails: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        // alignItems: 'center',
+        // justifyContent: 'center',
         display: 'flex',
-        marginTop: 40,
+        flexFlow: 'column nowrap',
+        margin: 40,
     },
     highlight: {
         width: '100%',
         textAlign: 'center',
         padding: '20px 0',
         margin: '40px 0 0',
+    },
+    cardColumn: {
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        width: '40%',
+        margin: '20px'
+    },
+    cardRow: {
+        width: '40%',
+        margin: '20px'
     }
 })
 
 class Profile extends Component {
 
-    horoscope = (birthday) => {
-        if (birthday) {
-            let date = birthday.split('-')
-            let day = date[2]
+    state = {
+        horoscope: '',
+        needsSignFetch: false
+    }
+
+    componentDidMount() {
+        this.signFetch()
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.user.birthday !== prevProps.user.birthday) {
+            this.signFetch()
+        }
+    }
+
+    sign = () => {
+        if (this.props.user && this.props.user.birthday) {
+            let date =  this.props.user.birthday.split('-')
+            let day = Number(date[2])
             let month = date[1]
 
             switch (month) {
-                case '01':
-                return birthday
-                case '02':
-                return birthday
-                case '03':
-                return birthday
-                case '04':
-                return birthday
-                case '05':
-                return birthday
-                case '06':
-                return birthday
-                case '07':
-                return birthday
-                case '08':
-                return birthday
-                case '09':
-                return birthday
-                case '10':
-                return birthday
-                case '11':
-                return birthday
-                case '12':
-                return birthday
-                break
-                default:
-                    return 'No horoscopes today...'
+            case '01':
+             return 1 <= day && day <= 19 ? 'Capricorn' : 'Aquarius'
+            case '02':
+             return 1 <= day && day <= 18 ? 'Aquarius' : 'Pisces'
+            case '03':
+             return 1 <= day && day <= 20 ? 'Pisces' : 'Aries'
+            case '04':
+             return 1 <= day && day <= 19 ? 'Aries' : 'Taurus'
+            case '05':
+             return 1 <= day && day <= 20 ? 'Taurus' : 'Gemini'
+            case '06':
+             return 1 <= day && day <= 20 ? 'Gemini' : 'Cancer'
+            case '07':
+             return 1 <= day && day <= 22 ? 'Cancer' : 'Leo'
+            case '08':
+             return 1 <= day && day <= 22 ? 'Leo' : 'Virgo'
+            case '09':
+             return 1 <= day && day <= 22 ? 'Virgo' : 'Libra'
+            case '10':
+             return 1 <= day && day <= 22 ? 'Libra' : 'Scorpio'
+            case '11':
+             return 1 <= day && day <= 21 ? 'Scorpio' : 'Sagittarius'
+            case '12':
+             return 1 <= day && day <= 21 ? 'Sagittarius' : 'Capricorn'
+            break
+            default:
+                return null
             }
         }
     }
 
+    signFetch = () => {
+        if (this.sign()) {
+            fetch(`http://localhost:3000/api/v1/horoscope/${this.sign()}`, {
+                method: 'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${this.props.token}`
+                }
+            })
+            .then(r=> r.json())
+            .then(r=> { this.setState({ horoscope: r.horoscope }) })
+        }
+    }
+
+
 
     render() {
         const { user, classes } = this.props
-        this.horoscope(user.birthday)
         return (
             <Fragment>
                 <div className='profile-container'>
-                    <div></div>
-                    <Card className={classes.card}>
-                        <Fragment>
+                    <div className={classes.cardRow}>
+                        <Card className={classes.card}>
+
                             <div className={classes.cardDetails}>
-                                <div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div>
+                                <h2 style={{ margin: 0 }}>{this.sign()} Today</h2>
+                                <p>{this.state.horoscope}</p>
                             </div>
-                            <div className={classes.highlight}>Total number of logs: {user.logs.length}</div>
-                        </Fragment>
-                    </Card>
+                        </Card>
+                    </div>
+                    <div className={classes.cardColumn}>
+                        <Card className={classes.card}>
+                            <div className={classes.cardDetails}>Total number of logs: {user.logs.length}</div>
+                        </Card>
+                        <Card className={classes.card}>
+                            <div className={classes.cardDetails}>Total number of logs: {user.logs.length}</div>
+                        </Card>
+                    </div>
 
                     <Card className={classes.card}>
                         <div className={classes.cardDetails}>
@@ -96,6 +144,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => {
-    return { user: state.user.user }
+    return {
+        user: state.user.user,
+        token: state.user.token
+    }
 }
 export default connect(mapStateToProps)(withStyles(styles)(Profile))
