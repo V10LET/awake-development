@@ -2,20 +2,17 @@ import React, { Component, Fragment } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setDrawer } from '../actions/designAction'
-import sidebarExtraFaded from '../style/images/sidebarExtraFaded.png'
-
-// material ui
 import { withStyles, createStyles } from '@material-ui/core/styles'
+
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
 import IconButton from '@material-ui/core/IconButton'
-import Button from '@material-ui/core/Button'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
-import Divider from '@material-ui/core/Divider'
+// import Divider from '@material-ui/core/Divider'
 
 const styles = theme => createStyles({
     headerLink: {
@@ -100,12 +97,12 @@ class Nav extends Component {
                              <List>
                                  <ListItem><div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div></ListItem>
                                  {/*<ListItem className={classes.name}>{user.name}</ListItem>*/}
-                                 {['Profile', 'View Logs', 'Create Log'].map((text, index) => (
-                                     <Fragment>
-                                         <ListItem button key={text} className={classes.routes}>
-                                             <Link to={text === 'View Logs' ? 'logs' : `/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                 {['Profile', 'Logs', 'Create Log', 'Settings'].map((text, index) => (
+                                     <Fragment key={text}>
+                                         <ListItem button className={classes.routes}>
+                                             <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
                                                  <ListItemText disableTypography primary={text} />
-                                                 <Divider style={{ margin: '10px 0px 0px', backgroundColor: 'black' }}/>
+                                                 {/*<Divider style={{ margin: '10px 0px 0px', backgroundColor: 'black' }}/>*/}
                                              </Link>
                                         </ListItem>
                                     </Fragment>

@@ -8,6 +8,7 @@ import SignUp from './SignUp'
 import Profile from './Profile'
 import CreateLog from './CreateLog'
 import ViewLogs from './ViewLogs'
+import Settings from './Settings'
 
 
 const Routes = () =>
@@ -19,6 +20,7 @@ const Routes = () =>
         <Route path='/profile' component={ Profile } />
         <Route path='/create-log' component={ CreateLog } />
         <Route path='/logs' component={ ViewLogs } />
+        <Route path='/settings' component={ Settings } />
     </Fragment>
 
 

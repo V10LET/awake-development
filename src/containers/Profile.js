@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import sidebarFaded from '../style/images/sidebarFaded.jpg'
-
 import { withStyles, createStyles } from '@material-ui/core/styles'
+
 import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
@@ -86,7 +85,6 @@ class Profile extends Component {
              return 1 <= day && day <= 21 ? 'Scorpio' : 'Sagittarius'
             case '12':
              return 1 <= day && day <= 21 ? 'Sagittarius' : 'Capricorn'
-            break
             default:
                 return null
             }

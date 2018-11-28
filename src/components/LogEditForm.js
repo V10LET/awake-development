@@ -58,7 +58,6 @@ class LogEditForm extends React.Component {
 
     handleChange = (name) => (event) => {
         const value = event.target.value
-        console.log(name, value)
         this.setState({ [name]: value })
     }
 
@@ -96,13 +95,12 @@ class LogEditForm extends React.Component {
         })
 
         let data = await r.json()
-        console.log(data)
         this.props.updateLog(data)
         this.props.onEdit()
     }
 
     render() {
-        const { mentalRating, mentalNote, emotionalRating, emotionalNote, physicalRating, physicalNote, spiritualRating, spiritualNote } = this.state
+        const { mentalRating, emotionalRating, physicalRating, spiritualRating } = this.state
         const { log } = this.props
         return (
             <form onSubmit={ this.handleSubmit }>
