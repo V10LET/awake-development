@@ -1,9 +1,8 @@
-import React, { Component, Fragement } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import UserEditForm from '../components/UserEditForm'
 
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import Card from '@material-ui/core/Card'
 import EditIcon from '@material-ui/icons/Edit'
@@ -18,14 +17,8 @@ const styles = theme => createStyles({
     editBtn: {
         display: 'flex',
         justifyContent: 'flex-end',
-        width: '100%',
+        padding: '10px 10px 0'
     },
-    // userInfo: {
-    //     display: 'flex',
-    //     flexFlow: 'column wrap',
-    //     alignItems: 'flex-start',
-    //     margin: 40
-    // },
     avatar: {
         height: 250,
         width: 250,
@@ -36,7 +29,7 @@ const styles = theme => createStyles({
         display: 'flex',
         flexFlow: 'column wrap',
         alignItems: 'flex-start',
-        margin: 40,
+        margin: '0 40px 40px',
     }
 })
 
@@ -44,53 +37,37 @@ class Settings extends Component {
 
     state = {
         editForm: false,
-        name: this.props.user.name,
-        birthday: this.props.user.birthday,
-        email: this.props.user.email,
-        avatar: this.props.user.avatar,
     }
 
-    handleClick = () => this.setState({ editForm: !this.state.editForm })
-
-    handleChange = (name) => (event) => {
-        const value = event.target.value
-        this.setState({ [name]: value })
-    }
-
-    handleSubmit = (event) => {
-        event.preventDefault()
-        console.log('submittteddd!')
+    handleClick = () => {
         this.setState({ editForm: !this.state.editForm })
     }
 
     render () {
         const { user, classes } = this.props
-        const { name, birthday, email, avatar, editForm } = this.state
+        console.log(this.state.editForm)
         return (
             <div className={classes.settingsContainer}>
                 <Card>
-
-                    {!editForm ?
-                        <div className={classes.editForm}>
-                            <div className={classes.editBtn}>
-                                <IconButton onClick={this.handleClick}><EditIcon/></IconButton>
-                            </div>
-                            <div style={{ backgroundImage: `url('${user.avatar}')` }} className={classes.avatar}></div>
-                            <h1>{user.name}</h1>
-                            <div>{user.birthday}</div>
-                            <div>{user.email}</div>
+                    {!this.state.editForm ?
+                        <div className={classes.editBtn}>
+                            <IconButton>
+                            <Tooltip title='Edit My Info' placement="right"><EditIcon onClick={this.handleClick}/></Tooltip>
+                            </IconButton>
                         </div>
-                    :
-                        <form onSubmit={this.handleSubmit} className={classes.editForm}>
-                            <TextField label='' placeholder={name} onChange={this.handleChange('name')} margin='normal'/><br/>
-                            <TextField label='' placeholder={birthday} onChange={this.handleChange('birthday')} margin='normal'/><br/>
-                            <TextField label='' placeholder={email} onChange={this.handleChange('email')} margin='normal'/><br/>
-                            <TextField label='' placeholder={avatar} onChange={this.handleChange('avatar')} margin='normal'/><br/>
-                            <button type='submit'>Save Changes</button>
-                        </form>
+                        : null
                     }
-
-
+                    <div className={classes.editForm}>
+                        {!this.state.editForm
+                            ? <Fragment>
+                                 <div style={{ backgroundImage: `url('${user.avatar}')` }} className={classes.avatar}></div>
+                                 <h1>{user.name}</h1>
+                                 <div>{user.birthday}</div>
+                                 <div>{user.email}</div>
+                              </Fragment>
+                            : <UserEditForm user={user} handleClick={this.handleClick} />
+                        }
+                    </div>
                 </Card>
             </div>
         )
