@@ -72,7 +72,7 @@ class Logs extends Component {
 
         let data = await r.json()
         this.props.setLog(data.log)
-        history.push('/profile')
+        history.push('/logs')
     }
 
 

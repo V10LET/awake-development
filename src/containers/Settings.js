@@ -45,7 +45,6 @@ class Settings extends Component {
 
     render () {
         const { user, classes } = this.props
-        console.log(this.state.editForm)
         return (
             <div className={classes.settingsContainer}>
                 <Card>

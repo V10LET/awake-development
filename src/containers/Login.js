@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import history from '../history'
 
 import { setToken, setUser } from '../actions/userAction'
+import { setChartData } from '../actions/logAction'
 
 class Login extends Component {
 
@@ -47,8 +48,8 @@ class Login extends Component {
 
         data = await r.json()
         this.props.setUser(data)
-        console.log(data)
-        history.push('/profile')
+        this.props.setChartData(data.logs)
+        history.push('/dashboard')
 
     }
 
@@ -72,7 +73,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setToken,
-    setUser
+    setUser,
+    setChartData
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

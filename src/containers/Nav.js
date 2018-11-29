@@ -12,26 +12,21 @@ import IconButton from '@material-ui/core/IconButton'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
-// import Divider from '@material-ui/core/Divider'
 
 const styles = theme => createStyles({
     headerLink: {
        textAlign: 'center',
        color: 'black',
        textDecoration: 'none',
-       // fontWeight: 'bold',
        },
    drawerLink: {
        color: 'black',
        textDecoration: 'none',
-       // fontWeight: 'bold',
        marginBottom: 5,
    },
    drawer: {
        width: 200,
        backgroundColor: 'white',
-       // backgroundColor: '#212121',
-       // backgroundImage: `url(${sidebarExtraFaded})`,
        color: 'white',
        zIndex: theme.zIndex.appBar - 1,
    },
@@ -58,6 +53,7 @@ const styles = theme => createStyles({
    }
 })
 
+const routes = ['Dashboard', 'Logs', 'Create Log', 'Progress', 'Settings']
 
 class Nav extends Component {
 
@@ -96,14 +92,15 @@ class Nav extends Component {
                             <div style={{ paddingTop: 80 }}></div>
                              <List>
                                  <ListItem><div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div></ListItem>
-                                 {/*<ListItem className={classes.name}>{user.name}</ListItem>*/}
-                                 {['Profile', 'Logs', 'Create Log', 'Settings'].map((text, index) => (
+                                 {routes.map((text, index) => (
                                      <Fragment key={text}>
                                          <ListItem button className={classes.routes}>
-                                             <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                                 <ListItemText disableTypography primary={text} />
-                                                 {/*<Divider style={{ margin: '10px 0px 0px', backgroundColor: 'black' }}/>*/}
-                                             </Link>
+                                             {token ?
+                                                 <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                                     <ListItemText primary={text} />
+                                                 </Link>
+                                                 : <Redirect to='/' />
+                                            }
                                         </ListItem>
                                     </Fragment>
                                 ))}

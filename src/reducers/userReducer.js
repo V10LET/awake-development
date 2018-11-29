@@ -1,5 +1,5 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
-import { SET_LOG, UPDATE_LOG } from '../actions/logAction'
+import { SET_LOG, UPDATE_LOG, SET_CHART_DATA } from '../actions/logAction'
 
 export const initialState = {
     drawerOpen: true,
@@ -10,6 +10,13 @@ export const initialState = {
         birthday: null,
         avatar: null,
         logs: []
+    },
+    chartData: {
+        day: [],
+        mentalRating: [],
+        emotionalRating: [],
+        physicalRating: [],
+        spiritualRating: []
     }
 }
 
@@ -46,12 +53,12 @@ export function userReducer(state = initialState, action) {
                 return {
                     ...state,
                     user: {
+                        ...state.user,
                         id: user.id,
                         name: user.name,
                         email: user.email,
                         birthday: user.birthday,
-                        avatar: user.avatar,
-                        logs: []
+                        avatar: user.avatar
                     }
                 }
             } else {
@@ -81,7 +88,6 @@ export function userReducer(state = initialState, action) {
             }
         case UPDATE_LOG: {
             const { log } = action.payload
-            console.log('log', log)
             let newLogs = state.user.logs.map(l=> {
                 if (l.id !== log.id) {
                     return l
@@ -99,6 +105,40 @@ export function userReducer(state = initialState, action) {
             }
         }
 
+        case SET_CHART_DATA: {
+            const { logs } = action.payload
+            if (logs === null) {
+                return {
+                    ...state,
+                    chartData: {
+                        ...state.chartData,
+                        day:             [],
+                        mentalRating:    [],
+                        emotionalRating: [],
+                        physicalRating:  [],
+                        spiritualRating: [],
+                    },
+                }
+            }
+
+            const days = (logs || []).map(log => new Intl.DateTimeFormat('en-US').format(Date.parse(log.created_at)))
+            const newMentalRatings = logs.map(log => log.mental_rating)
+            const newEmotionalRatings = logs.map(log => log.emotional_rating)
+            const newPhysicalRatings = logs.map(log => log.physical_rating)
+            const newSpiritualRatings = logs.map(log => log.spiritual_rating)
+
+            return {
+                ...state,
+                chartData: {
+                    ...state.chartData,
+                    day:             [...state.chartData.day, ...days],
+                    mentalRating:    [...state.chartData.mentalRating, ...newMentalRatings],
+                    emotionalRating: [...state.chartData.emotionalRating, ...newEmotionalRatings],
+                    physicalRating:  [...state.chartData.physicalRating, ...newPhysicalRatings],
+                    spiritualRating: [...state.chartData.spiritualRating, ...newSpiritualRatings],
+                },
+            }
+        }
         default:
             return state
     }
