@@ -64,12 +64,7 @@ class LineChart extends React.Component {
         return (
             <Fragment>
                 <h1>{title}</h1>
-                <Line
-                    height={400}
-                    width={800}
-                    data={data}
-                    options={options}
-                />
+                <Line height={400} width={800} data={data} options={options} />
             </Fragment>
         )
     }

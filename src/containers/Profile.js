@@ -13,8 +13,6 @@ const styles = theme => createStyles({
 
     },
     cardDetails: {
-        // alignItems: 'center',
-        // justifyContent: 'center',
         display: 'flex',
         flexFlow: 'column nowrap',
         margin: 40,
