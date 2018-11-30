@@ -21,16 +21,37 @@ const styles = theme => createStyles({
 })
 
 class ViewLogs extends Component {
+
+    state = {
+        searchTerm: ''
+    }
+
+    handleChange = (event) => {
+        this.setState({ searchTerm: event.target.value })
+    }
+
+    handleSearch = (logs) => {
+        const { searchTerm } = this.state
+        return logs ?
+            logs.filter(l=> {
+                return l.mentalNote.includes(searchTerm) ||
+                l.emotionalNote.includes(searchTerm) ||
+                l.physicalNote.includes(searchTerm) ||
+                l.spiritualNote.includes(searchTerm)
+            }) : null
+    }
+
     render() {
         const { user, classes } = this.props
+        const logs = this.handleSearch(user.logs)
         return (
             <div className={classes.allLogs}>
                 <div className={classes.searchContainer}>
                     <SearchIcon />
-                    <Input type="search" style={{ width: '40%' }}/>
+                    <Input type="search" style={{ width: '40%' }} onChange={this.handleChange}/>
                 </div>
                 <div className='logs-container'>
-                    {user.logs.slice().reverse().map(log=> {
+                    {logs.slice().reverse().map(log=> {
                         return (
                             <div key={log.id} style={{ margin: 20 }}>
                                 <ViewLog log={log} />
