@@ -16,7 +16,12 @@ const styles = theme => createStyles({
         display: 'flex',
         alignItems: 'flex-end',
         width: '100%',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        margin: '40px 0px'
+    },
+    inputBar: {
+        width: '40%',
+        marginLeft: 10
     }
 })
 
@@ -48,15 +53,11 @@ class ViewLogs extends Component {
             <div className={classes.allLogs}>
                 <div className={classes.searchContainer}>
                     <SearchIcon />
-                    <Input type="search" style={{ width: '40%' }} onChange={this.handleChange}/>
+                    <Input type="search" className={classes.inputBar} onChange={this.handleChange}/>
                 </div>
                 <div className='logs-container'>
                     {logs.slice().reverse().map(log=> {
-                        return (
-                            <div key={log.id} style={{ margin: 20 }}>
-                                <ViewLog log={log} />
-                            </div>
-                        )
+                        return <div key={log.id} style={{ margin: 20 }}><ViewLog log={log} /></div>
                     })}
                 </div>
             </div>

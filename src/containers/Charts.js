@@ -19,7 +19,10 @@ const styles = theme => createStyles({
         justifyContent: 'center',
     },
     lineChart: {
-        margin: 20
+        margin: 20,
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        alignItems: 'center'
     },
     switchRow: {
         display: 'flex',
@@ -87,7 +90,7 @@ class Charts extends React.Component {
                 <Fragment>
                     <div className={classes.switchRow}>
                         <div style={doughnut ? {color: 'rgba(0,0,0,.3)'} : null}>Line</div>
-                            <Switch color="black" checked={doughnut} onChange={this.handleChartChange}/>
+                            <Switch checked={doughnut} onChange={this.handleChartChange}/>
                         <div style={doughnut ? null : {color: 'rgba(0,0,0,.3)'}}>Doughnut</div>
                     </div>
 

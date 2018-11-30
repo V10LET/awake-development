@@ -34,7 +34,6 @@ class DoughnutChart extends React.Component {
 
     render () {
         const { rating, title } = this.props
-        console.log(rating)
         const data = {
             labels: this.labels(title),
             datasets: [{
