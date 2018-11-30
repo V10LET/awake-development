@@ -1,5 +1,6 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
 import { SET_LOG, UPDATE_LOG, SET_CHART_DATA } from '../actions/logAction'
+import Moment from 'react-moment'
 
 export const initialState = {
     drawerOpen: true,
@@ -121,7 +122,7 @@ export function userReducer(state = initialState, action) {
                 }
             }
 
-            const days = (logs || []).map(log => new Intl.DateTimeFormat('en-US').format(Date.parse(log.created_at)))
+            const days = (logs || []).map(log => log.created_at)
             const newMentalRatings = (logs || []).map(log => log.mental_rating)
             const newEmotionalRatings = (logs || []).map(log => log.emotional_rating)
             const newPhysicalRatings = (logs || []).map(log => log.physical_rating)
