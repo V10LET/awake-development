@@ -9,16 +9,29 @@ class LineChart extends React.Component {
             labels: day,
             datasets: [{
                 lineTension: .5,
-                label: title,
-                borderCapStyle: 'butt',
-                borderJoinStyle: 'miter',
+                label: 'Mental',
                 backgroundColor: 'rgba(75,192,192,0.4)',
                 borderColor: 'rgba(0,0,0,0)',
                 scaleOverride: true,
                 scaleStartValue: 0,
                 scaleStepWidth: 1,
                 scaleSteps: 1,
-                data: rating
+                data: rating.mentalRating
+            }, {
+                label: 'Emotional',
+                backgroundColor: 'rgba(175,192,220,0.4)',
+                borderColor: 'rgba(0,0,0,0)',
+                data: rating.emotionalRating
+            }, {
+                label: 'Physical',
+                backgroundColor: 'rgba(75,192,12,0.4)',
+                borderColor: 'rgba(0,0,0,0)',
+                data: rating.physicalRating
+            }, {
+                label: 'Spiritual',
+                backgroundColor: 'rgba(75,192,102,0.4)',
+                borderColor: 'rgba(0,0,0,0)',
+                data: rating.spiritualRating
             }]
         }
 
@@ -28,6 +41,7 @@ class LineChart extends React.Component {
             },
             scales: {
                 yAxes: [{
+
                     ticks: {
                         max: 6,
                         min: 0,
@@ -38,6 +52,7 @@ class LineChart extends React.Component {
                     }
                 }],
                 xAxes: [{
+
                     gridLines: {
                         display: false
                     }

@@ -122,10 +122,10 @@ export function userReducer(state = initialState, action) {
             }
 
             const days = (logs || []).map(log => new Intl.DateTimeFormat('en-US').format(Date.parse(log.created_at)))
-            const newMentalRatings = logs.map(log => log.mental_rating)
-            const newEmotionalRatings = logs.map(log => log.emotional_rating)
-            const newPhysicalRatings = logs.map(log => log.physical_rating)
-            const newSpiritualRatings = logs.map(log => log.spiritual_rating)
+            const newMentalRatings = (logs || []).map(log => log.mental_rating)
+            const newEmotionalRatings = (logs || []).map(log => log.emotional_rating)
+            const newPhysicalRatings = (logs || []).map(log => log.physical_rating)
+            const newSpiritualRatings = (logs || []).map(log => log.spiritual_rating)
 
             return {
                 ...state,
