@@ -1,9 +1,19 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import history from '../history'
+import { withStyles, createStyles } from '@material-ui/core/styles'
 
 import { setToken, setUser } from '../actions/userAction'
 import { setChartData } from '../actions/logAction'
+
+const styles = theme => createStyles({
+    error: {
+        color: 'red',
+        fontStyle: 'oblique',
+        fontSize: 10,
+        marginTop: 10,
+    }
+})
 
 class Login extends Component {
 
@@ -54,13 +64,14 @@ class Login extends Component {
     }
 
     render() {
+        const { classes } = this.props
         return (
             <form onSubmit={this.handleSubmit} style={{ marginTop: 50 }}>
                 <input type='text' name='email' onChange={this.handleChange} />
                 <input type='password' name='password' onChange={this.handleChange} />
                 <input type='submit' value='Login'/>
                 {this.state.loginError &&
-                    <div style={{color: 'red'}}>{this.state.loginError.toString()}</div>
+                    <div className={classes.error}>{this.state.loginError.toString()}</div>
                 }
             </form>
         )
@@ -77,4 +88,4 @@ const mapDispatchToProps = {
     setChartData
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))

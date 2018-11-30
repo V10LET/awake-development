@@ -92,7 +92,7 @@ class Logs extends Component {
                             handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" />
                     </div>
 
-                    <Button type='submit' variant="contained" aria-label="Save" color='secondary' size='large' style={ styles.button }>
+                    <Button type='submit' variant="contained" aria-label="Save" size='large' style={ styles.button }>
                         Submit</Button>
                 </form>
                 {this.state.submitError &&
