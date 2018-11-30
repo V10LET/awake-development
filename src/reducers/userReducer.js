@@ -1,6 +1,5 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
 import { SET_LOG, UPDATE_LOG, SET_CHART_DATA } from '../actions/logAction'
-import Moment from 'react-moment'
 
 export const initialState = {
     drawerOpen: true,

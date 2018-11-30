@@ -51,6 +51,8 @@ class LineChart extends React.Component {
                                     return physical[tooltipItem.yLabel]
                                 case 'Spiritual':
                                     return spiritual[tooltipItem.yLabel]
+                                default:
+                                    return null
                             }
                         }
                         return label()

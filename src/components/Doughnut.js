@@ -27,11 +27,13 @@ class DoughnutChart extends React.Component {
                 return physical
             case 'Spiritual':
                 return spiritual
+            default:
+                return null
         }
     }
 
     render () {
-        const { day, rating, title } = this.props
+        const { rating, title } = this.props
         console.log(rating)
         const data = {
             labels: this.labels(title),

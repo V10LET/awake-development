@@ -4,6 +4,7 @@ import { withStyles, createStyles } from '@material-ui/core/styles'
 import LineChart from '../components/LineChart'
 import AllLineChart from '../components/AllLineChart'
 import DoughnutChart from '../components/Doughnut'
+import Moment from 'moment'
 
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -42,15 +43,17 @@ class Charts extends React.Component {
         const { chartData } = this.props
         switch (this.state.chartView) {
             case 'Mental':
-                return <LineChart day={chartData.day} rating={chartData.mentalRating} title='Mental'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.mentalRating} title='Mental'/>
             case 'Emotional':
-                return <LineChart day={chartData.day} rating={chartData.emotionalRating} title='Emotional'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.emotionalRating} title='Emotional'/>
             case 'Physical':
-                return <LineChart day={chartData.day} rating={chartData.physicalRating} title='Physical'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.physicalRating} title='Physical'/>
             case 'Spiritual':
-                return <LineChart day={chartData.day} rating={chartData.spiritualRating} title='Spiritual'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.spiritualRating} title='Spiritual'/>
             case 'All':
-                return <AllLineChart day={chartData.day} rating={chartData} title='All'/>
+                return <AllLineChart day={this.day(chartData.day)} rating={chartData} title='All'/>
+            default:
+                return null
         }
     }
 
@@ -58,29 +61,26 @@ class Charts extends React.Component {
         const { chartData } = this.props
         switch (this.state.chartView) {
             case 'Mental':
-                return <DoughnutChart day={chartData.day} rating={chartData.mentalRating} title='Mental'/>
+                return <DoughnutChart day={this.day(chartData.day)} rating={chartData.mentalRating} title='Mental'/>
             case 'Emotional':
-                return <DoughnutChart day={chartData.day} rating={chartData.emotionalRating} title='Emotional'/>
+                return <DoughnutChart day={this.day(chartData.day)} rating={chartData.emotionalRating} title='Emotional'/>
             case 'Physical':
-                return <DoughnutChart day={chartData.day} rating={chartData.physicalRating} title='Physical'/>
+                return <DoughnutChart day={this.day(chartData.day)} rating={chartData.physicalRating} title='Physical'/>
             case 'Spiritual':
-                return <DoughnutChart day={chartData.day} rating={chartData.spiritualRating} title='Spiritual'/>
+                return <DoughnutChart day={this.day(chartData.day)} rating={chartData.spiritualRating} title='Spiritual'/>
             case 'All':
-                return <AllLineChart day={chartData.day} rating={chartData} title='All'/>
-
+                return <AllLineChart day={this.day(chartData.day)} rating={chartData} title='All'/>
+            default:
+                return null
         }
     }
 
-    handleRadioChange = (event) => {
-        this.setState({ chartView: event.target.value })
-    }
-
-    handleChartChange = () => {
-        this.setState({ doughnut: !this.state.doughnut })
-    }
+    day = (day) => day.map(d=> Moment(d).format('MMM Do YY'))
+    handleRadioChange = (event) => this.setState({ chartView: event.target.value })
+    handleChartChange = () => this.setState({ doughnut: !this.state.doughnut })
 
     render () {
-        const { classes, chartData } = this.props
+        const { classes } = this.props
         const { chartView, doughnut } = this.state
         return (
             <div className={classes.chartsContainer}>
