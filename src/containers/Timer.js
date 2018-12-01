@@ -26,12 +26,13 @@ class Timer extends Component {
 
     //----> EVENT METHODS
 
+    handleClick = () => this.setState({ open: !this.state.open })
+
     handleChange = name => event => {
       this.setState({ [name]: event.target.value })
       console.log(name, event.target.value)
     }
 
-    handleClick = () => this.setState({ open: !this.state.open })
     setTick = () => this.setState(this.state)
 
     startTimer = () => {
@@ -48,7 +49,10 @@ class Timer extends Component {
     }
 
     handlePlay = () => {
-        this.setState({ remaining: 0 })
+        let deadline = new Date().getTime() + this.state.remaining
+        this.setState({ remaining: 0, deadline }, ()=> {
+            this.setState({ timer: setInterval(this.setTick, 1000) })
+        })
     }
 
     //----> RENDER METHODS
