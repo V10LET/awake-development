@@ -19,37 +19,37 @@ class LogDetails extends React.Component {
         const { log, classes } = this.props
         return (
            <div key={log.id}>
-               <div>Mental Rating: {log.mentalRating === null
+               <div>Mental Rating: {log.mentalRating === 0
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.mentalRating}</div>
-                   <div>Mental Note: {log.mentalNote === null
+                   <div>Mental Note: {log.mentalNote === ''
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.mentalNote}</div>
 
                    <Divider className={ classes.divider }/>
 
-                   <div>Emotional Rating: {log.emotionalRating === null
+                   <div>Emotional Rating: {log.emotionalRating === 0
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.emotionalRating}</div>
-                   <div>Emotional Note: {log.emotionalNote === null
+                   <div>Emotional Note: {log.emotionalNote === ''
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.emotionalNote}</div>
 
                    <Divider className={ classes.divider }/>
 
-                   <div>Physical Rating: {log.physicalRating === null
+                   <div>Physical Rating: {log.physicalRating === 0
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.physicalRating}</div>
-                   <div>Physical Note: {log.physicalNote === null
+                   <div>Physical Note: {log.physicalNote === ''
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.physicalNote}</div>
 
                    <Divider className={ classes.divider }/>
 
-                   <div>Spiritual Rating: {log.spiritualRating === null
+                   <div>Spiritual Rating: {log.spiritualRating === 0
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.spiritualRating}</div>
-                   <div>Spiritual Note: {log.spiritualNote === null
+                   <div>Spiritual Note: {log.spiritualNote === ''
                        ? <span className={ classes.noEntryText }> No entry...</span>
                        : log.spiritualNote}</div>
             </div>

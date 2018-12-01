@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react'
 import LogDetails from './LogDetails'
 import LogEditForm from './LogEditForm'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-
+import Moment from 'moment'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -28,7 +28,7 @@ class ViewLog extends Component {
     getDate = (time) => {
         let oldT = Date.parse(time)
         let newT = new Date(oldT)
-        return newT.toDateString()
+        return Moment(newT).calendar()
     }
 
     getTime = (time) => {

@@ -56,7 +56,7 @@ const styles = theme => createStyles({
    }
 })
 
-const routes = ['Dashboard', 'Logs', 'Create Log', 'Progress', 'Settings']
+const routes = ['Dashboard', 'Timer', 'Logs', 'Create Log', 'Progress', 'Settings']
 
 class Nav extends Component {
 

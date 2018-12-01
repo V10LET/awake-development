@@ -10,6 +10,7 @@ import CreateLog from './CreateLog'
 import ViewLogs from './ViewLogs'
 import Settings from './Settings'
 import Charts from './Charts'
+import Timer from './Timer'
 
 const Routes = () =>
     <Fragment>
@@ -22,6 +23,7 @@ const Routes = () =>
         <Route path='/logs' component={ ViewLogs } />
         <Route path='/settings' component={ Settings } />
         <Route path='/progress' component={ Charts } />
+        <Route path='/timer' component={ Timer } />
     </Fragment>
 
 

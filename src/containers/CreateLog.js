@@ -19,14 +19,14 @@ const styles = {
 class Logs extends Component {
 
     state = {
-        mentalRating: null,
-        mentalNote: null,
-        emotionalRating: null,
-        emotionalNote: null,
-        physicalRating: null,
-        physicalNote: null,
-        spiritualRating: null,
-        spiritualNote: null,
+        mentalRating: 0,
+        mentalNote: '',
+        emotionalRating: 0,
+        emotionalNote: '',
+        physicalRating: 0,
+        physicalNote: '',
+        spiritualRating: 0,
+        spiritualNote: '',
         submitError: null
     }
 
