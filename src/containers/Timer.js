@@ -4,42 +4,55 @@ import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from '../components/SetTime'
 
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
 
 const styles = theme => createStyles({
-
+    inputError: {
+        color: 'red',
+        fontSize: '0.8em',
+        fontStyle: 'oblique'
+    },
 })
 
 class Timer extends Component {
 
     state = {
+        renderError: false,
         open: false,
+        setTime: false,
+        pause: false,
+        endOpen: false,
+        timer: '',
         min: '',
         hr: '',
         sec: '',
-        setTime: false,
-        pause: false,
         deadline: 0,
-        timer: '',
-        remaining: 0
+        remaining: 0,
       }
 
     //----> EVENT METHODS
 
-    handleClick = () => this.setState({ open: !this.state.open })
+    handleClick = () => this.setState({ open: !this.state.open, renderError: false })
 
     handleChange = name => event => {
-      this.setState({ [name]: event.target.value })
-      console.log(name, event.target.value)
+        this.setState({ [name]: event.target.value })
+        console.log(name, event.target.value)
     }
 
     setTick = () => this.setState(this.state)
 
     startTimer = () => {
-      let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
-      this.setState({ deadline, setTime: true, }, () => {
-          this.setState({ timer: setInterval(this.setTick, 1000) })
-      })
+        if (this.state.min === '' &&  this.state.min === '') {
+            this.setState({ renderError: true })
+        } else {
+            let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
+            this.setState({ deadline, setTime: true, }, () => {
+                this.setState({ timer: setInterval(this.setTick, 1000) })
+            })
+        }
     }
 
     handlePause = () => {
@@ -53,6 +66,11 @@ class Timer extends Component {
         this.setState({ remaining: 0, deadline }, ()=> {
             this.setState({ timer: setInterval(this.setTick, 1000) })
         })
+    }
+
+    handleEnd = () => {
+        const time = this.state.deadline
+        this.setState({ endOpen: true })
     }
 
     //----> RENDER METHODS
@@ -71,7 +89,7 @@ class Timer extends Component {
     renderStartEnd = () => {
         return !this.state.setTime ?
             <Button onClick={this.startTimer}>Start Timer</Button> :
-            <Button onClick={this.handleClick}>End</Button>
+            <Button onClick={this.handleEnd}>End</Button>
     }
 
     renderTime = () => {
@@ -107,15 +125,29 @@ class Timer extends Component {
         }
     }
 
+    renderEndDialog = () => {
+        return (
+            <Dialog disableBackdropClick disableEscapeKeyDown open={true}>
+                <DialogTitle>Do you want to save this session?</DialogTitle>
+                    <DialogActions>
+                        <Button onClick={null}>Yes</Button>
+                        <Button onClick={null}>No</Button>
+                    </DialogActions>
+            </Dialog>
+        )
+    }
+
     render () {
         const { classes } = this.props
-        const { min, hr, open } = this.state
+        const { min, hr, open, endOpen, renderError } = this.state
         return (
             <Fragment>
                 <h1>IMMA TIMER :)</h1>
                     <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
                     <div>{this.renderTime()}</div>
                     <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
+                    {endOpen ? this.renderEndDialog() : null}
+                    {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
             </Fragment>
 
         )
