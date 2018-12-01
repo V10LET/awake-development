@@ -1,98 +1,73 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import Moment from 'moment'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import Moment from 'moment'
+import SetTime from '../components/SetTime'
 
 import Button from '@material-ui/core/Button'
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import FormControl from '@material-ui/core/FormControl'
-import TextField from '@material-ui/core/TextField'
-import Timelapse from '@material-ui/icons/Timelapse'
 
 const styles = theme => createStyles({
-    container: {
-       display: 'flex',
-       flexWrap: 'wrap',
-       justifyContent: 'center',
-       alignItems: 'center'
-    },
-    formControl: {
-      display: 'flex',
-      flexFlow: 'row nowrap',
-      margin: theme.spacing.unit,
-      minWidth: 120,
-    },
-    textField: {
-      marginLeft: theme.spacing.unit,
-      marginRight: theme.spacing.unit,
-      width: 80,
-    },
-    inputError: {
-        color: 'red',
-        fontSize: '0.8em',
-        fontStyle: 'oblique'
-    },
-    timerIcon: {
-        width: '3em !important',
-        height: '3em !important',
-        textAlign: 'center'
-    },
-    actionBtns: {
-    }
+
 })
 
 class Timer extends Component {
 
     state = {
         open: false,
-        min: '00',
-        hr: '00',
-        sec: '00',
+        min: '',
+        hr: '',
+        sec: '',
         setTime: false,
+        pause: false,
         deadline: 0,
+        timer: '',
+        remaining: 0
       }
 
-    handleChange = name => event => this.setState({ [name]: event.target.value })
+    //----> EVENT METHODS
+
+    handleChange = name => event => {
+      this.setState({ [name]: event.target.value })
+      console.log(name, event.target.value)
+    }
 
     handleClick = () => this.setState({ open: !this.state.open })
     setTick = () => this.setState(this.state)
 
     startTimer = () => {
-        let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
-        this.setState({ deadline, setTime: true }, () => {
-            setInterval(this.setTick, 1000)
-        })
-
-
+      let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
+      this.setState({ deadline, setTime: true, }, () => {
+          this.setState({ timer: setInterval(this.setTick, 1000) })
+      })
     }
 
-    renderTextField = () => {
-        const {classes} = this.props
-        console.log()
-        if (this.state.min > 59) {
-            return (
-                <div>
-                    <TextField label="Hours" value={this.state.hr} onChange={this.handleChange('hr')}
-                        type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
-                    <TextField label="Minutes" value={this.state.min} onChange={this.handleChange('min')}
-                        type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
-                    <div className={classes.inputError}>Please enter 0-59 minutes.</div>
-                </div>
-            )
-        } else {
-            return (
-                <Fragment>
-                    <TextField label="Hours" value={this.state.hr} onChange={this.handleChange('hr')}
-                        type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
-                    <TextField label="Minutes" value={this.state.min} onChange={this.handleChange('min')}
-                        type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
-                </Fragment>
-            )
+    handlePause = () => {
+        const remaining = this.state.deadline - new Date().getTime()
+        clearInterval(this.state.timer)
+        this.setState({ remaining })
+    }
 
+    handlePlay = () => {
+        this.setState({ remaining: 0 })
+    }
+
+    //----> RENDER METHODS
+
+    renderSetPause = () => {
+        const {setTime, remaining} = this.state
+        if (!setTime) {
+            return <Button onClick={this.handleClick}>Set Timer</Button>
+        } else if (remaining !== 0) {
+            return <Button onClick={this.handlePlay}>Play</Button>
+        } else {
+            return <Button onClick={this.handlePause}>Pause</Button>
         }
+    }
+
+    renderStartEnd = () => {
+        return !this.state.setTime ?
+            <Button onClick={this.startTimer}>Start Timer</Button> :
+            <Button onClick={this.handleClick}>End</Button>
     }
 
     renderTime = () => {
@@ -104,7 +79,7 @@ class Timer extends Component {
         let minute = duration.minutes()
         let second = duration.seconds()
 
-        if (hr === '00' && min === '00') {
+        if (hr === '' && min === '') {
             return `00:00:00`
         } else if (!this.state.setTime) {
             if (hr < 10) {
@@ -130,35 +105,13 @@ class Timer extends Component {
 
     render () {
         const { classes } = this.props
+        const { min, hr, open } = this.state
         return (
             <Fragment>
                 <h1>IMMA TIMER :)</h1>
-                    <div>
-                        <Dialog disableEscapeKeyDown open={this.state.open} onClose={this.handleClick} classes={{ paper: classes.container}}>
-                            <DialogTitle style={{padding: '40px 20px 10px'}}><Timelapse className={classes.timerIcon}/></DialogTitle>
-                            <DialogContent>
-                                <form className={classes.container}>
-                                    <FormControl className={classes.formControl}>
-                                      {this.renderTextField()}
-                                    </FormControl>
-                                </form>
-                            </DialogContent>
-                            <DialogActions className={classes.actionBtns}>
-                                <Button onClick={this.handleClick}>Cancel</Button>
-                                <Button onClick={this.handleClick}>Set Time</Button>
-                            </DialogActions>
-                        </Dialog>
-                    </div>
+                    <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
                     <div>{this.renderTime()}</div>
-                    {!this.state.setTime ?
-                        <Button onClick={this.handleClick}>Set Timer</Button> :
-                        <Button onClick={this.handleClick}>Pause</Button>
-                    }
-                    {!this.state.setTime ?
-                        <Button onClick={this.startTimer}>Start Timer</Button> :
-                        <Button onClick={this.handleClick}>End</Button>
-                    }
-
+                    <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
             </Fragment>
 
         )
