@@ -49,6 +49,9 @@ class SetTime extends Component {
     renderTextField = () => {
         const { classes, handleChange, min, hr } = this.props
         if (min > 59) {
+            if (!this.state.error) {
+                this.setState({error: true})
+            }
             return (
                 <div>
                     <TextField label="Hours" value={hr} onChange={handleChange('hr')}
@@ -58,7 +61,10 @@ class SetTime extends Component {
                     <div className={classes.inputError}>Please enter 0-59 minutes.</div>
                 </div>
             )
-        } else if (min.includes('-')) {
+        } else if (min.includes('-') || hr.includes('-')) {
+            if (!this.state.error) {
+                this.setState({error: true})
+            }
             return (
                 <div>
                     <TextField label="Hours" value={hr} onChange={handleChange('hr')}
@@ -69,6 +75,9 @@ class SetTime extends Component {
                 </div>
             )
         } else {
+            if (this.state.error) {
+                this.setState({error: false})
+            }
             return (
                 <Fragment>
                     <TextField label="Hours" value={hr} onChange={handleChange('hr')}
@@ -96,7 +105,7 @@ class SetTime extends Component {
                     </DialogContent>
                     <DialogActions className={classes.actionBtns}>
                         <Button onClick={handleClick}>Cancel</Button>
-                        <Button onClick={handleClick}>Set Time</Button>
+                        <Button disabled={this.state.error ? true : false} onClick={handleClick}>Set</Button>
                     </DialogActions>
                 </Dialog>
             </div>
