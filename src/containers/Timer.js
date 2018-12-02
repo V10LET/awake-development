@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from '../components/SetTime'
+import SaveTime from '../components/SaveTime'
 import singingBowl from '../style/media/singingBowl.m4a'
 
 import Dialog from '@material-ui/core/Dialog'
@@ -41,24 +42,19 @@ const styles = theme => createStyles({
         fontSize: '3em',
         fontWeight: 'bold',
         textAlign: 'center'
+    },
+    timerBtns: {
+        marginTop: 40
     }
 })
 
 class Timer extends Component {
 
     state = {
-        audio: true,
-        renderError: false,
-        open: false,
-        setTime: false,
-        pause: false,
-        endOpen: false,
-        timer: '',
-        min: '',
-        hr: '',
-        sec: '',
-        deadline: 0,
-        remaining: 0,
+        audio: true, renderError: false, open: false, setTime: false,
+        pause: false, earlyEndOpen: false, end: false,
+        timer: '', min: '', hr: '', sec: '',
+        deadline: 0, remaining: 0
       }
 
     //----> EVENT METHODS
@@ -73,6 +69,7 @@ class Timer extends Component {
     setTick = () => {
         if (this.state.deadline <= new Date().getTime()) {
             clearInterval(this.state.timer)
+            this.setState({ end: true })
             return this.state.audio ? new Audio(singingBowl).play() : null
 
         } else {
@@ -88,7 +85,6 @@ class Timer extends Component {
             this.setState({ deadline, setTime: true }, () => {
                 this.setState({ timer: setInterval(this.setTick, 1000) })
                 return this.state.audio ? new Audio(singingBowl).play() : null
-
             })
         }
     }
@@ -109,7 +105,7 @@ class Timer extends Component {
 
     handleEndEarly = () => {
         clearInterval(this.state.timer)
-        this.setState({ endOpen: true })
+        this.setState({ earlyEndOpen: true })
     }
 
     //----> RENDER METHODS
@@ -180,7 +176,7 @@ class Timer extends Component {
 
     render () {
         const { classes } = this.props
-        const { min, hr, open, endOpen, renderError, setTime, audio } = this.state
+        const { min, hr, open, earlyEndOpen, renderError, setTime, audio, end } = this.state
         return (
             <div className={classes.timerContainer}>
 
@@ -190,15 +186,21 @@ class Timer extends Component {
                         <Switch checked={audio} onChange={this.handleAudio}/>
                     <div style={audio ? null : {color: 'rgba(0,0,0,.3)'}}>Yes</div>
                 </div>
-                <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
-                {endOpen ? this.renderEndDialog() : null}
-                {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
-                <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
+
                 <Card className={classes.timerCard}>
                     <div className={classes.time}>{this.renderTime()}</div>
                 </Card>
 
-
+                {!end ?
+                    <div className={classes.timerBtns}>
+                        <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
+                        <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
+                        {earlyEndOpen ? this.renderEndDialog() : null}
+                        {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
+                    </div>
+                :
+                    <SaveTime/>
+                }
             </div>
 
         )

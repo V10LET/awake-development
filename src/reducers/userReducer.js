@@ -1,5 +1,5 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
-import { SET_LOG, UPDATE_LOG, SET_CHART_DATA } from '../actions/logAction'
+import { SET_LOG, UPDATE_LOG, SET_CHART_DATA, SET_TIMED_LOG } from '../actions/logAction'
 
 export const initialState = {
     drawerOpen: true,
@@ -42,14 +42,16 @@ function changeLogKeys(log) {
 export function userReducer(state = initialState, action) {
 
     switch (action.type) {
+
         case SET_TOKEN:
             return {
                 ...state,
                 token: action.payload.token
             }
+
         case SET_USER:
             const { user } = action.payload
-            if (user.logs === undefined) {
+            if (user.logs === undefined || user.timed_logs === undefined) {
                 return {
                     ...state,
                     user: {
@@ -70,10 +72,12 @@ export function userReducer(state = initialState, action) {
                         email: user.email,
                         birthday: user.birthday,
                         avatar: user.avatar,
-                        logs: user.logs.map(changeLogKeys)
+                        logs: user.logs.map(changeLogKeys),
+                        timed_logs: user.timed_logs
                     }
                 }
             }
+
         case SET_LOG:
             const { log } = action.payload
             return {
@@ -86,6 +90,7 @@ export function userReducer(state = initialState, action) {
                     ]
                 }
             }
+
         case UPDATE_LOG: {
             const { log } = action.payload
             let newLogs = state.user.logs.map(l=> {
@@ -101,6 +106,17 @@ export function userReducer(state = initialState, action) {
                 user: {
                     ...state.user,
                     logs: newLogs
+                }
+            }
+        }
+
+        case SET_TIMED_LOG:{
+            const { log } = action.payload
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    timed_logs: [...state.user.timed_logs, log]
                 }
             }
         }

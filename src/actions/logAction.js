@@ -1,10 +1,18 @@
 export const SET_LOG = 'SET_LOG'
+export const SET_TIMED_LOG = 'SET_TIMED_LOG'
 export const UPDATE_LOG = 'UPDATE_LOG'
 export const SET_CHART_DATA = 'SET_CHART_DATA'
 
 export function setLog(log) {
     return {
         type: SET_LOG,
+        payload: { log }
+    }
+}
+
+export function setTimedLog(log) {
+    return {
+        type: SET_TIMED_LOG,
         payload: { log }
     }
 }
