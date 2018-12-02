@@ -42,6 +42,10 @@ const styles = theme => createStyles({
 
 class SetTime extends Component {
 
+    state = {
+        error: false
+    }
+
     renderTextField = () => {
         const { classes, handleChange, min, hr } = this.props
         if (min > 59) {
@@ -52,6 +56,16 @@ class SetTime extends Component {
                     <TextField label="Minutes" value={min} onChange={handleChange('min')}
                         type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
                     <div className={classes.inputError}>Please enter 0-59 minutes.</div>
+                </div>
+            )
+        } else if (min.includes('-')) {
+            return (
+                <div>
+                    <TextField label="Hours" value={hr} onChange={handleChange('hr')}
+                        type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
+                    <TextField label="Minutes" value={min} onChange={handleChange('min')}
+                        type="number" className={classes.textField} InputLabelProps={{ shrink: true }} margin="normal" />
+                    <div className={classes.inputError}>Please enter a positive number.</div>
                 </div>
             )
         } else {

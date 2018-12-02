@@ -1,5 +1,4 @@
-import React, { Component, Fragment } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from '../components/SetTime'
@@ -21,7 +20,6 @@ const styles = theme => createStyles({
     },
     audioPrompt: {
         margin: '0 20px 0 0',
-        // fontStyle: 'oblique'
     },
     inputError: {
         color: 'red',
@@ -63,7 +61,6 @@ class Timer extends Component {
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value })
-        console.log(name, event.target.value)
     }
 
     setTick = () => {
@@ -81,7 +78,8 @@ class Timer extends Component {
         if (this.state.min === '' &&  this.state.min === '') {
             this.setState({ renderError: true })
         } else {
-            let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
+            let deadline = new Date().getTime() + (3*1000)
+            // (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
             this.setState({ deadline, setTime: true }, () => {
                 this.setState({ timer: setInterval(this.setTick, 1000) })
                 return this.state.audio ? new Audio(singingBowl).play() : null
@@ -176,7 +174,7 @@ class Timer extends Component {
 
     render () {
         const { classes } = this.props
-        const { min, hr, open, earlyEndOpen, renderError, setTime, audio, end } = this.state
+        const { min, hr, open, earlyEndOpen, renderError, audio, end } = this.state
         return (
             <div className={classes.timerContainer}>
 
@@ -199,7 +197,7 @@ class Timer extends Component {
                         {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
                     </div>
                 :
-                    <SaveTime/>
+                    <SaveTime min={this.state.min} hr={this.state.hr} />
                 }
             </div>
 
@@ -209,4 +207,4 @@ class Timer extends Component {
 
 const mapDispatchToProps = {}
 
-export default connect(null, mapDispatchToProps)(withStyles(styles)(Timer))
+export default (withStyles(styles)(Timer))

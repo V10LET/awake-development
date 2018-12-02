@@ -9,7 +9,8 @@ export const initialState = {
         email: null,
         birthday: null,
         avatar: null,
-        logs: []
+        logs: [],
+        timed_logs: []
     },
     chartData: {
         day: [],
