@@ -57,7 +57,14 @@ class Timer extends Component {
 
     //----> EVENT METHODS
 
-    handleClick = () => this.setState({ open: !this.state.open, renderError: false })
+    handleClick = (event) => {
+        let input = event.target.innerText.toLowerCase()
+        if (input.includes('cancel')) {
+            this.setState({ min: '', hr: '', open: !this.state.open, renderError: false })
+        } else {
+            this.setState({ open: !this.state.open, renderError: false })
+        }
+    }
 
     handleChange = name => event => {
         this.setState({ [name]: event.target.value })
@@ -138,10 +145,18 @@ class Timer extends Component {
             return `00:00:00`
         } else if (!this.state.setTime) {
             if (hr < 10) {
-                hr = `0${hr}`
+                if (hr === '') {
+                    hr = '00'
+                } else {
+                    hr = `0${hr}`
+                }
             }
             if (min < 10) {
-                min = `0${min}`
+                if (min === '') {
+                    min = '00'
+                } else {
+                    min = `0${min}`
+                }
             }
             return `${hr}:${min}:00`
         } else {

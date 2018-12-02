@@ -1,13 +1,11 @@
 import React, { Component, Fragment } from 'react'
-import LogDetails from './LogDetails'
-import LogEditForm from './LogEditForm'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
+
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import EditIcon from '@material-ui/icons/Edit'
 import Tooltip from '@material-ui/core/Tooltip'
 
 const styles = theme => createStyles({
@@ -20,10 +18,6 @@ const styles = theme => createStyles({
 })
 
 class ViewLog extends Component {
-
-    state = {
-        edit: false
-    }
 
     getDate = (time) => {
         let oldT = Date.parse(time)
@@ -47,8 +41,51 @@ class ViewLog extends Component {
         return strTime
     }
 
-    handleClick = (event) => {
-        this.setState({ edit: !this.state.edit })
+    renderTime = (time) => {
+        time = Moment.duration(Number(time))
+        let hour = time.hours()
+        let minute = time.minutes()
+        let second = time.seconds()
+
+        console.log(hour,)
+
+        if (hour > 1) {
+            hour = `${hour} hours`
+        } else if (hour === 1) {
+            hour = `${hour} hour`
+        }
+        
+        if (minute > 1) {
+            minute = `${minute} minutes`
+        } else if (minute === 1) {
+            minute = `${minute} minute`
+        }
+
+        if (second > 1) {
+            second = `${second} seconds`
+        } else if (second === 1) {
+            second = `${second} second`
+        }
+
+        console.log(hour, minute, second)
+        if (hour === 0) {
+            if (minute === 0) {
+                return second
+            } else if (second === 0) {
+                return minute
+            } else {
+                return `${minute} and ${second}`
+            }
+        } else if (hour !== 0) {
+            if (minute === 0 && second === 0) {
+                return hour
+            } else if (second === 0) {
+                return `${hour} and ${minute}`
+            } else {
+                return `${hour}, ${minute} and ${second}`
+            }
+        }
+
     }
 
     render () {
@@ -59,21 +96,8 @@ class ViewLog extends Component {
                         <div>{this.getDate(log.created_at)}</div>
                  </ExpansionPanelSummary>
                  <ExpansionPanelDetails style={{ display: 'flex', flexDirection: 'column'}}>
-                        {!this.state.edit
-                          ? <Fragment>
-                                <div className={classes.cardHeader}>
-                                    <h3>{this.getTime(log.created_at)}</h3>
-                                    <Tooltip title='Edit Card' placement="top-end"><EditIcon onClick={this.handleClick}/></Tooltip>
-                                </div>
-                                <LogDetails log={log} />
-                            </Fragment>
-                          : <Fragment>
-                                <div>
-                                    <LogEditForm onEdit={this.handleClick} log={log} />
-                                </div>
-                            </Fragment>
-                        }
-
+                         <h3>{this.getTime(log.created_at)}</h3>
+                        <div>{this.renderTime(log.time)}</div>
                  </ExpansionPanelDetails>
             </ExpansionPanel>
         )
