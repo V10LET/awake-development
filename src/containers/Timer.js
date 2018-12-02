@@ -9,19 +9,45 @@ import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import Button from '@material-ui/core/Button'
+import Switch from '@material-ui/core/Switch'
+import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
+    timerContainer: {
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        alignItems: 'center'
+    },
+    audioPrompt: {
+        margin: '0 20px 0 0',
+        // fontStyle: 'oblique'
+    },
     inputError: {
         color: 'red',
         fontSize: '0.8em',
         fontStyle: 'oblique'
     },
+    switchRow: {
+        display: 'flex',
+        flexFlow: 'row nowrap',
+        alignItems: 'center'
+    },
+    timerCard: {
+        width: '40%',
+        marginTop: 40
+    },
+    time: {
+        margin: 40,
+        fontSize: '3em',
+        fontWeight: 'bold',
+        textAlign: 'center'
+    }
 })
 
 class Timer extends Component {
 
     state = {
-        playAudio: false,
+        audio: true,
         renderError: false,
         open: false,
         setTime: false,
@@ -44,7 +70,15 @@ class Timer extends Component {
         console.log(name, event.target.value)
     }
 
-    setTick = () => this.setState(this.state)
+    setTick = () => {
+        if (this.state.deadline <= new Date().getTime()) {
+            clearInterval(this.state.timer)
+            return this.state.audio ? new Audio(singingBowl).play() : null
+
+        } else {
+            return this.setState(this.state)
+        }
+    }
 
     startTimer = () => {
         if (this.state.min === '' &&  this.state.min === '') {
@@ -52,8 +86,8 @@ class Timer extends Component {
         } else {
             let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
             this.setState({ deadline, setTime: true }, () => {
-                new Audio(singingBowl).play()
                 this.setState({ timer: setInterval(this.setTick, 1000) })
+                return this.state.audio ? new Audio(singingBowl).play() : null
 
             })
         }
@@ -63,6 +97,7 @@ class Timer extends Component {
         const remaining = this.state.deadline - new Date().getTime()
         clearInterval(this.state.timer)
         this.setState({ remaining })
+
     }
 
     handlePlay = () => {
@@ -72,7 +107,7 @@ class Timer extends Component {
         })
     }
 
-    handleEnd = () => {
+    handleEndEarly = () => {
         clearInterval(this.state.timer)
         this.setState({ endOpen: true })
     }
@@ -93,7 +128,7 @@ class Timer extends Component {
     renderStartEnd = () => {
         return !this.state.setTime ?
             <Button onClick={this.startTimer}>Start Timer</Button> :
-            <Button onClick={this.handleEnd}>End</Button>
+            <Button onClick={this.handleEndEarly}>End</Button>
     }
 
     renderTime = () => {
@@ -141,18 +176,30 @@ class Timer extends Component {
         )
     }
 
+    handleAudio = () => this.setState({ audio: !this.state.audio })
+
     render () {
         const { classes } = this.props
-        const { min, hr, open, endOpen, renderError, setTime } = this.state
+        const { min, hr, open, endOpen, renderError, setTime, audio } = this.state
         return (
-            <Fragment>
-                <h1>IMMA TIMER :)</h1>
-                    <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
-                    <div>{this.renderTime()}</div>
-                    <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
-                    {endOpen ? this.renderEndDialog() : null}
-                    {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
-            </Fragment>
+            <div className={classes.timerContainer}>
+
+                <div className={classes.switchRow}>
+                    <div className={classes.audioPrompt}>Start and end with a singing bowl?</div>
+                    <div style={audio ? {color: 'rgba(0,0,0,.3)'} : null}>No</div>
+                        <Switch checked={audio} onChange={this.handleAudio}/>
+                    <div style={audio ? null : {color: 'rgba(0,0,0,.3)'}}>Yes</div>
+                </div>
+                <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
+                {endOpen ? this.renderEndDialog() : null}
+                {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
+                <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
+                <Card className={classes.timerCard}>
+                    <div className={classes.time}>{this.renderTime()}</div>
+                </Card>
+
+
+            </div>
 
         )
     }
