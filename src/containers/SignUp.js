@@ -63,7 +63,7 @@ class SignUp extends Component {
             <form onSubmit={this.handleSubmit} style={{ marginTop: 50 }}>
                 <Fragment>
                     <input type='text' placeholder='name' ref={ el => this.inputName = el } /><br/>
-                    <input type='file' placeholder='image link' ref={ el => this.inputAvatar = el }/><br/>
+                    <input type='text' placeholder='image link' ref={ el => this.inputAvatar = el }/><br/>
                     <input type='date' placeholder='birthday' ref={ el => this.inputBirthday = el } /><br/>
                     <input type='email' placeholder='email' ref={ el => this.inputEmail = el }/><br/>
                     <input type='password' placeholder='password' ref={ el => this.inputPassword = el }/><br/>

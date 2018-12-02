@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from '../components/SetTime'
+import singingBowl from '../style/media/singingBowl.m4a'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
@@ -20,6 +21,7 @@ const styles = theme => createStyles({
 class Timer extends Component {
 
     state = {
+        playAudio: false,
         renderError: false,
         open: false,
         setTime: false,
@@ -49,8 +51,10 @@ class Timer extends Component {
             this.setState({ renderError: true })
         } else {
             let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
-            this.setState({ deadline, setTime: true, }, () => {
+            this.setState({ deadline, setTime: true }, () => {
+                new Audio(singingBowl).play()
                 this.setState({ timer: setInterval(this.setTick, 1000) })
+
             })
         }
     }
@@ -69,7 +73,7 @@ class Timer extends Component {
     }
 
     handleEnd = () => {
-        const time = this.state.deadline
+        clearInterval(this.state.timer)
         this.setState({ endOpen: true })
     }
 
@@ -139,7 +143,7 @@ class Timer extends Component {
 
     render () {
         const { classes } = this.props
-        const { min, hr, open, endOpen, renderError } = this.state
+        const { min, hr, open, endOpen, renderError, setTime } = this.state
         return (
             <Fragment>
                 <h1>IMMA TIMER :)</h1>
