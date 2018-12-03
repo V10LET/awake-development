@@ -83,13 +83,13 @@ class Logs extends Component {
 
                     <div className='log-card-container'>
                         <NewLog rating="mentalRating" note="mentalNote" question="How has your state of mind been?" ratingValue={this.state.mentalRating}
-                            handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm" />
+                            handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm" id='1'/>
                         <NewLog rating="emotionalRating" note="emotionalNote" question="What's your strongest feeling today?" ratingValue={this.state.emotionalRating}
-                            handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude" />
+                            handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude" id='2'/>
                         <NewLog rating="physicalRating" note="physicalNote" question="How is your body doing today?" ratingValue={this.state.physicalRating}
-                            handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed" />
+                            handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed" id='3'/>
                         <NewLog rating="spiritualRating" note="spiritualNote" question="How're you feeling about life in general?" ratingValue={this.state.spiritualRating}
-                            handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" />
+                            handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" id='4'/>
                     </div>
 
                     <Button type='submit' variant="contained" color="primary" aria-label="Save" size='large' style={ styles.button }>
