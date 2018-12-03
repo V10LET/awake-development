@@ -4,7 +4,9 @@ import Moment from 'moment'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import TimelapseIcon from '@material-ui/icons/Timelapse'
 
 export default class ViewMed extends Component {
 
@@ -79,7 +81,10 @@ export default class ViewMed extends Component {
         return (
             <ExpansionPanel style={{ width: 275 }}>
                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <div>{this.getDate(log.created_at)}</div>
+                     <div style={{ display: 'flex', alignItems: 'center' }}>
+                         <TimelapseIcon style={{ marginRight: 10 }}/>
+                         <div>{this.getDate(log.created_at)}</div>
+                     </div>
                  </ExpansionPanelSummary>
                  <ExpansionPanelDetails style={{ display: 'flex', flexDirection: 'column'}}>
                         <h3>{this.renderTime(log.time)}</h3>

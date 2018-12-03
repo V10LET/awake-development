@@ -3,14 +3,15 @@ import LogDetails from './LogDetails'
 import LogEditForm from './LogEditForm'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
+
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import Tooltip from '@material-ui/core/Tooltip'
+
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import EditIcon from '@material-ui/icons/Edit'
-import Assignment from '@material-ui/icons/Assignment'
-
+import AssignmentIcon from '@material-ui/icons/Assignment'
 
 const styles = theme => createStyles({
     cardHeader: {
@@ -56,9 +57,12 @@ class ViewLog extends Component {
     render () {
         const { log, classes } = this.props
         return (
-            <ExpansionPanel style={{ width: 275 }}>
+            <ExpansionPanel style={{ width: 275, alignItems: 'center' }}>
                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <div>{this.getDate(log.created_at)}</div>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                            <AssignmentIcon style={{ marginRight: 10 }}/>
+                            <div>{this.getDate(log.created_at)}</div>
+                        </div>
                  </ExpansionPanelSummary>
                  <ExpansionPanelDetails style={{ display: 'flex', flexDirection: 'column'}}>
                         {!this.state.edit

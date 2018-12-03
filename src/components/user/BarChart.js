@@ -13,7 +13,7 @@ class DoughnutChart extends React.Component {
         const data = {
             labels: ["Meditations", "Logs"],
             datasets: [{
-                backgroundColor: ['green', 'blue'],
+                backgroundColor: ['rgba(0,0,0,.8)', 'rgba(0,0,0,.1)'],
                 data: [timedLogs, logs]
             }]
         }
@@ -31,11 +31,10 @@ class DoughnutChart extends React.Component {
             }
         }
 
-        console.log(timedLogs, logs)
         return (
             <Fragment>
                 <h2 style={{margin: '0 0 1em 0'}}>Progress</h2>
-                <Bar height={250} width={400} data={data} options={options}/>
+                <Bar height={250} width={300} data={data} options={options}/>
             </Fragment>
         )
     }

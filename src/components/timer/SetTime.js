@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import FormControl from '@material-ui/core/FormControl'
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
-import Timelapse from '@material-ui/icons/Timelapse'
+import TimelapseIcon from '@material-ui/icons/Timelapse'
 
 const styles = theme => createStyles({
     container: {
@@ -95,7 +95,7 @@ class SetTime extends Component {
         return (
             <div>
                 <Dialog disableEscapeKeyDown open={open} onClose={handleClick} classes={{ paper: classes.container}}>
-                    <DialogTitle style={{padding: '40px 20px 10px'}}><Timelapse className={classes.timerIcon}/></DialogTitle>
+                    <DialogTitle style={{padding: '40px 20px 10px'}}><TimelapseIcon className={classes.timerIcon}/></DialogTitle>
                     <DialogContent>
                         <form className={classes.container}>
                             <FormControl className={classes.formControl}>

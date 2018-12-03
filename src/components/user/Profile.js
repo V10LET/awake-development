@@ -2,28 +2,35 @@ import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import BarChart from './BarChart'
+import _ from 'lodash'
 
 import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
     card: {
-        width: '100%',
+        // height: '400px',
+        display: 'flex',
+        alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'white',
-        margin: '20px 0'
+        margin: '20px'
 
     },
     cardDetails: {
         display: 'flex',
         flexFlow: 'column nowrap',
         margin: 40,
-        flex: 1
+    },
+    cardHoroscope: {
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        margin: '40px 40px 20px'
     },
     highlight: {
         width: '100%',
         textAlign: 'center',
         padding: '20px 0',
-        margin: '40px 0 0',
+        backgroundColor: 'rgba(0,0,0,.1)'
     },
     cardColumn: {
         display: 'flex',
@@ -32,7 +39,13 @@ const styles = theme => createStyles({
         margin: '20px'
     },
     cardRow: {
-        width: '400px',
+        display: 'flex',
+        flexFlow: 'row wrap',
+        justifyContent: 'center',
+
+    },
+    cardQuote: {
+        width: '300px',
         margin: '20px'
     }
 })
@@ -41,11 +54,13 @@ class Profile extends Component {
 
     state = {
         horoscope: '',
+        quotes: '',
         needsSignFetch: false
     }
 
     componentDidMount() {
         this.signFetch()
+        this.quoteFetch()
     }
 
     componentDidUpdate(prevProps) {
@@ -91,50 +106,69 @@ class Profile extends Component {
         }
     }
 
-    signFetch = () => {
+    signFetch = async () => {
         if (this.sign()) {
-            fetch(`http://localhost:3000/api/v1/horoscope/${this.sign()}`, {
+            let r = await fetch(`http://localhost:3000/api/v1/horoscope/${this.sign()}`, {
                 method: 'GET',
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${this.props.token}`
-                }
+                headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}` }
             })
-            .then(r=> r.json())
-            .then(r=> { this.setState({ horoscope: r.horoscope }) })
+            let data = await r.json()
+            this.setState({ horoscope: data.horoscope })
         }
     }
 
+    quoteFetch = async () => {
+        let r = await fetch('https://talaikis.com/api/quotes/')
+        let data = await r.json()
+        let quotes = _.sampleSize(data, 9)
+        this.setState({ quotes })
+    }
 
+    renderQuotes = () => {
+        const { classes } = this.props
+        const { quotes } = this.state
+        if (quotes) {
+            return quotes.map(q=> {
+                return (
+                    <Card className={classes.cardQuote}>
+                        <div className={classes.cardDetails}>
+                            <div>{q.quote}</div>
+                            <br/>
+                            <div>~{q.author}</div>
+                        </div>
+                    </Card>
+                )
+            })
+        }
+    }
 
     render() {
         const { user, classes } = this.props
         return (
             <Fragment>
                 <div className='profile-container'>
-                    <div className={classes.cardRow}>
+                    <div style={{width: '450px'}}>
                         <Card className={classes.card}>
-
-                            <div className={classes.cardDetails}>
+                            <div >
+                            <div className={classes.cardHoroscope}>
                                 <h2 style={{ margin: 0 }}>{this.sign()} Today</h2>
                                 <p>{this.state.horoscope}</p>
                             </div>
+                            <div className={classes.highlight}>Total logs and meditations: {user.logs.length + user.timed_logs.length}</div>
+                            </div>
                         </Card>
                     </div>
-                    <div className={classes.cardColumn}>
-                        <Card className={classes.cardRow}>
+                    <div style={{width: '450px'}}>
+                        <Card className={classes.card}>
                             <div className={classes.cardDetails}>
                                 <BarChart timedLogs={user.timed_logs.length} logs={user.logs.length}/>
                             </div>
-
                         </Card>
                     </div>
+                    <div className={classes.cardRow}>
+                        {this.renderQuotes()}
+                    </div>
 
-                    <Card className={classes.card}>
-                        <div className={classes.cardDetails}>
-                            LOG STATS (OR TIMER INFO) GO HERE
-                        </div>
-                    </Card>
                 </div>
             </Fragment>
         )
