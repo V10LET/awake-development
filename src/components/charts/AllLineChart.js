@@ -10,8 +10,8 @@ class LineChart extends React.Component {
             datasets: [{
                 lineTension: .5,
                 label: 'Mental',
-                backgroundColor: 'rgba(75,192,192,0.4)',
-                borderColor: 'rgba(0,0,0,0)',
+                backgroundColor: 'rgba(19,143,176,.4)',
+                borderColor: 'rgba(19,143,176)',
                 scaleOverride: true,
                 scaleStartValue: 0,
                 scaleStepWidth: 1,
@@ -19,18 +19,18 @@ class LineChart extends React.Component {
                 data: rating.mentalRating
             }, {
                 label: 'Emotional',
-                backgroundColor: 'rgba(175,192,220,0.4)',
-                borderColor: 'rgba(0,0,0,0)',
+                backgroundColor: 'rgba(94,95,1,.4)',
+                borderColor: 'rgba(94,95,1)',
                 data: rating.emotionalRating
             }, {
                 label: 'Physical',
-                backgroundColor: 'rgba(75,192,12,0.4)',
-                borderColor: 'rgba(0,0,0,0)',
+                backgroundColor: 'rgba(0,0,0,.4)',
+                borderColor: 'rgba(0,0,0)',
                 data: rating.physicalRating
             }, {
                 label: 'Spiritual',
-                backgroundColor: 'rgba(75,192,102,0.4)',
-                borderColor: 'rgba(0,0,0,0)',
+                backgroundColor: 'rgba(176,88,19,.4)',
+                borderColor: 'rgba(176,88,19)',
                 data: rating.spiritualRating
             }]
         }

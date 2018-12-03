@@ -8,7 +8,7 @@ const spiritual = {1: 'Hopeless', 2: 'Uncertain', 3: 'Apathetic', 4: 'Intrigued'
 
 class LineChart extends React.Component {
     render () {
-        const { day, rating, title } = this.props
+        const { day, rating, title, color } = this.props
 
         const data = {
             labels: day,
@@ -17,7 +17,7 @@ class LineChart extends React.Component {
                 label: title,
                 borderCapStyle: 'butt',
                 borderJoinStyle: 'miter',
-                backgroundColor: 'rgba(75,192,192,0.4)',
+                backgroundColor: color,
                 borderColor: 'rgba(0,0,0,0)',
                 scaleOverride: true,
                 scaleStartValue: 0,

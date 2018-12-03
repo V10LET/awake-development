@@ -7,6 +7,11 @@ import _ from 'lodash'
 import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
+    topCards: {
+        marginBottom: 40,
+        display: 'flex',
+        flexFlow: 'row wrap'
+    },
     card: {
         display: 'flex',
         alignItems: 'center',
@@ -30,7 +35,6 @@ const styles = theme => createStyles({
         textAlign: 'center',
         padding: '20px 0',
         backgroundColor: '#138FB0',
-        // color: 'white'
     },
     cardColumn: {
         display: 'flex',
@@ -131,7 +135,7 @@ class Profile extends Component {
         if (quotes) {
             return quotes.map((q, i)=> {
                 return (
-                    <Card className={classes.cardQuote} style={{backgroundImage: `url("https://source.unsplash.com/1600x900/?nature,tree/${i}")`}}>
+                    <Card key={i} className={classes.cardQuote} style={{backgroundImage: `url("https://source.unsplash.com/1600x900/?nature,tree/${i}")`}}>
                     <div style={{backgroundColor: 'rgba(255, 255, 255, .5)', height: '100%'}}>
                         <div className={classes.cardDetails}>
                             <div><strong>{q.quote}</strong></div>
@@ -149,23 +153,25 @@ class Profile extends Component {
         return (
             <Fragment>
                 <div className='profile-container'>
-                    <div style={{width: '450px'}}>
-                        <Card className={classes.card}>
-                            <div >
-                            <div className={classes.cardHoroscope}>
-                                <h2 style={{ margin: 0 }}>{this.sign()} Today</h2>
-                                <p>{this.state.horoscope}</p>
-                            </div>
-                            <div className={classes.highlight}>Total logs and meditations: {user.logs.length + user.timed_logs.length}</div>
-                            </div>
-                        </Card>
-                    </div>
-                    <div style={{width: '450px'}}>
-                        <Card className={classes.card}>
-                            <div className={classes.cardDetails}>
-                                <BarChart timedLogs={user.timed_logs.length} logs={user.logs.length}/>
-                            </div>
-                        </Card>
+                    <div className={classes.topCards}>
+                        <div style={{width: '450px'}}>
+                            <Card className={classes.card}>
+                                <div >
+                                <div className={classes.cardHoroscope}>
+                                    <h2 style={{ margin: 0 }}>{this.sign()} Today</h2>
+                                    <p>{this.state.horoscope}</p>
+                                </div>
+                                <div className={classes.highlight}>Total logs and meditations: {user.logs.length + user.timed_logs.length}</div>
+                                </div>
+                            </Card>
+                        </div>
+                        <div style={{width: '450px'}}>
+                            <Card className={classes.card}>
+                                <div className={classes.cardDetails}>
+                                    <BarChart timedLogs={user.timed_logs.length} logs={user.logs.length}/>
+                                </div>
+                            </Card>
+                        </div>
                     </div>
                     <div className={classes.cardRow}>
                         {this.renderQuotes()}

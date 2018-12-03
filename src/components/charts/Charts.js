@@ -46,13 +46,17 @@ class Charts extends React.Component {
         const { chartData } = this.props
         switch (this.state.chartView) {
             case 'Mental':
-                return <LineChart day={this.day(chartData.day)} rating={chartData.mentalRating} title='Mental'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.mentalRating}
+                    title='Mental' color='rgba(19,143,176)'/>
             case 'Emotional':
-                return <LineChart day={this.day(chartData.day)} rating={chartData.emotionalRating} title='Emotional'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.emotionalRating}
+                    title='Emotional' color='rgba(94,95,1)'/>
             case 'Physical':
-                return <LineChart day={this.day(chartData.day)} rating={chartData.physicalRating} title='Physical'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.physicalRating}
+                    title='Physical' color='rgba(0,0,0)'/>
             case 'Spiritual':
-                return <LineChart day={this.day(chartData.day)} rating={chartData.spiritualRating} title='Spiritual'/>
+                return <LineChart day={this.day(chartData.day)} rating={chartData.spiritualRating}
+                    title='Spiritual' color='rgba(176,88,19)'/>
             case 'All':
                 return <AllLineChart day={this.day(chartData.day)} rating={chartData} title='All'/>
             default:

@@ -20,7 +20,7 @@ class App extends Component {
             <Router history={history}>
                 <Fragment>
                     <Nav />
-                    <div style={ this.props.drawerOpen ? {margin: '100px 0 0 200px'} : {marginTop: 100} }>
+                    <div style={ this.props.drawerOpen ? {margin: '80px 0 0 200px'} : {marginTop: 100} }>
                         <Routes />
                     </div>
 
