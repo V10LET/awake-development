@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Moment from 'moment'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 
 import ViewLog from '../components/ViewLog'
@@ -41,7 +42,7 @@ class ViewLogs extends Component {
     }
 
     handleChange = (event) => {
-        this.setState({ searchTerm: event.target.value })
+        this.setState({ searchTerm: String(event.target.value) })
     }
 
     handleSearch = (user) => {
@@ -49,7 +50,26 @@ class ViewLogs extends Component {
         if (user.logs) {
             if (meditation) {
                 return user.timed_logs.filter(l=> {
-                    return l.time.includes(searchTerm)
+
+                    let hr = String(Moment.duration(Number(l.time)).hours())
+                    let min = String(Moment.duration(Number(l.time)).minutes())
+                    let sec = String(Moment.duration(Number(l.time)).seconds())
+
+                    if (hr !== '0') {
+                        hr = hr + 'hours'
+                    }
+
+                    if (min !== '0') {
+                        min = min + 'minutes'
+                    }
+
+                    if (sec !== '0') {
+                        sec = sec + 'seconds'
+                    }
+
+                    return hr.includes(searchTerm) ||
+                    min.includes(searchTerm) ||
+                    sec.includes(searchTerm)
                 })
             } else {
                 return user.logs.filter(l=> {
@@ -62,7 +82,7 @@ class ViewLogs extends Component {
         }
     }
 
-    handleChange = () => this.setState({ meditation: !this.state.meditation })
+    handleSwitchChange = () => this.setState({ meditation: !this.state.meditation })
 
     render() {
         const { user, classes } = this.props
@@ -77,7 +97,7 @@ class ViewLogs extends Component {
 
                 <div className={classes.switchRow}>
                     <div style={meditation ? {color: 'rgba(0,0,0,.3)'} : null}>Written</div>
-                        <Switch checked={meditation} onChange={this.handleChange}/>
+                        <Switch checked={meditation} onChange={this.handleSwitchChange}/>
                     <div style={meditation ? null : {color: 'rgba(0,0,0,.3)'}}>Meditation</div>
                 </div>
 
