@@ -53,7 +53,7 @@ class Charts extends React.Component {
                     title='Emotional' color='rgba(94,95,1)'/>
             case 'Physical':
                 return <LineChart day={this.day(chartData.day)} rating={chartData.physicalRating}
-                    title='Physical' color='rgba(0,0,0)'/>
+                    title='Physical' color='rgba(0,0,0,.9)'/>
             case 'Spiritual':
                 return <LineChart day={this.day(chartData.day)} rating={chartData.spiritualRating}
                     title='Spiritual' color='rgba(176,88,19)'/>

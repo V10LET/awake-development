@@ -25,7 +25,7 @@ class LineChart extends React.Component {
             }, {
                 label: 'Physical',
                 backgroundColor: 'rgba(0,0,0,.4)',
-                borderColor: 'rgba(0,0,0)',
+                borderColor: 'rgba(0,0,0, .9)',
                 data: rating.physicalRating
             }, {
                 label: 'Spiritual',

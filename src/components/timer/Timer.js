@@ -34,10 +34,12 @@ const styles = theme => createStyles({
     },
     timerCard: {
         width: '40%',
-        marginTop: 40
+        marginTop: 40,
+        backgroundImage: `url("https://source.unsplash.com/600x354/?nature,tree/")`,
+        backgroundSize: 'cover'
     },
     time: {
-        margin: 40,
+        padding: 80,
         fontSize: '3em',
         fontWeight: 'bold',
         textAlign: 'center'
@@ -207,7 +209,9 @@ class Timer extends Component {
                 </div>
 
                 <Card className={classes.timerCard}>
-                    <div className={classes.time}>{this.renderTime()}</div>
+                    <div style={{backgroundColor: 'rgba(255,255,255,0.5)', height: '100%'}}>
+                        <div className={classes.time}>{this.renderTime()}</div>
+                    </div>
                 </Card>
 
                 {!end ?

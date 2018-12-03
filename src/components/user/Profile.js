@@ -135,7 +135,7 @@ class Profile extends Component {
         if (quotes) {
             return quotes.map((q, i)=> {
                 return (
-                    <Card key={i} className={classes.cardQuote} style={{backgroundImage: `url("https://source.unsplash.com/1600x900/?nature,tree/${i}")`}}>
+                    <Card key={i} className={classes.cardQuote} style={{backgroundImage: `url("https://source.unsplash.com/600x354/?nature,tree/${i}")`}}>
                     <div style={{backgroundColor: 'rgba(255, 255, 255, .5)', height: '100%'}}>
                         <div className={classes.cardDetails}>
                             <div><strong>{q.quote}</strong></div>

@@ -38,7 +38,7 @@ class DoughnutChart extends React.Component {
             labels: this.labels(title),
             datasets: [{
                 label: title,
-                backgroundColor: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
+                backgroundColor: ['#B05813', 'rgba(0,0,0,.9)', '#138FB0', '#5E5F01', 'rgba(0,0,0,.4)', 'rgba(94,95,1,0.4)'],
                 data: this.occurance(rating)
             }]
         }
