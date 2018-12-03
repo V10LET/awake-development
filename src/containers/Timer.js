@@ -3,6 +3,7 @@ import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from '../components/SetTime'
 import SaveTime from '../components/SaveTime'
+import SaveEndEarly from '../components/SaveEndEarly'
 import singingBowl from '../style/media/singingBowl.m4a'
 
 import Dialog from '@material-ui/core/Dialog'
@@ -85,8 +86,7 @@ class Timer extends Component {
         if (this.state.min === '' &&  this.state.min === '') {
             this.setState({ renderError: true })
         } else {
-            let deadline = new Date().getTime() + (3*1000)
-            // (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
+            let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
             this.setState({ deadline, setTime: true }, () => {
                 this.setState({ timer: setInterval(this.setTick, 1000) })
                 return this.state.audio ? new Audio(singingBowl).play() : null
@@ -179,12 +179,6 @@ class Timer extends Component {
         this.setState({ earlyEndOpen: false })
     }
 
-    handleYes = () => {
-        console.log(remaining)
-        this.setState(this.state)
-        this.setState({ earlyEndOpen: false })
-    }
-
     renderEndDialog = () => {
         return (
             <Dialog disableBackdropClick disableEscapeKeyDown open={true}>
@@ -201,7 +195,7 @@ class Timer extends Component {
 
     render () {
         const { classes } = this.props
-        const { min, hr, open, earlyEndOpen, renderError, audio, end } = this.state
+        const { min, hr, open, earlyEndOpen, renderError, audio, end, remaining } = this.state
         return (
             <div className={classes.timerContainer}>
 
@@ -220,7 +214,7 @@ class Timer extends Component {
                     <div className={classes.timerBtns}>
                         <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
                         <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
-                        {earlyEndOpen ? this.renderEndDialog() : null}
+                        {earlyEndOpen ? <SaveEndEarly handleNo={this.handleNo} hr={hr} min={min} remaining={remaining}/> : null}
                         {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
                     </div>
                 :
@@ -231,7 +225,5 @@ class Timer extends Component {
         )
     }
 }
-
-const mapDispatchToProps = {}
 
 export default (withStyles(styles)(Timer))

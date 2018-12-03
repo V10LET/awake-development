@@ -11,7 +11,7 @@ class SaveTime extends Component {
         const { hr, min } = this.props
         let num = (Number(min) * 60 * 1000) + (Number(hr) * 3600 * 1000)
         const time = String(num)
-        console.log(time)
+        
         let r = await fetch('http://localhost:3000/api/v1/timed_logs', {
             method: 'POST',
             headers: {

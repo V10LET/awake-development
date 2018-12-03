@@ -1,23 +1,12 @@
-import React, { Component, Fragment } from 'react'
-import { withStyles, createStyles } from '@material-ui/core/styles'
+import React, { Component } from 'react'
 import Moment from 'moment'
 
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import Tooltip from '@material-ui/core/Tooltip'
 
-const styles = theme => createStyles({
-    cardHeader: {
-        display: 'flex',
-        flexFlow: 'row nowrap',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    }
-})
-
-class ViewMed extends Component {
+export default class ViewMed extends Component {
 
     getDate = (time) => {
         let oldT = Date.parse(time)
@@ -86,7 +75,7 @@ class ViewMed extends Component {
     }
 
     render () {
-        const { log, classes } = this.props
+        const { log } = this.props
         return (
             <ExpansionPanel style={{ width: 275 }}>
                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -100,5 +89,3 @@ class ViewMed extends Component {
         )
     }
 }
-
-export default (withStyles(styles)(ViewMed))
