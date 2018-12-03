@@ -109,8 +109,9 @@ class Timer extends Component {
     }
 
     handleEndEarly = () => {
+        const remaining = this.state.deadline - new Date().getTime()
         clearInterval(this.state.timer)
-        this.setState({ earlyEndOpen: true })
+        this.setState({ earlyEndOpen: true, remaining })
     }
 
     //----> RENDER METHODS
@@ -173,13 +174,24 @@ class Timer extends Component {
         }
     }
 
+    handleNo = () => {
+        this.setState(this.state)
+        this.setState({ earlyEndOpen: false })
+    }
+
+    handleYes = () => {
+        console.log(remaining)
+        this.setState(this.state)
+        this.setState({ earlyEndOpen: false })
+    }
+
     renderEndDialog = () => {
         return (
             <Dialog disableBackdropClick disableEscapeKeyDown open={true}>
                 <DialogTitle>Do you want to save this session?</DialogTitle>
                     <DialogActions>
-                        <Button onClick={null}>Yes</Button>
-                        <Button onClick={null}>No</Button>
+                        <Button onClick={this.handleYes}>Yes</Button>
+                        <Button onClick={this.handleNo}>No</Button>
                     </DialogActions>
             </Dialog>
         )

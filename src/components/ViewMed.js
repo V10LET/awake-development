@@ -17,7 +17,7 @@ const styles = theme => createStyles({
     }
 })
 
-class ViewLog extends Component {
+class ViewMed extends Component {
 
     getDate = (time) => {
         let oldT = Date.parse(time)
@@ -47,14 +47,12 @@ class ViewLog extends Component {
         let minute = time.minutes()
         let second = time.seconds()
 
-        console.log(hour,)
-
         if (hour > 1) {
             hour = `${hour} hours`
         } else if (hour === 1) {
             hour = `${hour} hour`
         }
-        
+
         if (minute > 1) {
             minute = `${minute} minutes`
         } else if (minute === 1) {
@@ -67,7 +65,6 @@ class ViewLog extends Component {
             second = `${second} second`
         }
 
-        console.log(hour, minute, second)
         if (hour === 0) {
             if (minute === 0) {
                 return second
@@ -96,12 +93,12 @@ class ViewLog extends Component {
                         <div>{this.getDate(log.created_at)}</div>
                  </ExpansionPanelSummary>
                  <ExpansionPanelDetails style={{ display: 'flex', flexDirection: 'column'}}>
-                         <h3>{this.getTime(log.created_at)}</h3>
-                        <div>{this.renderTime(log.time)}</div>
+                        <h3>{this.renderTime(log.time)}</h3>
+                        <div>{this.getTime(log.created_at)}</div>
                  </ExpansionPanelDetails>
             </ExpansionPanel>
         )
     }
 }
 
-export default (withStyles(styles)(ViewLog))
+export default (withStyles(styles)(ViewMed))

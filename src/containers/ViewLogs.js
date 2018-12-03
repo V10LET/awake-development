@@ -97,7 +97,6 @@ class ViewLogs extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('mapStateToProps ~>', state)
     return { user: state.user.user }
 }
 export default connect(mapStateToProps)(withStyles(styles)(ViewLogs))
