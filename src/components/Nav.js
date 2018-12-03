@@ -27,7 +27,7 @@ const styles = theme => createStyles({
    drawer: {
        width: 200,
        backgroundColor: 'white',
-       color: 'white',
+       backgroundColor: '#B05813',
        zIndex: theme.zIndex.appBar - 1,
    },
    name: {
@@ -49,7 +49,7 @@ const styles = theme => createStyles({
        boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)'
    },
    appbar: {
-       backgroundColor: 'white',
+       backgroundColor: '#138FB0',
    },
    MenuIcon: {
        color: 'black',

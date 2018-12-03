@@ -13,7 +13,7 @@ class DoughnutChart extends React.Component {
         const data = {
             labels: ["Meditations", "Logs"],
             datasets: [{
-                backgroundColor: ['rgba(0,0,0,.8)', 'rgba(0,0,0,.1)'],
+                backgroundColor: ['rgba(0,0,0,0.9)', '#B05813'],
                 data: [timedLogs, logs]
             }]
         }

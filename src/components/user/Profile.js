@@ -8,7 +8,6 @@ import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
     card: {
-        // height: '400px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -19,7 +18,7 @@ const styles = theme => createStyles({
     cardDetails: {
         display: 'flex',
         flexFlow: 'column nowrap',
-        margin: 40,
+        padding: 40,
     },
     cardHoroscope: {
         display: 'flex',
@@ -30,7 +29,8 @@ const styles = theme => createStyles({
         width: '100%',
         textAlign: 'center',
         padding: '20px 0',
-        backgroundColor: 'rgba(0,0,0,.1)'
+        backgroundColor: '#138FB0',
+        // color: 'white'
     },
     cardColumn: {
         display: 'flex',
@@ -46,7 +46,8 @@ const styles = theme => createStyles({
     },
     cardQuote: {
         width: '300px',
-        margin: '20px'
+        margin: '20px',
+        backgroundSize: 'cover'
     }
 })
 
@@ -128,15 +129,16 @@ class Profile extends Component {
         const { classes } = this.props
         const { quotes } = this.state
         if (quotes) {
-            return quotes.map(q=> {
+            return quotes.map((q, i)=> {
                 return (
-                    <Card className={classes.cardQuote}>
+                    <Card className={classes.cardQuote} style={{backgroundImage: `url("https://source.unsplash.com/1600x900/?nature,tree/${i}")`}}>
+                    <div style={{backgroundColor: 'rgba(255, 255, 255, .5)', height: '100%'}}>
                         <div className={classes.cardDetails}>
-                            <div>{q.quote}</div>
-                            <br/>
-                            <div>~{q.author}</div>
+                            <div><strong>{q.quote}</strong></div>
+                            <br/><div>~{q.author}</div>
                         </div>
-                    </Card>
+                    </div>
+                </Card>
                 )
             })
         }

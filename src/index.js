@@ -39,16 +39,16 @@ const theme = createMuiTheme({
   },
   palette: {
     primary: {
-      light: '#000',
-      main: '#000',
-      dark: '#000',
-      contrastText: '#000',
+      light: 'rgba(0,0,0,0.9)',
+      main: 'rgba(0,0,0,0.9)',
+      dark: 'rgba(0,0,0,0.9)',
+      contrastText: 'rgba(0,0,0,0.9)',
     },
     secondary: {
-      light: '#000',
-      main: '#000',
-      dark: '#000',
-      contrastText: '#000',
+      light: 'rgba(0,0,0,0.9)',
+      main: 'rgba(0,0,0,0.9)',
+      dark: 'rgba(0,0,0,0.9)',
+      contrastText: 'rgba(0,0,0,0.9)',
     },
   }
 })
