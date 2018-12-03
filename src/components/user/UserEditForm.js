@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-import { setUser } from '../actions/userAction'
+import { setUser } from '../../actions/userAction'
 
 import IconButton from '@material-ui/core/IconButton'
 import TextField from '@material-ui/core/TextField'

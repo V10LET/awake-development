@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import Moment from 'moment'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 
-import ViewLog from '../components/ViewLog'
-import ViewMed from '../components/ViewMed'
+import ViewLog from './ViewLog'
+import ViewMed from './ViewMed'
 
 import Input from '@material-ui/core/Input'
 import SearchIcon from '@material-ui/icons/Search'

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import BarChart from './BarChart'
 
 import Card from '@material-ui/core/Card'
 
@@ -16,6 +17,7 @@ const styles = theme => createStyles({
         display: 'flex',
         flexFlow: 'column nowrap',
         margin: 40,
+        flex: 1
     },
     highlight: {
         width: '100%',
@@ -30,7 +32,7 @@ const styles = theme => createStyles({
         margin: '20px'
     },
     cardRow: {
-        width: '40%',
+        width: '400px',
         margin: '20px'
     }
 })
@@ -120,11 +122,11 @@ class Profile extends Component {
                         </Card>
                     </div>
                     <div className={classes.cardColumn}>
-                        <Card className={classes.card}>
-                            <div className={classes.cardDetails}>Total number of logs: {user.logs.length}</div>
-                        </Card>
-                        <Card className={classes.card}>
-                            <div className={classes.cardDetails}>Total number of logs: {user.logs.length}</div>
+                        <Card className={classes.cardRow}>
+                            <div className={classes.cardDetails}>
+                                <BarChart timedLogs={user.timed_logs.length} logs={user.logs.length}/>
+                            </div>
+
                         </Card>
                     </div>
 

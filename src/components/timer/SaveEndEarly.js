@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import history from '../history'
-import { setTimedLog } from '../actions/logAction'
+import history from '../../history'
+import { setTimedLog } from '../../actions/logAction'
 
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'

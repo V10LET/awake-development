@@ -3,9 +3,9 @@ import { Router } from 'react-router-dom'
 import './style/App.css'
 import { connect } from 'react-redux'
 
-import Nav from './containers/Nav'
+import Nav from './components/Nav'
 import history from './history'
-import Routes from './containers/Routes'
+import Routes from './components/Routes'
 
 class App extends Component {
 

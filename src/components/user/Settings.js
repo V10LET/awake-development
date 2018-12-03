@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-import UserEditForm from '../components/UserEditForm'
+import UserEditForm from './UserEditForm'
 
 import IconButton from '@material-ui/core/IconButton'
 import Card from '@material-ui/core/Card'

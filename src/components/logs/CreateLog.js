@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import history from '../history'
-import NewLog from '../components/NewLog'
-import { setLog } from '../actions/logAction'
+import history from '../../history'
+import NewLog from './NewLog'
+import { setLog } from '../../actions/logAction'
 
 import Button from '@material-ui/core/Button'
 

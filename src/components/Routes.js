@@ -5,12 +5,12 @@ import Home from './Home'
 import Login from './Login'
 import Logout from './Logout'
 import SignUp from './SignUp'
-import Profile from './Profile'
-import CreateLog from './CreateLog'
-import ViewLogs from './ViewLogs'
-import Settings from './Settings'
-import Charts from './Charts'
-import Timer from './Timer'
+import Profile from './user/Profile'
+import CreateLog from './logs/CreateLog'
+import ViewLogs from './logs/ViewLogs'
+import Settings from './user/Settings'
+import Charts from './charts/Charts'
+import Timer from './timer/Timer'
 
 const Routes = () =>
     <Fragment>

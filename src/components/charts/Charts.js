@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-import LineChart from '../components/LineChart'
-import AllLineChart from '../components/AllLineChart'
-import DoughnutChart from '../components/Doughnut'
+import LineChart from './LineChart'
+import AllLineChart from './AllLineChart'
+import DoughnutChart from './Doughnut'
 import Moment from 'moment'
 
 import Radio from '@material-ui/core/Radio'
