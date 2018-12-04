@@ -39,8 +39,8 @@ const styles = theme => createStyles({
         backgroundSize: 'cover'
     },
     time: {
-        padding: 80,
-        fontSize: '3em',
+        padding: '100px 80px',
+        fontSize: '4em',
         fontWeight: 'bold',
         textAlign: 'center'
     },

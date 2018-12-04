@@ -43,13 +43,23 @@ const theme = createMuiTheme({
       main: 'rgba(0,0,0,0.9)',
       dark: '#138FB0',
       contrastText: '#000',
+    },
+    secondary: {
+        light: '#5E5F01',
+        main: 'rgba(0,0,0,0.9)',
+        dark: '#138FB0',
+        contrastText: '#000',
+    }
   },
-  secondary: {
-    light: '#5E5F01',
-    main: 'rgba(0,0,0,0.9)',
-    dark: '#138FB0',
-    contrastText: '#000',
-  }
+  overrides: {
+      MuiButton: {
+          root: {
+              "&:hover": {
+                // backgroundColor: 'rgba(176,88,19)'
+                backgroundColor: 'rgba(0,0,0,0)'
+              }
+          }
+      }
   }
 })
 

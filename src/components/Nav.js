@@ -79,8 +79,8 @@ class Nav extends Component {
                             <Button><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
                             :
                             <div>
-                                <Button><Link to="/login" className={ classes.headerLink }>Login</Link></Button>
-                                <Button><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
+                                <Button style={{marginRight: 10}}><Link to="/login" className={ classes.headerLink }>Login</Link></Button>
+                                <Button className='nav-hover-btn' variant='outlined'><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
                             </div>
                         }
                         </div>

@@ -13,6 +13,10 @@
     height: 50px;
 }
 
+.nav-hover-btn:hover {
+    background-color: rgba(19,143,176,.8) !important;
+}
+
 /*************/
 /* LOG CARDS */
 /*************/
