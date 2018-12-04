@@ -9,10 +9,27 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
 import Tab from '@material-ui/core/Tab'
+
 import MenuIcon from '@material-ui/icons/Menu'
+import AssessmentIcon from '@material-ui/icons/Assessment'
+import TimelapseIcon from '@material-ui/icons/Timelapse'
+import SettingsIcon from '@material-ui/icons/Settings'
+import AssignmentIcon from '@material-ui/icons/Assignment'
+import BrushIcon from '@material-ui/icons/Brush'
+import HomeIcon from '@material-ui/icons/Home'
+
+const routes = {
+    'Dashboard':<HomeIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Timer':<TimelapseIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Logs':<AssignmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Create Log':<BrushIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Progress':<AssessmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Settings':<SettingsIcon style={{fill: 'rgba(0,0,0,.9)'}}/>
+}
 
 const styles = theme => createStyles({
     headerLink: {
@@ -23,7 +40,6 @@ const styles = theme => createStyles({
    drawerLink: {
        color: 'black',
        textDecoration: 'none',
-       marginBottom: 5,
    },
    drawer: {
        width: 200,
@@ -35,6 +51,11 @@ const styles = theme => createStyles({
    },
    logout: {
        backgroundColor: 'white',
+   },
+   routes: {
+       display: 'flex',
+       alignItems: 'center',
+       marginBottom: 5
    },
    media: {
        borderRadius: '5%',
@@ -57,8 +78,6 @@ const styles = theme => createStyles({
        alignItems: 'center'
    }
 })
-
-const routes = ['Dashboard', 'Timer', 'Logs', 'Create Log', 'Progress', 'Settings']
 
 class Nav extends Component {
 
@@ -99,18 +118,21 @@ class Nav extends Component {
                                         <div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div>
                                     </ListItem>
                                     <ListItem style={{fontSize: '1.5em', fontWeight: 'bold'}}>{user.name}</ListItem>
-                                    {routes.map((text, index) => (
+                                    {Object.keys(routes).map((text, index) => (
                                         <Fragment key={text}>
                                             <ListItem button className={classes.routes}>
                                                 {token ?
-                                                    <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                                        <ListItemText primary={text} />
-                                                    </Link>
+                                                    <Fragment>
+                                                        <ListItemIcon >{routes[text]}</ListItemIcon>
+                                                        <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                                            <ListItemText primary={text} />
+                                                        </Link>
+                                                    </Fragment>
                                                     : <Redirect to='/' />
                                                }
                                            </ListItem>
                                        </Fragment>
-                                   ))}
+                                    ))}
                                 </List>
                         </Drawer>
                     </Fragment>
