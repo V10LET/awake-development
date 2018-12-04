@@ -13,15 +13,21 @@ const styles = theme => createStyles({
     },
 })
 
-export default class MedBarChart extends React.Component {
+const backgroundColor = ['#138FB0','#B05813', 'rgba(0,0,0,0.9)', '#5E5F01']
+
+export default class MedBar extends React.Component {
+
+    color = (time) => time ? time.map(t=> backgroundColor[Math.floor(Math.random() * backgroundColor.length)]) : null
 
     render () {
         const { time, day } = this.props
+
         const data = {
-            labels: [day],
+            labels: day,
             datasets: [{
-                backgroundColor: ['#B05813', 'rgba(0,0,0,0.9)'],
-                data: [time]
+                label: 'Minutes',
+                backgroundColor: this.color(time),
+                data: time
             }]
         }
 

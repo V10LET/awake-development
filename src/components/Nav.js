@@ -68,7 +68,7 @@ const styles = theme => createStyles({
        marginBottom: 5
    },
    media: {
-       borderRadius: '5%',
+       borderRadius: '100%',
        width: 80,
        height: 80,
        backgroundSize: 'cover',

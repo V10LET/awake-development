@@ -124,7 +124,6 @@ export function userReducer(state = initialState, action) {
 
         case SET_CHART_DATA: {
             const { logs } = action.payload
-            console.log(logs, logs === {})
             if (logs === null) {
                 return {
                     ...state,
