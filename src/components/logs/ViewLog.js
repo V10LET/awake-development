@@ -11,6 +11,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import EditIcon from '@material-ui/icons/Edit'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 
 const styles = theme => createStyles({
@@ -50,8 +51,12 @@ class ViewLog extends Component {
         return strTime
     }
 
-    handleClick = (event) => {
+    handleClick = () => {
         this.setState({ edit: !this.state.edit })
+    }
+
+    handleDelete = () => {
+
     }
 
     render () {
@@ -69,11 +74,17 @@ class ViewLog extends Component {
                           ? <Fragment>
                                 <div className={classes.cardHeader}>
                                     <h3>{this.getTime(log.created_at)}</h3>
-                                    <Tooltip title='Edit Card' placement="top-end"><EditIcon onClick={this.handleClick}/></Tooltip>
+                                    <div>
+                                        <Tooltip title='Edit Card' placement="top-end"><EditIcon onClick={this.handleClick}/></Tooltip>
+                                        <Tooltip title='Delete Card' placement="top-end"><DeleteForeverIcon onClick={this.handleDelete}/></Tooltip>
+                                    </div>
                                 </div>
                                 <LogDetails log={log} />
                             </Fragment>
                           : <Fragment>
+                                <div style={{textAlign: 'right'}}>
+                                    <Tooltip title='Delete Card' placement="top-end"><DeleteForeverIcon onClick={this.handleDelete}/></Tooltip>
+                                </div>
                                 <div>
                                     <LogEditForm onEdit={this.handleClick} log={log} />
                                 </div>
