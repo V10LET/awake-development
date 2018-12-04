@@ -1,9 +1,9 @@
 import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-import { Bar } from 'react-chartjs-2'
 import Moment from 'moment'
 import MedBar from './MedBar'
+import MedDoughnut from './MedDoughnut'
 import Switch from '@material-ui/core/Switch'
 
 const styles = theme => createStyles({
@@ -35,9 +35,13 @@ class MedChart extends React.Component {
     day = (logs) => logs.map(l=> Moment(l.created_at).format('MMM Do YY'))
 
     time = (logs) => logs.map(l=> {
+        let hr = Moment.duration(Number(l.time)).hours() * 60
         let min = Moment.duration(Number(l.time)).minutes()
         let sec = Moment.duration(Number(l.time)).seconds() / 60
-        return sec > 0 ? min += sec : min
+        if (sec > 0) {
+            min += sec
+        }
+        return hr + min
     })
 
     handleChange = () => this.setState({ bar: !this.state.bar })
@@ -54,7 +58,7 @@ class MedChart extends React.Component {
                         <div style={bar ? null : {color: 'rgba(0,0,0,.3)'}}>Doughnut</div>
                     </div>
                     <div className={classes.lineChart}>
-                        {bar ?
+                        {!bar ?
                             <MedBar time={this.time(timedLogs)} day={this.day(timedLogs)}/>
                         :
                             <MedDoughnut time={this.time(timedLogs)} day={this.day(timedLogs)}/>

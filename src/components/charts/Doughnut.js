@@ -6,7 +6,7 @@ const emotional = ['Anger', 'Shame', 'Stress', 'Excitement', 'Content', 'Gratitu
 const physical = ['Painful', 'Tired', 'Disconnected', 'Grounded', 'Energetic', 'Relaxed']
 const spiritual = ['Hopeless', 'Uncertain', 'Apathetic', 'Intrigued', 'Hopeful', 'Inspired']
 
-class DoughnutChart extends React.Component {
+export default class DoughnutChart extends React.Component {
 
     occurance = (rating) => {
         const counts = {}
@@ -52,5 +52,3 @@ class DoughnutChart extends React.Component {
         )
     }
 }
-
-export default DoughnutChart

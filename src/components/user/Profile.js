@@ -157,7 +157,7 @@ class Profile extends Component {
     }
 
     renderBarChart = () => {
-        const { user, classes } = this.props
+        const { user } = this.props
         if (user.logs.length === 0 && user.timed_logs.length === 0) {
             return (
                 <div style={{marginLeft: '-7em'}}>
