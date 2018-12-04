@@ -32,6 +32,9 @@ const routes = {
 }
 
 const styles = theme => createStyles({
+    listItemText:{
+        fontSize: '0.8em'
+    },
     headerLink: {
        textAlign: 'center',
        color: 'black',
@@ -62,7 +65,7 @@ const styles = theme => createStyles({
        width: 80,
        height: 80,
        backgroundSize: 'cover',
-       boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)'
+       boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
    },
    appbar: {
        boxShadow: '0 0 0 !important',
@@ -114,10 +117,10 @@ class Nav extends Component {
                                 <MenuIcon onClick={ this.handleClick } className={classes.MenuIcon}/>
                             </div>
                                 <List disableTopography className={classes.drawerList}>
-                                    <ListItem>
+                                    <ListItem style={{ justifyContent: 'center' }}>
                                         <div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div>
                                     </ListItem>
-                                    <ListItem style={{fontSize: '1.5em', fontWeight: 'bold'}}>{user.name}</ListItem>
+                                    <ListItem style={{fontSize: '1.5em', fontWeight: 'bold', justifyContent: 'center'}}>{user.name}</ListItem>
                                     {Object.keys(routes).map((text, index) => (
                                         <Fragment key={text}>
                                             <ListItem button className={classes.routes}>
@@ -125,7 +128,7 @@ class Nav extends Component {
                                                     <Fragment>
                                                         <ListItemIcon >{routes[text]}</ListItemIcon>
                                                         <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                                            <ListItemText primary={text} />
+                                                            <ListItemText disableTopography classes={{primary: classes.listItemText}} primary={text} />
                                                         </Link>
                                                     </Fragment>
                                                     : <Redirect to='/' />
