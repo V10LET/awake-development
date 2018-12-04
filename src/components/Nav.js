@@ -12,10 +12,16 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Button from '@material-ui/core/Button'
-import Tab from '@material-ui/core/Tab'
+import Divider from '@material-ui/core/Divider'
+
+import ExpansionPanel from '@material-ui/core/ExpansionPanel'
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 
 import MenuIcon from '@material-ui/icons/Menu'
 import AssessmentIcon from '@material-ui/icons/Assessment'
+import ShowChartIcon from '@material-ui/icons/ShowChart'
 import TimelapseIcon from '@material-ui/icons/Timelapse'
 import SettingsIcon from '@material-ui/icons/Settings'
 import AssignmentIcon from '@material-ui/icons/Assignment'
@@ -24,10 +30,11 @@ import HomeIcon from '@material-ui/icons/Home'
 
 const routes = {
     'Dashboard':<HomeIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
-    'Timer':<TimelapseIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Logs':<AssignmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Create Log':<BrushIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
-    'Progress':<AssessmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Log Charts':<ShowChartIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Timer':<TimelapseIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Meditation Chart':<AssessmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Settings':<SettingsIcon style={{fill: 'rgba(0,0,0,.9)'}}/>
 }
 
@@ -122,19 +129,19 @@ class Nav extends Component {
                                     <ListItem style={{fontSize: '1.5em', fontWeight: 'bold', justifyContent: 'center'}}>{user.name}</ListItem>
                                     {Object.keys(routes).map((text, index) => (
                                         <Fragment key={text}>
-                                            <ListItem button className={classes.routes}>
                                                 {token ?
                                                     <Fragment>
-                                                        <ListItemIcon >{routes[text]}</ListItemIcon>
-                                                        <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                                            <ListItemText classes={{primary: classes.listItemText}} primary={text} />
-                                                        </Link>
+                                                        <ListItem>
+                                                            <ListItemIcon >{routes[text]}</ListItemIcon>
+                                                            <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
+                                                                <ListItemText classes={{primary: classes.listItemText}} primary={text} />
+                                                            </Link>
+                                                        </ListItem>
                                                     </Fragment>
                                                     : <Redirect to='/' />
                                                }
-                                           </ListItem>
                                        </Fragment>
-                                    ))}
+                                   ))}
                                 </List>
                         </Drawer>
                     </Fragment>

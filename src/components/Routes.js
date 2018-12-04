@@ -10,6 +10,7 @@ import CreateLog from './logs/CreateLog'
 import ViewLogs from './logs/ViewLogs'
 import Settings from './user/Settings'
 import Charts from './charts/Charts'
+import MedCharts from './charts/MedCharts'
 import Timer from './timer/Timer'
 
 const Routes = () =>
@@ -22,7 +23,8 @@ const Routes = () =>
         <Route path='/create-log' component={ CreateLog } />
         <Route path='/logs' component={ ViewLogs } />
         <Route path='/settings' component={ Settings } />
-        <Route path='/progress' component={ Charts } />
+        <Route path='/log-charts' component={ Charts } />
+        <Route path='/meditation-chart' component={ MedCharts } />
         <Route path='/timer' component={ Timer } />
     </Fragment>
 

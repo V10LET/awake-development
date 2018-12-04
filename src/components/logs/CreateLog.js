@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import history from '../../history'
 import NewLog from './NewLog'
-import { setLog } from '../../actions/logAction'
+import { setLog, setChartData } from '../../actions/logAction'
 
 import Button from '@material-ui/core/Button'
 
@@ -68,6 +68,7 @@ class Logs extends Component {
 
         let data = await r.json()
         this.props.setLog(data.log)
+        this.props.setChartData([data.log])
         history.push('/logs')
     }
 
@@ -103,6 +104,6 @@ const mapStateToProps = state => {
     return { user: state.user }
 }
 
-const mapDispatchToProps = { setLog }
+const mapDispatchToProps = { setLog, setChartData }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Logs)
