@@ -1,9 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-import BarChart from './BarChart'
 import _ from 'lodash'
+import history from '../../history'
+import BarChart from './BarChart'
 
+import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 
 const styles = theme => createStyles({
@@ -148,6 +150,36 @@ class Profile extends Component {
         }
     }
 
+    handleClick = (event) => {
+        const value = event.target.innerText.toLowerCase()
+        console.log(value, value.includes('log'))
+        value.includes('log') ? history.push('/create-log') : history.push('/timer')
+    }
+
+    renderBarChart = () => {
+        const { user, classes } = this.props
+        if (user.logs.length === 0 && user.timed_logs.length === 0) {
+            return (
+                <div style={{marginLeft: '-7em'}}>
+                    <h2 style={{margin: '0 0 1em 0'}}>Progress</h2>
+                    <div style={{fontStyle: 'oblique', fontSize: '.8em', color: 'grey'}}>No logs or meditations yet...</div>
+                    <div style={{margin: '1em 0 0 -1em', display: 'flex', justifyContent: 'flex-start'}}>
+                        <Button onClick={this.handleClick}>New Log</Button>
+                        <Button onClick={this.handleClick}>Meditate</Button>
+                    </div>
+                </div>
+            )
+        } else {
+            return <BarChart timedLogs={user.timed_logs.length} logs={user.logs.length}/>
+        }
+    }
+
+    componentWillUnmount() {
+        this.signFetch()
+        this.quoteFetch()
+        this.renderBarChart()
+    }
+
     render() {
         const { user, classes } = this.props
         return (
@@ -168,7 +200,7 @@ class Profile extends Component {
                         <div style={{width: '450px'}}>
                             <Card className={classes.card}>
                                 <div className={classes.cardDetails}>
-                                    <BarChart timedLogs={user.timed_logs.length} logs={user.logs.length}/>
+                                    {this.renderBarChart()}
                                 </div>
                             </Card>
                         </div>

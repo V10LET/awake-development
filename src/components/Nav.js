@@ -84,9 +84,8 @@ const styles = theme => createStyles({
 
 class Nav extends Component {
 
-    handleClick = () => {
-        this.props.setDrawer(!this.props.drawerOpen)
-    }
+    handleClick = () => this.props.setDrawer(!this.props.drawerOpen)
+    renderAvatar = (img) => img === '' ? 'https://source.unsplash.com/300x300/?nature,tree' : img
 
     render () {
         const { drawerOpen, token, user, classes } = this.props
@@ -118,7 +117,7 @@ class Nav extends Component {
                             </div>
                                 <List className={classes.drawerList}>
                                     <ListItem style={{ justifyContent: 'center' }}>
-                                        <div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div>
+                                        <div className={classes.media} style={{backgroundImage: `url("${this.renderAvatar(user.avatar)}")`}}></div>
                                     </ListItem>
                                     <ListItem style={{fontSize: '1.5em', fontWeight: 'bold', justifyContent: 'center'}}>{user.name}</ListItem>
                                     {Object.keys(routes).map((text, index) => (

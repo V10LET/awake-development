@@ -18,7 +18,7 @@ class SignUp extends Component {
 
     handleSubmit = async (event) => {
         event.preventDefault()
-
+        
         let r = await fetch('http://localhost:3000/api/v1/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },

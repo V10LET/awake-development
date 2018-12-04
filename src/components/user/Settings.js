@@ -39,9 +39,8 @@ class Settings extends Component {
         editForm: false,
     }
 
-    handleClick = () => {
-        this.setState({ editForm: !this.state.editForm })
-    }
+    handleClick = () => this.setState({ editForm: !this.state.editForm })
+    renderAvatar = (img) => img === '' ? 'https://source.unsplash.com/300x300/?nature,tree' : img
 
     render () {
         const { user, classes } = this.props
@@ -59,7 +58,7 @@ class Settings extends Component {
                     <div className={classes.editForm}>
                         {!this.state.editForm
                             ? <Fragment>
-                                 <div style={{ backgroundImage: `url('${user.avatar}')` }} className={classes.avatar}></div>
+                                 <div style={{ backgroundImage: `url('${this.renderAvatar(user.avatar)}')` }} className={classes.avatar}></div>
                                  <h1>{user.name}</h1>
                                  <div>{user.birthday}</div>
                                  <div>{user.email}</div>
