@@ -55,7 +55,6 @@ const theme = createMuiTheme({
       MuiButton: {
           root: {
               "&:hover": {
-                // backgroundColor: 'rgba(176,88,19)'
                 backgroundColor: 'rgba(0,0,0,0)'
               }
           }

@@ -1,11 +1,6 @@
 import React, { Fragment } from 'react'
 import { Bar } from 'react-chartjs-2'
 
-const mental = ['Busy', 'Foggy', 'Distracted', 'Neutral', 'Focused', 'Calm']
-const emotional = ['Anger', 'Shame', 'Stress', 'Excitement', 'Content', 'Gratitude']
-const physical = ['Painful', 'Tired', 'Disconnected', 'Grounded', 'Energetic', 'Relaxed']
-const spiritual = ['Hopeless', 'Uncertain', 'Apathetic', 'Intrigued', 'Hopeful', 'Inspired']
-
 class DoughnutChart extends React.Component {
 
     render () {

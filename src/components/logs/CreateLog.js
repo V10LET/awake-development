@@ -34,7 +34,6 @@ class Logs extends Component {
     handleChange = (event) => {
         const name = event.target.name
         const value = event.target.value
-        console.log(name, value)
         this.setState({ [name]: value })
     }
 
@@ -46,10 +45,7 @@ class Logs extends Component {
 
         let r = await fetch(`http://localhost:3000/api/v1/logs`, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.props.user.token}`
-            },
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.props.user.token}` },
             body: JSON.stringify({
                 log: {
                     mental_rating: mentalRating,

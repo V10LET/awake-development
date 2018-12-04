@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import LogDetails from './LogDetails'
 import LogEditForm from './LogEditForm'
+import DeleteLog from './DeleteLog'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 
@@ -26,7 +27,8 @@ const styles = theme => createStyles({
 class ViewLog extends Component {
 
     state = {
-        edit: false
+        edit: false,
+        deleteDialog: false
     }
 
     getDate = (time) => {
@@ -55,9 +57,9 @@ class ViewLog extends Component {
         this.setState({ edit: !this.state.edit })
     }
 
-    handleDelete = () => {
+    handleDialog = () => this.setState({deleteDialog: !this.state.deleteDialog})
 
-    }
+
 
     render () {
         const { log, classes } = this.props
@@ -76,14 +78,16 @@ class ViewLog extends Component {
                                     <h3>{this.getTime(log.created_at)}</h3>
                                     <div>
                                         <Tooltip title='Edit Card' placement="top-end"><EditIcon onClick={this.handleClick}/></Tooltip>
-                                        <Tooltip title='Delete Card' placement="top-end"><DeleteForeverIcon onClick={this.handleDelete}/></Tooltip>
+                                        <Tooltip title='Delete Card' placement="top-end"><DeleteForeverIcon onClick={this.handleDialog}/></Tooltip>
+                                        {this.state.deleteDialog ? <DeleteLog deleteDialog={this.handleDialog} logId={log.id} /> : null}
                                     </div>
                                 </div>
                                 <LogDetails log={log} />
                             </Fragment>
                           : <Fragment>
                                 <div style={{textAlign: 'right'}}>
-                                    <Tooltip title='Delete Card' placement="top-end"><DeleteForeverIcon onClick={this.handleDelete}/></Tooltip>
+                                    <Tooltip title='Delete Card' placement="top-end"><DeleteForeverIcon onClick={this.handleDialog}/></Tooltip>
+                                    {this.state.deleteDialog ? <DeleteLog deleteDialog={this.handleDialog} logId={log.id} /> : null}
                                 </div>
                                 <div>
                                     <LogEditForm onEdit={this.handleClick} log={log} />

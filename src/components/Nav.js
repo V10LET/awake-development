@@ -116,7 +116,7 @@ class Nav extends Component {
                             <div style={{padding: '20px 30px 10px'}}>
                                 <MenuIcon onClick={ this.handleClick } className={classes.MenuIcon}/>
                             </div>
-                                <List disableTopography className={classes.drawerList}>
+                                <List className={classes.drawerList}>
                                     <ListItem style={{ justifyContent: 'center' }}>
                                         <div className={classes.media} style={{backgroundImage: `url("${user.avatar}")`}}></div>
                                     </ListItem>
@@ -128,7 +128,7 @@ class Nav extends Component {
                                                     <Fragment>
                                                         <ListItemIcon >{routes[text]}</ListItemIcon>
                                                         <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                                            <ListItemText disableTopography classes={{primary: classes.listItemText}} primary={text} />
+                                                            <ListItemText classes={{primary: classes.listItemText}} primary={text} />
                                                         </Link>
                                                     </Fragment>
                                                     : <Redirect to='/' />
