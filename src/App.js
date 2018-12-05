@@ -15,12 +15,22 @@ class App extends Component {
         })
     }
 
+    renderStyle = () => {
+        if (this.props.token && this.props.drawerOpen) {
+            return { margin: '80px 0 0 200px' }
+        } else if (this.props.token) {
+            return { marginTop: 80 }
+        } else {
+            return null
+        }
+    }
+
     render() {
         return (
             <Router history={history}>
                 <Fragment>
                     <Nav />
-                    <div style={ this.props.drawerOpen ? {margin: '80px 0 0 200px'} : {marginTop: 80} }>
+                    <div style={this.renderStyle()}>
                         <Routes />
                     </div>
 
@@ -29,10 +39,9 @@ class App extends Component {
         )
     }
 }
-const mapStateToProps = state => {
-    return {
-        drawerOpen: state.design.drawerOpen
-    }
-}
+const mapStateToProps = state => ({
+    drawerOpen: state.design.drawerOpen,
+    token: state.user.token
+})
 
 export default connect(mapStateToProps)(App)

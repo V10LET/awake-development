@@ -37,30 +37,34 @@ class UserEditForm extends React.Component {
         avatar: this.props.user.avatar,
     }
 
-    handleChange = (name) => (event) => {
+    handleChange = name => (event) => {
         const value = event.target.value
-        console.log(name, value)
         this.setState({ [name]: value })
     }
 
     handleSubmit = async (event) => {
         event.preventDefault()
+        console.log(this.state.name, this.props.user.id, this.props.token)
         let r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`, {
             method: 'PATCH',
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}` },
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${this.props.token}`
+            },
             body: JSON.stringify({
-                user: {
-                    name: this.state.name,
-                    email: this.state.email,
-                    birthday: this.state.birthday,
-                    avatar: this.state.avatar,
-                }
+                name: this.state.name,
+                email: this.state.email,
+                birthday: this.state.birthday,
+                avatar: this.state.avatar,
             })
         })
 
         r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`, {
             method: 'GET',
-            headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}`}
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${this.props.token}`
+            }
         })
 
         let data = await r.json()
@@ -95,6 +99,7 @@ class UserEditForm extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ user: state.user.user })
+const mapStateToProps = state => ({ user: state.user.user, token: state.user.token })
+const mapDispatchToProps = { setUser }
 
-export default connect(mapStateToProps, { setUser })(withStyles(styles)(UserEditForm))
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(UserEditForm))
