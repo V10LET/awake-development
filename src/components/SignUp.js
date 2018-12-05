@@ -20,7 +20,15 @@ const styles = theme => createStyles({
         display: 'flex',
         flexFlow: 'column nowrap',
         alignItems: 'center',
-        paddingTop: '8em'
+        paddingTop: '8em',
+        position: 'fixed',
+        top: 0, bottom: 0, left: 0, right: 0,
+        maxWidth: '100%', maxHeight: '100%',
+        margin: 'auto',
+        overflow: 'auto',
+        backgroundImage: 'url("https://images.pexels.com/photos/1108118/pexels-photo-1108118.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        backgroundSize: 'cover'
+
     },
     card: {
         width: '25%'

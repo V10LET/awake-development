@@ -44,7 +44,7 @@ class Log extends Component {
                               <FormControlLabel value="6" control={<Radio />} label={v6} />
                             </RadioGroup>
                         </FormControl>
-                        <TextField id="outlined-multiline-static" multiline rows="4" label="Add Note"
+                        <TextField id="outlined-multiline-static" multiline rows="2" label="Add Note"
                             margin="normal" variant="outlined" name={note} onChange={handleChange }/>
                     </div>
                 </div>

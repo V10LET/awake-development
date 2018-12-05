@@ -47,7 +47,11 @@ const styles = theme => createStyles({
    },
    drawer: {
        width: 200,
-       backgroundColor: '#5E5F01',
+       backgroundSize: 'cover',
+       backgroundImage: "url('https://images.pexels.com/photos/565998/pexels-photo-565998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
+       backgroundPositionX: '-20em',
+       backgroundPositionY: '10em',
+       // backgroundColor: '#5E5F01',
    },
    name: {
        fontSize: 25,
@@ -120,7 +124,7 @@ class Nav extends Component {
                                     <ListItem style={{ justifyContent: 'center' }}>
                                         <div className={classes.media} style={{backgroundImage: `url("${this.renderAvatar(user.avatar)}")`}}></div>
                                     </ListItem>
-                                    <ListItem style={{fontSize: '1.5em', fontWeight: 'bold', justifyContent: 'center'}}>{user.name}</ListItem>
+                                    <ListItem style={{fontSize: '1.5em', fontWeight: 'bold', justifyContent: 'center'}}>{user.name ? user.name.toUpperCase() : null}</ListItem>
                                     {Object.keys(routes).map((text, index) => (
                                         <Fragment key={text}>
                                                 {token ?

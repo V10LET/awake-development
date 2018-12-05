@@ -17,9 +17,9 @@ class App extends Component {
 
     renderStyle = () => {
         if (this.props.token && this.props.drawerOpen) {
-            return { margin: '80px 0 0 200px' }
+            return { margin: '60px 0 0 200px' }
         } else if (this.props.token) {
-            return { marginTop: 80 }
+            return { marginTop: 60 }
         } else {
             return null
         }

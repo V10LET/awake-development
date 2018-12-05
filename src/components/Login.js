@@ -7,6 +7,19 @@ import { setToken, setUser } from '../actions/userAction'
 import { setChartData } from '../actions/logAction'
 
 const styles = theme => createStyles({
+    loginContainer: {
+        display: 'flex',
+        flexFlow: 'column wrap',
+        alignItems: 'center',
+        position: 'fixed',
+        top: 0, bottom: 0, left: 0, right: 0,
+        maxWidth: '100%', maxHeight: '100%',
+        margin: 'auto',
+        overflow: 'auto',
+        backgroundImage: "url('https://images.pexels.com/photos/1404918/pexels-photo-1404918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
+        // backgroundImage: 'url("https://images.pexels.com/photos/1108118/pexels-photo-1108118.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        backgroundSize: 'cover'
+    },
     error: {
         color: 'red',
         fontStyle: 'oblique',
@@ -66,14 +79,16 @@ class Login extends Component {
     render() {
         const { classes } = this.props
         return (
-            <form onSubmit={this.handleSubmit} style={{ marginTop: 50 }}>
-                <input type='text' name='email' onChange={this.handleChange} />
-                <input type='password' name='password' onChange={this.handleChange} />
-                <input type='submit' value='Login'/>
-                {this.state.loginError &&
-                    <div className={classes.error}>{this.state.loginError.toString()}</div>
-                }
-            </form>
+            <div className={classes.loginContainer}>
+                <form onSubmit={this.handleSubmit} style={{ marginTop: 50 }}>
+                    <input type='text' name='email' onChange={this.handleChange} />
+                    <input type='password' name='password' onChange={this.handleChange} />
+                    <input type='submit' value='Login'/>
+                    {this.state.loginError &&
+                        <div className={classes.error}>{this.state.loginError.toString()}</div>
+                    }
+                </form>
+            </div>
         )
     }
 }
