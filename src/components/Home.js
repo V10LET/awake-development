@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import { setPath } from '../actions/designAction'
 import Login from './Login'
@@ -23,12 +24,13 @@ const styles = theme => createStyles({
         alignItems: 'center',
     },
     loginContainer:{
-        marginTop: 40
+        marginTop: 40,
+        width: '100%'
     },
     title: {
         fontSize: '13em',
         color: '#1E1E1E',
-        marginTop: 40
+        marginTop: 20
     },
     desc: {
         fontSize: '1em',
@@ -44,19 +46,26 @@ class Home extends Component {
     }
 
     render() {
-        const {classes} = this.props
+        const { classes, token } = this.props
         return (
-            <div className={classes.homeContainer}>
-                <div className={classes.titleContainer}>
-                    <div className={classes.title}>awake</div>
-                    <div className={classes.desc}>cultivating deeper self awareness through personal reflection</div>
-                </div>
-                <div className={classes.loginContainer}>
-                    <Login/>
-                </div>
-            </div>
+            <Fragment>
+                { !token ?
+                    <div className={classes.homeContainer}>
+                        <div className={classes.titleContainer}>
+                            <div className={classes.title}>awake</div>
+                            <div className={classes.desc}>cultivating deeper self awareness through personal reflection</div>
+                        </div>
+                        <div className={classes.loginContainer}>
+                            <Login/>
+                        </div>
+                    </div>
+                    : <Redirect to='/dashboard'/>
+                }
+            </Fragment>
         )
     }
 }
 
-export default connect(null, { setPath })(withStyles(styles)(Home))
+const mapStateToProps = state => ({ token: state.user.token })
+
+export default connect(mapStateToProps, { setPath })(withStyles(styles)(Home))

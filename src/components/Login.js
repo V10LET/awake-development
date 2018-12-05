@@ -11,27 +11,32 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-
 const styles = theme => createStyles({
     loginContainer: {
         display: 'flex',
+        flexFlow: 'column wrap',
         alignItems: 'center',
         justifyContent: 'center',
     },
     textField: {
-        // marginBottom: 20,
-        marginRight: 20
+        width: '15%',
     },
     form: {
         display: 'flex',
         flexFlow: 'row wrap',
         alignItems: 'center',
+        justifyContent: 'center',
+        width: '100%'
     },
     error: {
         color: 'red',
         fontStyle: 'oblique',
         fontSize: 10,
         marginTop: 10,
+    },
+    resize: {
+        fontSize: 12,
+        letterSpacing: 2,
     }
 })
 
@@ -87,13 +92,21 @@ class Login extends Component {
         return (
             <div className={classes.loginContainer}>
                 <form onSubmit={this.handleSubmit} className={classes.form}>
-                    <TextField placeholder="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} />
-                    <TextField type="password" placeholder="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange('password')} />
-                    <IconButton type='submit'><ChevronRightIcon /></IconButton>
-                    {this.state.loginError &&
-                        <div className={classes.error}>{this.state.loginError.toString()}</div>
-                    }
+                    <TextField placeholder="Email" className={classes.textField} style={{marginRight: 20}}
+                        value={this.state.email} onChange={this.handleChange('email')}
+                        InputProps={{ classes: { input: classes.resize }}} />
+
+                    <TextField type="password" placeholder="Password" className={classes.textField}
+                        value={this.state.password} onChange={this.handleChange('password')}
+                        InputProps={{ classes: { input: classes.resize }}} />
+
+                    <IconButton type='submit'>
+                        <ChevronRightIcon />
+                    </IconButton>
                 </form>
+                {this.state.loginError &&
+                    <div className={classes.error}>{this.state.loginError.toString()}</div>
+                }
             </div>
         )
     }

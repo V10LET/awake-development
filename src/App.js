@@ -33,7 +33,6 @@ class App extends Component {
                     <div style={this.renderStyle()}>
                         <Routes />
                     </div>
-
                 </Fragment>
             </Router>
         )

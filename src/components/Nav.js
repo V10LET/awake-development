@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link, Redirect, Route } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setDrawer } from '../actions/designAction'
 import { withStyles, createStyles } from '@material-ui/core/styles'
@@ -22,6 +22,7 @@ import SettingsIcon from '@material-ui/icons/Settings'
 import AssignmentIcon from '@material-ui/icons/Assignment'
 import BrushIcon from '@material-ui/icons/Brush'
 import HomeIcon from '@material-ui/icons/Home'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
 
 const routes = {
     'Dashboard':<HomeIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
@@ -34,67 +35,40 @@ const routes = {
 }
 
 const styles = theme => createStyles({
-    listItemText:{
-        fontSize: '0.8em'
-    },
-    headerLink: {
-       textAlign: 'center',
-       color: 'black',
-       textDecoration: 'none',
-       },
-   drawerLink: {
-       color: 'black',
-       textDecoration: 'none',
-   },
-   drawer: {
+
+    listItemText:{ fontSize: '0.8em' },
+    MenuIcon: { color: 'black', cursor: 'pointer' },
+    name: { fontSize: 25, fontWeight: 700 },
+    btn: {backgroundColor: '#CEC678'},
+    logout: { backgroundColor: 'white' },
+    drawerLink: { color: 'black', textDecoration: 'none' },
+    appbar: { boxShadow: '0 0 0 !important', backgroundColor: 'rgba(0,0,0,0)' },
+
+    icon: { marginRight: 5, fill: 'rgba(0,0,0,.9)', height: 20},
+    headerLink: { textAlign: 'center', color: 'black', textDecoration: 'none' },
+    routes: { display: 'flex', alignItems: 'center', marginBottom: 5 },
+    drawerList: { display: 'flex', flexFlow: 'column nowrap', alignItems: 'center' },
+
+    drawer: {
        width: 200,
        backgroundSize: 'cover',
        backgroundImage: "url('https://images.pexels.com/photos/565998/pexels-photo-565998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
        backgroundPositionX: '-20em',
        backgroundPositionY: '10em',
-   },
-   name: {
-       fontSize: 25,
-       fontWeight: 700,
-   },
-   logout: {
-       backgroundColor: 'white',
-   },
-   routes: {
-       display: 'flex',
-       alignItems: 'center',
-       marginBottom: 5
-   },
-   media: {
-       borderRadius: '100%',
-       width: 80,
-       height: 80,
-       backgroundSize: 'cover',
-       boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
-   },
-   appbar: {
-       boxShadow: '0 0 0 !important',
-       backgroundColor: 'rgba(0,0,0,0)',
-   },
-   MenuIcon: {
-       color: 'black',
-       cursor: 'pointer',
-   },
-   drawerList: {
-       display: 'flex',
-       flexFlow: 'column nowrap',
-       alignItems: 'center'
-   }
+    },
+    media: {
+        borderRadius: '100%',
+        width: 80,
+        height: 80,
+        backgroundSize: 'cover',
+        boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
+    },
 })
 
 class Nav extends Component {
 
     handleClick = () => this.props.setDrawer(!this.props.drawerOpen)
     renderAvatar = (img) => img === '' ? 'https://source.unsplash.com/300x300/?nature,tree' : img
-
-    handleClick = () => {
-        console.log('correctly passed!')
-    }
 
     render () {
         const { drawerOpen, token, user, classes, path } = this.props
@@ -110,12 +84,20 @@ class Nav extends Component {
                             :
                             <div>
                             { path === '/signup' ?
-                                <Button><Link to="/" className={ classes.headerLink }>Home</Link></Button>
+                                <Link to="/" className={ classes.headerLink }>
+                                    <Button variant='contained' className={classes.btn}>
+                                        <HomeIcon className={classes.icon}/>
+                                        Home
+                                    </Button>
+                                </Link>
                                 :
-                                <Button className='nav-hover-btn' variant='contained' color={'#B05813'}>
+                                <Link to="/signup" className={ classes.headerLink }>
+                                    <Button variant='contained' color={'#B05813'} className={classes.btn}>
+                                        <PersonAddIcon className={classes.icon}/>
+                                        Sign Up
+                                    </Button>
+                                </Link>
 
-                                    <Link to="/signup" className={ classes.headerLink }>Sign Up</Link>
-                                </Button>
                             }
                             </div>
                         }

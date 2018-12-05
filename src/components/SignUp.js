@@ -27,7 +27,10 @@ const styles = theme => createStyles({
         maxWidth: '100%', maxHeight: '100%',
         margin: 'auto',
         overflow: 'auto',
-        backgroundImage: 'url("https://images.pexels.com/photos/1108118/pexels-photo-1108118.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        // backgroundImage: 'url("https://images.pexels.com/photos/1390505/pexels-photo-1390505.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        // backgroundImage: 'url("https://images.pexels.com/photos/428353/pexels-photo-428353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        backgroundImage: 'url("https://images.pexels.com/photos/1591305/pexels-photo-1591305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
+        // backgroundImage: 'url("")',
         backgroundSize: 'cover'
 
     },
@@ -38,11 +41,13 @@ const styles = theme => createStyles({
         overflow: 'visible',
         margin: 'auto',
         marginTop: '-1em',
+        // backgroundImage: 'linear-gradient(to bottom right, #C6E1CC,#7FA788)',
+        backgroundColor: '#D5875B'
     },
     card: {
         width: '25%',
         overflow: 'visible',
-        backgroundImage: 'linear-gradient(to bottom right, #C6E1CC,#7FA788)',
+        backgroundColor: 'rgba(255,255,255,.1)'
     },
     form: {
         display: 'flex',
