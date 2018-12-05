@@ -106,7 +106,7 @@ class SignUp extends Component {
 
         data = await r.json()
         this.props.setUser(data)
-        history.push('/profile')
+        history.push('/dashboard')
     }
 
     handleInput = name => (event) => {

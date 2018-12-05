@@ -21,6 +21,7 @@ const styles = theme => createStyles({
     },
     audioPrompt: {
         margin: '0 20px 0 0',
+        fontWeight: 'bold'
     },
     inputError: {
         color: 'red',
@@ -39,6 +40,8 @@ const styles = theme => createStyles({
         backgroundSize: 'cover'
     },
     time: {
+        display: 'flex',
+        justifyContent: 'center',
         padding: '100px 80px',
         fontSize: '4em',
         fontWeight: 'bold',
