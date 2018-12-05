@@ -2,7 +2,6 @@ import React, { Fragment } from 'react'
 import { Route } from 'react-router-dom'
 
 import Home from './Home'
-import Login from './Login'
 import Logout from './Logout'
 import SignUp from './SignUp'
 import Profile from './user/Profile'
@@ -16,7 +15,6 @@ import Timer from './timer/Timer'
 const Routes = () =>
     <Fragment>
         <Route exact path='/' component={ Home } />
-        <Route path='/login' render={(props)=> <Login {...props} /> } />
         <Route path='/signup' render={(props)=> <SignUp {...props} /> } />
         <Route path='/logout' component={ Logout } />
         <Route path='/dashboard' component={ Profile } />

@@ -8,29 +8,23 @@ import { setPath } from '../actions/designAction'
 
 import TextField from '@material-ui/core/TextField'
 import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
 
 const styles = theme => createStyles({
     loginContainer: {
         display: 'flex',
-        flexFlow: 'column wrap',
         alignItems: 'center',
         justifyContent: 'center',
-        position: 'fixed',
-        top: 0, bottom: 0, left: 0, right: 0,
-        maxWidth: '100%', maxHeight: '100%',
-        margin: 'auto',
-        overflow: 'auto',
-        backgroundImage: "url('https://images.pexels.com/photos/1404918/pexels-photo-1404918.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
-        // backgroundImage: 'url("https://images.pexels.com/photos/1108118/pexels-photo-1108118.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
-        backgroundSize: 'cover'
     },
     textField: {
-        marginBottom: 20
+        // marginBottom: 20,
+        marginRight: 20
     },
     form: {
         display: 'flex',
-        flexFlow: 'column wrap',
+        flexFlow: 'row wrap',
         alignItems: 'center',
     },
     error: {
@@ -47,10 +41,6 @@ class Login extends Component {
         email: '',
         password: '',
         loginError: null,
-    }
-
-    componentDidMount() {
-        this.props.setPath(this.props.match.path)
     }
 
     handleChange = name => (event) => {
@@ -97,10 +87,9 @@ class Login extends Component {
         return (
             <div className={classes.loginContainer}>
                 <form onSubmit={this.handleSubmit} className={classes.form}>
-                    <h1>Login</h1>
-                    <TextField label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} />
-                    <TextField type="password" label="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange('password')} />
-                    <Button type='submit'>Login</Button>
+                    <TextField placeholder="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} />
+                    <TextField type="password" placeholder="Password" className={classes.textField} value={this.state.password} onChange={this.handleChange('password')} />
+                    <IconButton type='submit'><ChevronRightIcon /></IconButton>
                     {this.state.loginError &&
                         <div className={classes.error}>{this.state.loginError.toString()}</div>
                     }
@@ -110,9 +99,7 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { token: state.user.token }
-}
+const mapStateToProps = state => ({ token: state.user.token })
 
 const mapDispatchToProps = {
     setToken,

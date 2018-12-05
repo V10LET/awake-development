@@ -3,6 +3,7 @@ import history from '../history'
 import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import { setToken, setUser } from '../actions/userAction'
+import { setPath } from '../actions/designAction'
 
 import Card from '@material-ui/core/Card'
 import Button from '@material-ui/core/Button'
@@ -30,14 +31,24 @@ const styles = theme => createStyles({
         backgroundSize: 'cover'
 
     },
+    titleCard: {
+        display: 'flex',
+        justifyContent: 'center',
+        width: '70%',
+        overflow: 'visible',
+        margin: 'auto',
+        marginTop: '-1em',
+    },
     card: {
-        width: '25%'
+        width: '25%',
+        overflow: 'visible',
+        backgroundImage: 'linear-gradient(to bottom right, #C6E1CC,#7FA788)',
     },
     form: {
         display: 'flex',
         flexFlow: 'column nowrap',
         alignItems: 'center',
-        margin: '20px 40px 40px'
+        margin: '10px 40px 40px'
     },
     textField: {
         marginTop: 10,
@@ -49,6 +60,7 @@ const styles = theme => createStyles({
         fontSize: '1em',
         textTransform: 'uppercase',
         marginTop: 10,
+        background: 'none'
     },
     birthdayLabel: {
         marginTop: 10,
@@ -68,6 +80,10 @@ class SignUp extends Component {
         confirmPassword: '',
         loginError: null,
         visibility: false
+    }
+
+    componentDidMount() {
+        this.props.setPath('/signup')
     }
 
     handleSubmit = async (event) => {
@@ -141,9 +157,11 @@ class SignUp extends Component {
         console.log(this.props)
         return (
             <div className={classes.signUpContainer}>
-                <div className={classes.card}>
+                <Card className={classes.card}>
+                    <Card className={classes.titleCard}>
+                        <h1 style={{ padding: 5 }}>Sign Up</h1>
+                    </Card>
                     <form onSubmit={this.handleSubmit} className={classes.form}>
-                        <h1>Sign Up</h1>
                         <Fragment>
                             <TextField required label="Name" className={classes.textField} onChange={this.handleInput('name')} />
                             <div style={{margin: '20px 0 0', textAlign: 'left', width: '100%'}}>
@@ -171,7 +189,7 @@ class SignUp extends Component {
                             {this.state.loginError && this.renderError(this.state.loginError)}
                         </Fragment>
                     </form>
-                </div>
+                </Card>
             </div>
         )
     }
@@ -183,7 +201,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     setToken,
-    setUser
+    setUser,
+    setPath
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(SignUp))

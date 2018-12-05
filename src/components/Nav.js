@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link, Redirect, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setDrawer } from '../actions/designAction'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import Home from './Home'
 
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
@@ -91,6 +92,10 @@ class Nav extends Component {
     handleClick = () => this.props.setDrawer(!this.props.drawerOpen)
     renderAvatar = (img) => img === '' ? 'https://source.unsplash.com/300x300/?nature,tree' : img
 
+    handleClick = () => {
+        console.log('correctly passed!')
+    }
+
     render () {
         const { drawerOpen, token, user, classes, path } = this.props
         return (
@@ -104,16 +109,14 @@ class Nav extends Component {
                             <Button><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
                             :
                             <div>
-                                { path === '/login' ?
-                                    <Button style={{marginRight: 10}}>
-                                        <Link to="/" className={ classes.headerLink }>Home</Link>
-                                    </Button>
-                                    :
-                                    <Button style={{marginRight: 10}}>
-                                        <Link to="/login" className={ classes.headerLink }>Login</Link>
-                                    </Button>
-                                }
-                                    <Button className='nav-hover-btn' variant='outlined'><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
+                            { path === '/signup' ?
+                                <Button><Link to="/" className={ classes.headerLink }>Home</Link></Button>
+                                :
+                                <Button className='nav-hover-btn' variant='contained' color={'#B05813'}>
+
+                                    <Link to="/signup" className={ classes.headerLink }>Sign Up</Link>
+                                </Button>
+                            }
                             </div>
                         }
                         </div>
