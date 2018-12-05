@@ -12,7 +12,7 @@ const styles = theme => createStyles({
     editBtn: {
         display: 'flex',
         justifyContent: 'flex-end',
-        padding: '10px 10px 0',
+        padding: '20px 0 0',
         marginRight: '-40px',
     },
     birthday: {
@@ -77,7 +77,7 @@ class UserEditForm extends React.Component {
         const { classes } = this.props
         const { name, birthday, email, avatar } = this.state
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} style={{padding: '0 60px 60px'}}>
                 <Fragment>
                     <div className={classes.editBtn}>
                         <IconButton type='submit'>
@@ -86,13 +86,14 @@ class UserEditForm extends React.Component {
                             </Tooltip>
                         </IconButton>
                     </div>
-                    <TextField label='Name' value={name} onChange={this.handleChange('name')} margin='normal'/><br/>
+                    <h1 style={{textAlign: 'center', margin: '0 0 10px'}}>Edit Settings</h1>
+                    <TextField style={{width: 250}} label='Name' value={name} onChange={this.handleChange('name')} margin='normal'/><br/>
                     <div style={{ marginTop: 10 }}>
                         <label className={classes.birthdayLabel}>Birthday</label><br/>
                         <input type='date' value={birthday} onChange={this.handleChange('birthday')} className={classes.birthday}/><br/>
                     </div>
-                    <TextField label='Email' value={email} onChange={this.handleChange('email')} margin='normal'/><br/>
-                    <TextField label='Avatar Link' value={avatar} onChange={this.handleChange('avatar')} margin='normal'/><br/>
+                    <TextField style={{width: 250}} label='Email' value={email} onChange={this.handleChange('email')} margin='normal'/><br/>
+                    <TextField style={{width: 250}} label='Avatar Link' value={avatar} onChange={this.handleChange('avatar')} margin='normal'/><br/>
                 </Fragment>
             </form>
         )

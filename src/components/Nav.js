@@ -50,7 +50,7 @@ const styles = theme => createStyles({
     drawerList: { display: 'flex', flexFlow: 'column nowrap', alignItems: 'center' },
 
     drawer: {
-       width: 200,
+       width: 225,
        backgroundSize: 'cover',
        backgroundImage: "url('https://images.pexels.com/photos/565998/pexels-photo-565998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
        backgroundPositionX: '-20em',

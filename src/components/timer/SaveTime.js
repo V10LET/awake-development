@@ -31,7 +31,7 @@ class SaveTime extends Component {
     render () {
         return (
             <Fragment>
-                <h1>NICE JOB FINSIHING YOUR MEDITATION</h1>
+                <h1 style={{marginTop: '2em'}}>NICE JOB FINSIHING YOUR MEDITATION</h1>
                 <Button onClick={this.handleSave}>Save</Button>
             </Fragment>
         )
