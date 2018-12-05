@@ -1,5 +1,9 @@
-import { initialState } from './userReducer'
-import { SET_DRAWER } from '../actions/designAction'
+import { SET_DRAWER, SET_PATH } from '../actions/designAction'
+
+const initialState = {
+    drawerOpen: true,
+    path: '',
+}
 
 export function designReducer(state = initialState, action) {
     switch (action.type) {
@@ -8,6 +12,11 @@ export function designReducer(state = initialState, action) {
                 ...state,
                 drawerOpen: action.payload.status,
             }
+        case SET_PATH:
+        return {
+            ...state,
+            path: action.payload.path
+        }
         default:
             return state
     }

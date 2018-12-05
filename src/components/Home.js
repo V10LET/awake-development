@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import { setPath } from '../actions/designAction'
 
 const styles = theme => createStyles({
     homeContainer: {
@@ -28,6 +30,10 @@ const styles = theme => createStyles({
 
 class Home extends Component {
 
+    componentDidMount() {
+
+    }
+
     render() {
         const {classes} = this.props
         return (
@@ -40,4 +46,4 @@ class Home extends Component {
     }
 }
 
-export default (withStyles(styles)(Home))
+export default connect(null, { setPath })(withStyles(styles)(Home))

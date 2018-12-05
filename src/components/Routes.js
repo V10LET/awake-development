@@ -16,8 +16,8 @@ import Timer from './timer/Timer'
 const Routes = () =>
     <Fragment>
         <Route exact path='/' component={ Home } />
-        <Route path='/login' component={ Login } />
-        <Route path='/signup' component={ SignUp } />
+        <Route path='/login' render={(props)=> <Login {...props} /> } />
+        <Route path='/signup' render={(props)=> <SignUp {...props} /> } />
         <Route path='/logout' component={ Logout } />
         <Route path='/dashboard' component={ Profile } />
         <Route path='/create-log' component={ CreateLog } />

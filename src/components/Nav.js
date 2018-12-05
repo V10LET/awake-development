@@ -51,7 +51,6 @@ const styles = theme => createStyles({
        backgroundImage: "url('https://images.pexels.com/photos/565998/pexels-photo-565998.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260')",
        backgroundPositionX: '-20em',
        backgroundPositionY: '10em',
-       // backgroundColor: '#5E5F01',
    },
    name: {
        fontSize: 25,
@@ -93,7 +92,7 @@ class Nav extends Component {
     renderAvatar = (img) => img === '' ? 'https://source.unsplash.com/300x300/?nature,tree' : img
 
     render () {
-        const { drawerOpen, token, user, classes } = this.props
+        const { drawerOpen, token, user, classes, path } = this.props
         return (
 
             <div >
@@ -105,8 +104,16 @@ class Nav extends Component {
                             <Button><Link to="/logout" className={ classes.headerLink }>Logout</Link></Button>
                             :
                             <div>
-                                <Button style={{marginRight: 10}}><Link to="/login" className={ classes.headerLink }>Login</Link></Button>
-                                <Button className='nav-hover-btn' variant='outlined'><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
+                                { path === '/login' ?
+                                    <Button style={{marginRight: 10}}>
+                                        <Link to="/" className={ classes.headerLink }>Home</Link>
+                                    </Button>
+                                    :
+                                    <Button style={{marginRight: 10}}>
+                                        <Link to="/login" className={ classes.headerLink }>Login</Link>
+                                    </Button>
+                                }
+                                    <Button className='nav-hover-btn' variant='outlined'><Link to="/signup" className={ classes.headerLink }>Sign Up</Link></Button>
                             </div>
                         }
                         </div>
@@ -154,6 +161,7 @@ class Nav extends Component {
 const mapStateToProps = state => {
     return {
         drawerOpen: state.design.drawerOpen,
+        path: state.design.path,
         token: state.user.token,
         user: state.user.user
     }

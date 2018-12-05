@@ -138,10 +138,10 @@ class SignUp extends Component {
 
     render () {
         const { classes } = this.props
-        console.log(this.state.loginError)
+        console.log(this.props)
         return (
             <div className={classes.signUpContainer}>
-                <Card className={classes.card}>
+                <div className={classes.card}>
                     <form onSubmit={this.handleSubmit} className={classes.form}>
                         <h1>Sign Up</h1>
                         <Fragment>
@@ -171,7 +171,7 @@ class SignUp extends Component {
                             {this.state.loginError && this.renderError(this.state.loginError)}
                         </Fragment>
                     </form>
-                </Card>
+                </div>
             </div>
         )
     }

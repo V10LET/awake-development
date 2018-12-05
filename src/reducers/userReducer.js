@@ -1,8 +1,7 @@
 import { SET_TOKEN, SET_USER } from '../actions/userAction'
 import { SET_LOG, UPDATE_LOG, SET_CHART_DATA, SET_TIMED_LOG } from '../actions/logAction'
 
-export const initialState = {
-    drawerOpen: true,
+const initialState = {
     token: null,
     user: {
         name: null,
