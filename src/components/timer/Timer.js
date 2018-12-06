@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react'
+import { connect } from 'react-redux'
+import { setPath } from '../../actions/designAction'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from './SetTime'
@@ -62,6 +64,10 @@ class Timer extends Component {
         pause: false, earlyEndOpen: false, end: false,
         timer: '', min: '', hr: '', sec: '',
         deadline: 0, remaining: 0
+      }
+
+      componentDidMount() {
+          this.props.setPath('/timer')
       }
 
     //----> EVENT METHODS
@@ -246,4 +252,6 @@ class Timer extends Component {
     }
 }
 
-export default (withStyles(styles)(Timer))
+const mapDispatchToProps = { setPath }
+
+export default connect(null, mapDispatchToProps)(withStyles(styles)(Timer))

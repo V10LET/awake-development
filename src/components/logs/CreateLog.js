@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import history from '../../history'
 import NewLog from './NewLog'
 import { setLog, setChartData } from '../../actions/logAction'
+import { setPath } from '../../actions/designAction'
 
 import Button from '@material-ui/core/Button'
 
@@ -30,6 +31,9 @@ class Logs extends Component {
         submitError: null
     }
 
+    componentDidMount() {
+        this.props.setPath('/create-log')
+    }
 
     handleChange = (event) => {
         const name = event.target.name
@@ -62,7 +66,7 @@ class Logs extends Component {
 
         if (!r.ok) {
             let data = await r.json()
-            this.setState({loginError: data.message})
+            this.setState({submitError: data.message})
             return
         }
 
@@ -79,13 +83,13 @@ class Logs extends Component {
 
                     <div className='log-card-container'>
                         <NewLog rating="mentalRating" note="mentalNote" question="How has your state of mind been?" ratingValue={this.state.mentalRating}
-                            handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm" color=''/>
+                            handleChange={this.handleChange} v1="Busy" v2="Foggy" v3="Distracted" v4="Neutral" v5="Focused" v6="Calm"/>
                         <NewLog rating="emotionalRating" note="emotionalNote" question="What's your strongest feeling today?" ratingValue={this.state.emotionalRating}
-                            handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude" color=''/>
+                            handleChange={this.handleChange} v1="Anger" v2="Shame" v3="Stress" v4="Excitement" v5="Content" v6="Gratitude"/>
                         <NewLog rating="physicalRating" note="physicalNote" question="How is your body doing today?" ratingValue={this.state.physicalRating}
-                            handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed" color=''/>
+                            handleChange={this.handleChange} v1="Painful" v2="Tired" v3="Disconnected" v4="Grounded" v5="Energetic" v6="Relaxed"/>
                         <NewLog rating="spiritualRating" note="spiritualNote" question="How're you feeling about life in general?" ratingValue={this.state.spiritualRating}
-                            handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired" color=''/>
+                            handleChange={this.handleChange} v1="Hopeless" v2="Uncertain" v3="Apathetic" v4="Intrigued" v5="Hopeful" v6="Inspired"/>
                     </div>
 
                     <Button type='submit' variant="contained" color="primary" aria-label="Save" size='large' style={ styles.button }>
@@ -103,6 +107,6 @@ const mapStateToProps = state => {
     return { user: state.user }
 }
 
-const mapDispatchToProps = { setLog, setChartData }
+const mapDispatchToProps = { setLog, setChartData, setPath }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Logs)

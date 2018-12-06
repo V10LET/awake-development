@@ -4,6 +4,7 @@ import { withStyles, createStyles } from '@material-ui/core/styles'
 import _ from 'lodash'
 import history from '../../history'
 import BarChart from './BarChart'
+import { setPath } from '../../actions/designAction'
 
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
@@ -71,6 +72,7 @@ class Profile extends Component {
     componentDidMount() {
         this.signFetch()
         this.quoteFetch()
+        this.props.setPath('/dashboard')
     }
 
     componentDidUpdate(prevProps) {
@@ -231,4 +233,7 @@ const mapStateToProps = state => {
         token: state.user.token
     }
 }
-export default connect(mapStateToProps)(withStyles(styles)(Profile))
+
+const mapDispatchToProps = { setPath }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Profile))

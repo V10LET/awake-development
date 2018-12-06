@@ -33,7 +33,6 @@ class Log extends Component {
     }
 
     componentDidMount() {
-        let colors = ['#a65b2c', '#5f5c19', '#b5b494', '#d9dca1', '#7c8165', 'white']
         const color = colors[Math.floor(Math.random() * colors.length)]
         this.setState({ color })
     }

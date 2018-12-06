@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import UserEditForm from './UserEditForm'
+import { setPath } from '../../actions/designAction'
 
 import IconButton from '@material-ui/core/IconButton'
 import Card from '@material-ui/core/Card'
@@ -43,6 +44,10 @@ class Settings extends Component {
 
     state = {
         editForm: false,
+    }
+
+    componentDidMount() {
+        this.props.setPath('/settings')
     }
 
     handleClick = () => this.setState({ editForm: !this.state.editForm })
@@ -95,4 +100,6 @@ const mapStateToProps = state => {
     return { user: state.user.user }
 }
 
-export default connect(mapStateToProps)(withStyles(styles)(Settings))
+const mapDispatchToProps = { setPath }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Settings))

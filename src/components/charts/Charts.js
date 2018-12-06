@@ -5,6 +5,7 @@ import LineChart from './LineChart'
 import AllLineChart from './AllLineChart'
 import DoughnutChart from './Doughnut'
 import Moment from 'moment'
+import { setPath } from '../../actions/designAction'
 
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
@@ -39,6 +40,7 @@ class Charts extends React.Component {
     }
 
     componentDidMount() {
+        this.props.setPath('/log-charts')
         return this.props.chartData
     }
 
@@ -119,4 +121,6 @@ class Charts extends React.Component {
 
 const mapStateToProps = state => ({ chartData: state.user.chartData })
 
-export default connect(mapStateToProps)(withStyles(styles)(Charts))
+const mapDispatchToProps = { setPath }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Charts))

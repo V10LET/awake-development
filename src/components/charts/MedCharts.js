@@ -5,6 +5,7 @@ import Moment from 'moment'
 import MedBar from './MedBar'
 import MedDoughnut from './MedDoughnut'
 import Switch from '@material-ui/core/Switch'
+import { setPath } from '../../actions/designAction'
 
 const styles = theme => createStyles({
     chartsContainer: {
@@ -30,6 +31,10 @@ class MedChart extends React.Component {
 
     state = {
         bar: false
+    }
+
+    componentDidMount() {
+        this.props.setPath('/meditation-charts')
     }
 
     day = (logs) => logs.map(l=> Moment(l.created_at).format('MMM Do YY'))
@@ -72,4 +77,6 @@ class MedChart extends React.Component {
 
 const mapStateToProps = state => ({ timedLogs: state.user.user.timed_logs })
 
-export default connect(mapStateToProps)(withStyles(styles)(MedChart))
+const mapDispatchToProps = { setPath }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(MedChart))

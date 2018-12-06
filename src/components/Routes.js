@@ -22,7 +22,7 @@ const Routes = () =>
         <Route path='/logs' component={ ViewLogs } />
         <Route path='/settings' component={ Settings } />
         <Route path='/log-charts' component={ Charts } />
-        <Route path='/meditation-chart' component={ MedCharts } />
+        <Route path='/meditation-charts' component={ MedCharts } />
         <Route path='/timer' component={ Timer } />
     </Fragment>
 

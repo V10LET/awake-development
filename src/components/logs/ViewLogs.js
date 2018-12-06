@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Moment from 'moment'
 import { withStyles, createStyles } from '@material-ui/core/styles'
+import { setPath } from '../../actions/designAction'
 
 import ViewLog from './ViewLog'
 import ViewMed from './ViewMed'
@@ -44,6 +45,10 @@ class ViewLogs extends Component {
     state = {
         searchTerm: '',
         meditation: false
+    }
+
+    componentDidMount() {
+        this.props.setPath('/logs')
     }
 
     handleChange = (event) => {
@@ -135,7 +140,8 @@ class ViewLogs extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return { user: state.user.user }
-}
-export default connect(mapStateToProps)(withStyles(styles)(ViewLogs))
+const mapStateToProps = state => ({ user: state.user.user })
+
+const mapDispatchToProps = { setPath }
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ViewLogs))

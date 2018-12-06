@@ -30,9 +30,11 @@ const routes = {
     'Create Log':<BrushIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Log Charts':<ShowChartIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Timer':<TimelapseIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
-    'Meditation Chart':<AssessmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
+    'Meditation Charts':<AssessmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Settings':<SettingsIcon style={{fill: 'rgba(0,0,0,.9)'}}/>
 }
+
+const paths = Object.keys(routes).map(text => `/${text.replace(/ /g,'-').toLowerCase()}`)
 
 const styles = theme => createStyles({
 
@@ -63,6 +65,9 @@ const styles = theme => createStyles({
         backgroundSize: 'cover',
         boxShadow: '0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12)',
     },
+    selected: {
+        backgroundColor: 'rgba(0,0,0,.05)'
+    }
 })
 
 class Nav extends Component {
@@ -73,7 +78,6 @@ class Nav extends Component {
     render () {
         const { drawerOpen, token, user, classes, path } = this.props
         return (
-
             <div >
                 <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar variant="dense" style={{minHeight: 60}}>
@@ -103,7 +107,6 @@ class Nav extends Component {
                         }
                         </div>
                     </Toolbar>
-
                 </AppBar>
 
                 { token ?
@@ -117,14 +120,15 @@ class Nav extends Component {
                                         <div className={classes.media} style={{backgroundImage: `url("${this.renderAvatar(user.avatar)}")`}}></div>
                                     </ListItem>
                                     <ListItem style={{fontSize: '1.5em', fontWeight: 'bold', justifyContent: 'center'}}>{user.name ? user.name.toUpperCase() : null}</ListItem>
+                                    {Object.keys(routes).map(text => console.log('text~>', text, 'path~>', path))}
                                     {Object.keys(routes).map((text, index) => (
                                         <Fragment key={text}>
                                                 {token ?
                                                     <Fragment>
-                                                        <ListItem>
+                                                        <ListItem classes={path === `/${text.replace(/ /g,'-').toLowerCase()}` ? {root: classes.selected} : null}>
                                                             <ListItemIcon >{routes[text]}</ListItemIcon>
                                                             <Link to={`/${text.replace(/ /g,'-').toLowerCase()}`} className={ classes.drawerLink }>
-                                                                <ListItemText classes={{primary: classes.listItemText}} primary={text} />
+                                                                <ListItemText classes={{primary: classes.listItemText}} primary={text}/>
                                                             </Link>
                                                         </ListItem>
                                                     </Fragment>
