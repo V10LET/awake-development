@@ -32,6 +32,11 @@ const styles = theme => createStyles({
         flexFlow: 'row nowrap',
         alignItems: 'center'
     },
+    noData: {
+        marginTop: '1em',
+        fontSize: '.8em',
+        fontStyle: 'oblique'
+    }
 })
 
 class ViewLogs extends Component {
@@ -84,6 +89,14 @@ class ViewLogs extends Component {
 
     handleSwitchChange = () => this.setState({ meditation: !this.state.meditation })
 
+    renderNoData = () => {
+        if (this.state.meditation) {
+            return 'No meditations yet. But it\'s chill to kick it at your own pace.'
+        } else {
+            return 'No logs yet, and it ain\'t no big thang.'
+        }
+    }
+
     render() {
         const { user, classes } = this.props
         const { meditation } = this.state
@@ -102,14 +115,20 @@ class ViewLogs extends Component {
                 </div>
 
                 <div className='logs-container'>
-                    {logs.slice().reverse().map(log=> {
-                        if (!meditation) {
-                            return <div key={log.id} style={{ margin: 20 }}><ViewLog log={log} /></div>
-                        } else {
-                            return <div key={log.id} style={{ margin: 20 }}><ViewMed log={log}/></div>
-                        }
+                    { logs.length === 0 ?
+                        <div className={classes.noData}>{this.renderNoData()}</div>
+                        :
+                        <div>
+                            {logs.slice().reverse().map(log=> {
+                                if (!meditation) {
+                                    return <div key={log.id} style={{ margin: 20 }}><ViewLog log={log} /></div>
+                                } else {
+                                    return <div key={log.id} style={{ margin: 20 }}><ViewMed log={log}/></div>
+                                }
 
-                    })}
+                            })}
+                        </div>
+                    }
                 </div>
             </div>
         )
