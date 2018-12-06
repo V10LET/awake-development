@@ -56,7 +56,7 @@ class Login extends Component {
     handleSubmit = async (event) => {
         event.preventDefault()
 
-        let r = await fetch('http://192.168.0.130:3000/api/v1/login', {
+        let r = await fetch('http://localhost:3000/api/v1/login', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: this.state.email, password: this.state.password })
@@ -72,7 +72,7 @@ class Login extends Component {
         localStorage.setItem("app-token", data.token)
         this.props.setToken(data.token)
 
-        r = await fetch('http://192.168.0.130:3000/api/v1/profile', {
+        r = await fetch('http://localhost:3000/api/v1/profile', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

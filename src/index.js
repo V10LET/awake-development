@@ -23,7 +23,7 @@ if (token !== null) {
 }
 
 async function getUserFetch() {
-    let r = await fetch('http://192.168.0.130:3000/api/v1/profile', {
+    let r = await fetch('http://localhost:3000/api/v1/profile', {
         method: 'GET',
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
     })

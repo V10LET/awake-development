@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { withStyles, createStyles } from '@material-ui/core/styles'
 import Moment from 'moment'
 import SetTime from './SetTime'
@@ -24,6 +24,7 @@ const styles = theme => createStyles({
         fontWeight: 'bold'
     },
     inputError: {
+        marginTop: '2em',
         color: 'red',
         fontSize: '0.8em',
         fontStyle: 'oblique'
@@ -36,13 +37,15 @@ const styles = theme => createStyles({
     timerCard: {
         width: '400px',
         marginTop: 20,
+        backgroundColor: 'rgba(0,0,0,0)',
+        border: 10
         // backgroundImage: `url("https://source.unsplash.com/600x354/?nature,tree/")`,
-        backgroundSize: 'cover'
+        // backgroundSize: 'cover'
     },
     time: {
         display: 'flex',
         justifyContent: 'center',
-        padding: '100px 80px',
+        padding: '20px 0',
         fontSize: '4em',
         fontWeight: 'bold',
         textAlign: 'center'
@@ -211,23 +214,32 @@ class Timer extends Component {
                         <Switch checked={audio} onChange={this.handleAudio}/>
                     <div style={audio ? null : {color: 'rgba(0,0,0,.3)'}}>Yes</div>
                 </div>
-
+                <div>
                 {!end ?
+                    <div className={classes.timerContainer}>
                     <div className={classes.timerBtns}>
                         <SetTime handleChange={this.handleChange} min={min} hr={hr} open={open} handleClick={this.handleClick}/>
                         <div>{this.renderSetPause()} {this.renderStartEnd()}</div>
                         {earlyEndOpen ? <SaveEndEarly handleNo={this.handleNo} hr={hr} min={min} remaining={remaining}/> : null}
-                        {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
                     </div>
+                    <Card className={classes.timerCard}>
+                        <div style={{backgroundColor: 'rgba(255,255,255,0.5)', height: '100%'}}>
+                            <div className={classes.time}>{this.renderTime()}</div>
+                        </div>
+                    </Card>
+                </div>
                 :
+                    <div className={classes.timerContainer}>
+                    <Card className={classes.timerCard}>
+                        <div style={{backgroundColor: 'rgba(255,255,255,0.5)', height: '100%'}}>
+                            <div className={classes.time}>{this.renderTime()}</div>
+                        </div>
+                    </Card>
                     <SaveTime min={this.state.min} hr={this.state.hr} />
-                }
-
-                <Card className={classes.timerCard}>
-                    <div style={{backgroundColor: 'rgba(255,255,255,0.5)', height: '100%'}}>
-                        <div className={classes.time}>{this.renderTime()}</div>
                     </div>
-                </Card>
+                }
+                </div>
+                {renderError ? <div className={classes.inputError}>Please set a time.</div> : null}
             </div>
 
         )

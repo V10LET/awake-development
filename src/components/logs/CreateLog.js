@@ -43,7 +43,7 @@ class Logs extends Component {
 
         const { mentalRating, mentalNote, emotionalRating, emotionalNote, physicalRating, physicalNote, spiritualRating, spiritualNote } = this.state
 
-        let r = await fetch(`http://192.168.0.130:3000/api/v1/logs`, {
+        let r = await fetch(`http://localhost:3000/api/v1/logs`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.props.user.token}` },
             body: JSON.stringify({

@@ -26,11 +26,16 @@ const styles = theme => createStyles({
 
 class Log extends Component {
 
+    colorPicker = () => {
+        let colors = ['#a65b2c', '#5f5c19', '#b5b494', '#d9dca1', '#7c8165', 'white']
+        return colors[Math.floor(Math.random() * colors.length)]
+    }
+
     render() {
 
         const { classes, rating, note, question, v1, v2, v3, v4, v5, v6, handleChange, ratingValue, id } = this.props
         return (
-            <Card className='log-card' style={{backgroundImage: `url("https://source.unsplash.com/1600x900/?nature,tree/${id}")`}}>
+            <Card className='log-card' style={{backgroundColor: `${this.colorPicker()}`}}>
                 <div style={{backgroundColor: 'rgba(255, 255, 255, .5)', height: '100%'}}>
                     <div className='card-content'>
                         <FormControl component="fieldset" >

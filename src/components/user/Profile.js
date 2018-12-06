@@ -23,6 +23,7 @@ const styles = theme => createStyles({
 
     },
     cardDetails: {
+        fontSize: '0.8em',
         display: 'flex',
         flexFlow: 'column nowrap',
         padding: 40,
@@ -35,8 +36,10 @@ const styles = theme => createStyles({
     highlight: {
         width: '100%',
         textAlign: 'center',
+        color: 'white',
         padding: '20px 0',
-        backgroundColor: '#138FB0',
+        // backgroundColor: '#138FB0',
+        backgroundColor: 'rgba(0,0,0,.9)',
     },
     cardColumn: {
         display: 'flex',
@@ -115,7 +118,7 @@ class Profile extends Component {
 
     signFetch = async () => {
         if (this.sign()) {
-            let r = await fetch(`http://192.168.0.130:3000/api/v1/horoscope/${this.sign()}`, {
+            let r = await fetch(`http://localhost:3000/api/v1/horoscope/${this.sign()}`, {
                 method: 'GET',
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}` }
             })
@@ -131,14 +134,20 @@ class Profile extends Component {
         this.setState({ quotes })
     }
 
+    colorPicker = () => {
+        let colors = ['#a65b2c', '#5f5c19', '#b5b494', '#d9dca1', '#7c8165', 'white']
+        return colors[Math.floor(Math.random() * colors.length)]
+    }
+
     renderQuotes = () => {
+        console.log(this.colorPicker())
         const { classes } = this.props
         const { quotes } = this.state
         if (quotes) {
             return quotes.map((q, i)=> {
                 return (
-                    <Card key={i} className={classes.cardQuote} style={{backgroundImage: `url("https://source.unsplash.com/600x354/?nature,tree/${i}")`}}>
-                    <div style={{backgroundColor: 'rgba(255, 255, 255, .5)', height: '100%'}}>
+                    <Card key={i} className={classes.cardQuote}>
+                    <div style={{backgroundColor: `${this.colorPicker()}`, height: '100%'}}>
                         <div className={classes.cardDetails}>
                             <div><strong>{q.quote}</strong></div>
                             <br/><div>~{q.author}</div>
@@ -149,6 +158,7 @@ class Profile extends Component {
             })
         }
     }
+
 
     handleClick = (event) => {
         const value = event.target.innerText.toLowerCase()

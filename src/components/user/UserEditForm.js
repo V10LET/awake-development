@@ -45,7 +45,7 @@ class UserEditForm extends React.Component {
     handleSubmit = async (event) => {
         event.preventDefault()
         console.log(this.state.name, this.props.user.id, this.props.token)
-        let r = await fetch(`http://192.168.0.130:3000/api/v1/users/${this.props.user.id}`, {
+        let r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -59,7 +59,7 @@ class UserEditForm extends React.Component {
             })
         })
 
-        r = await fetch(`http://192.168.0.130:3000/api/v1/users/${this.props.user.id}`, {
+        r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
