@@ -24,18 +24,25 @@ const styles = theme => createStyles({
     }
 })
 
+const colors = ['#a65b2c', '#5f5c19', '#b5b494', '#d9dca1', '#7c8165', 'white']
+
 class Log extends Component {
 
-    colorPicker = () => {
+    state = {
+        color: ''
+    }
+
+    componentDidMount() {
         let colors = ['#a65b2c', '#5f5c19', '#b5b494', '#d9dca1', '#7c8165', 'white']
-        return colors[Math.floor(Math.random() * colors.length)]
+        const color = colors[Math.floor(Math.random() * colors.length)]
+        this.setState({ color })
     }
 
     render() {
 
-        const { classes, rating, note, question, v1, v2, v3, v4, v5, v6, handleChange, ratingValue, id } = this.props
+        const { classes, rating, note, question, v1, v2, v3, v4, v5, v6, handleChange, ratingValue } = this.props
         return (
-            <Card className='log-card' style={{backgroundColor: `${this.colorPicker()}`}}>
+            <Card className='log-card' style={{backgroundColor: `${this.state.color}`}}>
                 <div style={{backgroundColor: 'rgba(255, 255, 255, .5)', height: '100%'}}>
                     <div className='card-content'>
                         <FormControl component="fieldset" >

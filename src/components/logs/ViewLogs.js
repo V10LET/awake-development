@@ -99,7 +99,7 @@ class ViewLogs extends Component {
 
     render() {
         const { user, classes } = this.props
-        const { meditation } = this.state
+        const { meditation, searchTerm } = this.state
         const logs = this.handleSearch(user)
         return (
             <div className={classes.allLogs}>
@@ -115,10 +115,10 @@ class ViewLogs extends Component {
                 </div>
 
                 <div className='logs-container'>
-                    { logs.length === 0 ?
+                    { logs.length === 0 && searchTerm === ''?
                         <div className={classes.noData}>{this.renderNoData()}</div>
                         :
-                        <div>
+                        <div className='logs-container'>
                             {logs.slice().reverse().map(log=> {
                                 if (!meditation) {
                                     return <div key={log.id} style={{ margin: 20 }}><ViewLog log={log} /></div>

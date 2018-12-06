@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Doughnut } from 'react-chartjs-2'
 
 const mental = ['Busy', 'Foggy', 'Distracted', 'Neutral', 'Focused', 'Calm']
@@ -6,7 +6,7 @@ const emotional = ['Anger', 'Shame', 'Stress', 'Excitement', 'Content', 'Gratitu
 const physical = ['Painful', 'Tired', 'Disconnected', 'Grounded', 'Energetic', 'Relaxed']
 const spiritual = ['Hopeless', 'Uncertain', 'Apathetic', 'Intrigued', 'Hopeful', 'Inspired']
 
-export default class DoughnutChart extends React.Component {
+export default class DoughnutChart extends Component {
 
     occurance = (rating) => {
         const counts = {}

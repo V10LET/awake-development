@@ -18,6 +18,15 @@ const styles = theme => createStyles({
         bottom: 0,
         right: 0,
         left: 0
+    },
+    innerContainer: {
+        backgroundColor: 'rgba(255,255,255,.3)',
+        position: 'fixed',
+        overflow: 'auto',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0
     }
 })
 
@@ -45,8 +54,10 @@ class App extends Component {
             <Router history={history}>
                 <Fragment>
                     <Nav />
-                    <div style={this.renderStyle()} className={classes.container}>
-                        <Routes />
+                    <div className={classes.container}>
+                        <div style={this.renderStyle()} className={classes.innerContainer}>
+                            <Routes />
+                        </div>
                     </div>
                 </Fragment>
             </Router>

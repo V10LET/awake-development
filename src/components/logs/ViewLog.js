@@ -64,7 +64,7 @@ class ViewLog extends Component {
     render () {
         const { log, classes } = this.props
         return (
-            <ExpansionPanel style={{ width: 275, alignItems: 'center' }}>
+            <ExpansionPanel style={{ width: 350, alignItems: 'center' }}>
                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <div style={{ display: 'flex', alignItems: 'center' }}>
                             <AssignmentIcon style={{ marginRight: 10 }}/>

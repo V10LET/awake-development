@@ -79,7 +79,7 @@ export default class ViewMed extends Component {
     render () {
         const { log } = this.props
         return (
-            <ExpansionPanel style={{ width: 275 }}>
+            <ExpansionPanel style={{ width: 250 }}>
                  <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                      <div style={{ display: 'flex', alignItems: 'center' }}>
                          <TimelapseIcon style={{ marginRight: 10 }}/>

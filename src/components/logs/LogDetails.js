@@ -10,6 +10,10 @@ const styles = theme => createStyles({
     },
     divider: {
         margin: '20px 0',
+    },
+    text: {
+        fontStyle: 'oblique',
+        fontSize: 15
     }
 })
 
@@ -19,39 +23,43 @@ class LogDetails extends React.Component {
         const { log, classes } = this.props
         return (
            <div key={log.id}>
-               <div>Mental Rating: {log.mentalRating === 0
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.mentalRating}</div>
-                   <div>Mental Note: {log.mentalNote === ''
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.mentalNote}</div>
+              <h3>Mental</h3>
+              <div>Rating: {log.mentalRating === 0
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.mentalRating}</span>}</div>
+               <div style={{marginTop: 10}}>Note: {log.mentalNote === ''
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.mentalNote}</span>}</div>
 
-                   <Divider className={ classes.divider }/>
+               <Divider className={ classes.divider }/>
 
-                   <div>Emotional Rating: {log.emotionalRating === 0
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.emotionalRating}</div>
-                   <div>Emotional Note: {log.emotionalNote === ''
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.emotionalNote}</div>
+               <h3>Emotional</h3>
+               <div>Rating: {log.emotionalRating === 0
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.emotionalRating}</span>}</div>
+               <div style={{marginTop: 10}}>Note: {log.emotionalNote === ''
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.emotionalNote}</span>}</div>
 
-                   <Divider className={ classes.divider }/>
+               <Divider className={ classes.divider }/>
 
-                   <div>Physical Rating: {log.physicalRating === 0
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.physicalRating}</div>
-                   <div>Physical Note: {log.physicalNote === ''
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.physicalNote}</div>
+               <h3>Physical</h3>
+               <div>Rating: {log.physicalRating === 0
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.physicalRating}</span>}</div>
+               <div style={{marginTop: 10}}>Note: {log.physicalNote === ''
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.physicalNote}</span>}</div>
 
-                   <Divider className={ classes.divider }/>
+               <Divider className={ classes.divider }/>
 
-                   <div>Spiritual Rating: {log.spiritualRating === 0
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.spiritualRating}</div>
-                   <div>Spiritual Note: {log.spiritualNote === ''
-                       ? <span className={ classes.noEntryText }> No entry...</span>
-                       : log.spiritualNote}</div>
+               <h3>Spiritual</h3>
+               <div>Rating: {log.spiritualRating === 0
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.spiritualRating}</span>}</div>
+               <div style={{marginTop: 10}}>Note: {log.spiritualNote === ''
+                   ? <span className={ classes.noEntryText }> No entry...</span>
+                   : <span className={classes.text}>{log.spiritualNote}</span>}</div>
             </div>
         )
     }
