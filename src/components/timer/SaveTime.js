@@ -12,7 +12,7 @@ class SaveTime extends Component {
         let num = (Number(min) * 60 * 1000) + (Number(hr) * 3600 * 1000)
         const time = String(num)
 
-        let r = await fetch('http://localhost:3000/api/v1/timed_logs', {
+        let r = await fetch('http://192.168.0.130:3000/api/v1/timed_logs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

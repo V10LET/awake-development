@@ -2,10 +2,23 @@ import React, { Component, Fragment } from 'react'
 import { Router } from 'react-router-dom'
 import './style/App.css'
 import { connect } from 'react-redux'
+import { withStyles, createStyles } from '@material-ui/core/styles'
 
 import Nav from './components/Nav'
 import history from './history'
 import Routes from './components/Routes'
+
+const styles = theme => createStyles({
+    container: {
+        backgroundImage: "url('https://bit.ly/2Ukac80')",
+        backgroundSize: 'cover',
+        position: 'fixed',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0
+    }
+})
 
 class App extends Component {
 
@@ -17,20 +30,21 @@ class App extends Component {
 
     renderStyle = () => {
         if (this.props.token && this.props.drawerOpen) {
-            return { margin: '60px 0 0 225px' }
+            return { padding: '60px 0 0 225px' }
         } else if (this.props.token) {
-            return { marginTop: 60 }
+            return { paddingTop: 60 }
         } else {
             return null
         }
     }
 
     render() {
+        const {classes} = this.props
         return (
             <Router history={history}>
                 <Fragment>
                     <Nav />
-                    <div style={this.renderStyle()}>
+                    <div style={this.renderStyle()} className={classes.container}>
                         <Routes />
                     </div>
                 </Fragment>
@@ -43,4 +57,4 @@ const mapStateToProps = state => ({
     token: state.user.token
 })
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps)(withStyles(styles)(App))

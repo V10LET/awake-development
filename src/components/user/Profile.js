@@ -115,7 +115,7 @@ class Profile extends Component {
 
     signFetch = async () => {
         if (this.sign()) {
-            let r = await fetch(`http://localhost:3000/api/v1/horoscope/${this.sign()}`, {
+            let r = await fetch(`http://192.168.0.130:3000/api/v1/horoscope/${this.sign()}`, {
                 method: 'GET',
                 headers: { "Content-Type": "application/json", Authorization: `Bearer ${this.props.token}` }
             })
