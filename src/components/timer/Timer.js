@@ -100,8 +100,7 @@ class Timer extends Component {
         if (this.state.min === '' &&  this.state.min === '') {
             this.setState({ renderError: true })
         } else {
-            let deadline = new Date().getTime() + (3*1000)
-            // (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
+            let deadline = new Date().getTime() + (Number(this.state.min) * 60 * 1000) + (Number(this.state.hr) * 3600 * 1000)
             this.setState({ deadline, setTime: true }, () => {
                 this.setState({ timer: setInterval(this.setTick, 1000) })
                 return this.state.audio ? new Audio(singingBowl).play() : null
