@@ -27,12 +27,8 @@ const styles = theme => createStyles({
         maxWidth: '100%', maxHeight: '100%',
         margin: 'auto',
         overflow: 'auto',
-        // backgroundImage: 'url("https://images.pexels.com/photos/1390505/pexels-photo-1390505.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
-        // backgroundImage: 'url("https://images.pexels.com/photos/428353/pexels-photo-428353.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
         backgroundImage: 'url("https://images.pexels.com/photos/1591305/pexels-photo-1591305.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260")',
-        // backgroundImage: 'url("")',
         backgroundSize: 'cover'
-
     },
     titleCard: {
         display: 'flex',
@@ -41,7 +37,6 @@ const styles = theme => createStyles({
         overflow: 'visible',
         margin: 'auto',
         marginTop: '-1em',
-        // backgroundImage: 'linear-gradient(to bottom right, #C6E1CC,#7FA788)',
         backgroundColor: '#D5875B'
     },
     card: {
@@ -71,6 +66,12 @@ const styles = theme => createStyles({
         marginTop: 10,
         fontSize: '0.8em',
         color: 'rgba(0, 0, 0, 0.54)'
+    },
+    error: {
+        color: '#7d2a2a',
+        fontStyle: 'oblique',
+        fontSize: '1em',
+        marginTop: 10,
     }
 })
 
@@ -191,7 +192,7 @@ class SignUp extends Component {
                                 <Input type={this.state.visibility ? 'text' : 'password'}  className={classes.textField} onChange={this.handleInput('confirmPassword')} />
                             </FormControl>
                             <Button type='submit' style={{marginTop: 20}}>Sign Up</Button>
-                            {this.state.loginError && this.renderError(this.state.loginError)}
+                            <div className={classes.error}>{this.state.loginError && this.renderError(this.state.loginError)}</div>
                         </Fragment>
                     </form>
                 </Card>

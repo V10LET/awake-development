@@ -28,9 +28,9 @@ const styles = theme => createStyles({
         width: '100%'
     },
     error: {
-        color: 'red',
+        color: '#7d2a2a',
         fontStyle: 'oblique',
-        fontSize: 10,
+        fontSize: '1em',
         marginTop: 10,
     },
     resize: {
