@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import history from '../../history'
 import { withStyles, createStyles } from '@material-ui/core/styles'
@@ -27,7 +27,7 @@ class SaveTime extends Component {
         let num = (Number(min) * 60 * 1000) + (Number(hr) * 3600 * 1000)
         const time = String(num)
 
-        let r = await fetch('http://localhost:3000/api/v1/timed_logs', {
+        let r = await fetch('/api/v1/timed_logs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

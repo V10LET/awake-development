@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setPath } from '../../actions/designAction'
 import { withStyles, createStyles } from '@material-ui/core/styles'
@@ -41,8 +41,6 @@ const styles = theme => createStyles({
         marginTop: 20,
         backgroundColor: 'rgba(0,0,0,0)',
         border: 10
-        // backgroundImage: `url("https://source.unsplash.com/600x354/?nature,tree/")`,
-        // backgroundSize: 'cover'
     },
     time: {
         display: 'flex',

@@ -16,7 +16,7 @@ class SaveEndEarly extends Component {
         const total = initialTime - remaining
         const time = String(total)
 
-        let r = await fetch('http://localhost:3000/api/v1/timed_logs', {
+        let r = await fetch('/api/v1/timed_logs', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

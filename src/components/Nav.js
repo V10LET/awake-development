@@ -3,7 +3,6 @@ import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setDrawer } from '../actions/designAction'
 import { withStyles, createStyles } from '@material-ui/core/styles'
-import Home from './Home'
 
 import Drawer from '@material-ui/core/Drawer'
 import AppBar from '@material-ui/core/AppBar'
@@ -33,8 +32,6 @@ const routes = {
     'Meditation Charts':<AssessmentIcon style={{fill: 'rgba(0,0,0,.9)'}}/>,
     'Settings':<SettingsIcon style={{fill: 'rgba(0,0,0,.9)'}}/>
 }
-
-const paths = Object.keys(routes).map(text => `/${text.replace(/ /g,'-').toLowerCase()}`)
 
 const styles = theme => createStyles({
 

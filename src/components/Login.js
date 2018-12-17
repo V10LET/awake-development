@@ -7,7 +7,6 @@ import { setChartData } from '../actions/logAction'
 import { setPath } from '../actions/designAction'
 
 import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
@@ -56,7 +55,7 @@ class Login extends Component {
     handleSubmit = async (event) => {
         event.preventDefault()
 
-        let r = await fetch('http://localhost:3000/api/v1/login', {
+        let r = await fetch('/api/v1/login', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email: this.state.email, password: this.state.password })
@@ -72,7 +71,7 @@ class Login extends Component {
         localStorage.setItem("app-token", data.token)
         this.props.setToken(data.token)
 
-        r = await fetch('http://localhost:3000/api/v1/profile', {
+        r = await fetch('/api/v1/profile', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
@@ -88,7 +87,7 @@ class Login extends Component {
     }
 
     render() {
-        const { classes, match } = this.props
+        const { classes } = this.props
         return (
             <div className={classes.loginContainer}>
                 <form onSubmit={this.handleSubmit} className={classes.form}>

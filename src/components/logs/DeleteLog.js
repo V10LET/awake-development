@@ -14,12 +14,12 @@ class DeleteLog extends React.Component {
     handleClick = () => this.props.deleteDialog()
 
     handleDelete = async () => {
-        let r = await fetch(`http://localhost:3000/api/v1/logs/${this.props.logId}`, {
+        let r = await fetch(`/api/v1/logs/${this.props.logId}`, {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${this.props.user.token}` }
         })
 
-        r = await fetch(`http://localhost:3000/api/v1/users/${this.props.user.id}`)
+        r = await fetch(`/api/v1/users/${this.props.user.id}`)
         let data = await r.json()
         this.props.setUser(data)
         this.props.deleteDialog()

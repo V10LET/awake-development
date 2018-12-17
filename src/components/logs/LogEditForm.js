@@ -66,7 +66,7 @@ class LogEditForm extends React.Component {
 
         const { mentalRating, mentalNote, emotionalRating, emotionalNote, physicalRating, physicalNote, spiritualRating, spiritualNote } = this.state
 
-        let r = await fetch(`http://localhost:3000/api/v1/logs/${this.props.log.id}`, {
+        let r = await fetch(`/api/v1/logs/${this.props.log.id}`, {
             method: 'PATCH',
             headers: {
                 "Content-Type": "application/json",
@@ -86,7 +86,7 @@ class LogEditForm extends React.Component {
             })
         })
 
-        r = await fetch(`http://localhost:3000/api/v1/logs/${this.props.log.id}`, {
+        r = await fetch(`/api/v1/logs/${this.props.log.id}`, {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",

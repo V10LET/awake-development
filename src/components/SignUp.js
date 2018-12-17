@@ -100,7 +100,7 @@ class SignUp extends Component {
             return
         }
 
-        let r = await fetch('http://localhost:3000/api/v1/signup', {
+        let r = await fetch('/api/v1/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
             body: JSON.stringify({
@@ -125,7 +125,7 @@ class SignUp extends Component {
         localStorage.setItem("app-token", data.token)
         this.props.setToken(data.token)
 
-        r = await fetch('http://localhost:3000/api/v1/profile', {
+        r = await fetch('/api/v1/profile', {
             method: 'GET',
             headers: {
                 "Content-Type": "application/json",
